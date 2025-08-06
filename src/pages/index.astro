@@ -33,10 +33,48 @@ const projects = [
   }
 ];
 
+// Sample experiments data
+const experiments = [
+  {
+    title: "Interactive Animation Library",
+    description: "A lightweight CSS animation library with custom easing functions and timeline controls.",
+    technologies: ["JavaScript", "CSS", "Web Animations API"],
+    status: "In Progress",
+    githubUrl: "https://github.com",
+    demoUrl: "https://example.com",
+    category: "Library"
+  },
+  {
+    title: "AI Chat Interface",
+    description: "Experimental chat interface with voice recognition and natural language processing.",
+    technologies: ["React", "WebRTC", "OpenAI API"],
+    status: "Prototype",
+    githubUrl: "https://github.com",
+    category: "AI/ML"
+  },
+  {
+    title: "WebGL Particle System",
+    description: "Real-time particle system using WebGL shaders for dynamic visual effects.",
+    technologies: ["Three.js", "WebGL", "GLSL"],
+    status: "Complete",
+    demoUrl: "https://example.com",
+    category: "Graphics"
+  },
+  {
+    title: "Micro Frontend Framework",
+    description: "Exploring module federation and micro frontend architecture patterns.",
+    technologies: ["Webpack", "React", "TypeScript"],
+    status: "Research",
+    githubUrl: "https://github.com",
+    category: "Architecture"
+  }
+];
+
 const dockItems = [
   { name: "About", icon: "👤", href: "#about" },
   { name: "Projects", icon: "💼", href: "#projects", isActive: true },
   { name: "Skills", icon: "🛠️", href: "#skills" },
+  { name: "Experiments", icon: "🧪", href: "#experiments" },
   { name: "Contact", icon: "📧", href: "#contact" }
 ];
 ---
@@ -192,6 +230,88 @@ const dockItems = [
             </div>
           </div>
         </Window>
+      </div>
+    </section>
+
+    <!-- Experiments Section -->
+    <section id="experiments" class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-macos-gray-900 dark:text-white mb-4">
+            Experiments & Research
+          </h2>
+          <p class="text-lg text-macos-gray-600 dark:text-macos-gray-400">
+            Exploring new technologies, concepts, and creative solutions
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          {experiments.map((experiment) => (
+            <Window title={experiment.title} class="h-full">
+              <div class="h-full flex flex-col">
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-medium text-macos-blue-500 dark:text-macos-blue-400">
+                      {experiment.category}
+                    </span>
+                    <span class={`text-xs px-2 py-1 rounded-full font-medium ${
+                      experiment.status === 'Complete' 
+                        ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                        : experiment.status === 'In Progress'
+                        ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+                        : experiment.status === 'Prototype'
+                        ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
+                        : 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400'
+                    }`}>
+                      {experiment.status}
+                    </span>
+                  </div>
+                  
+                  <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4 leading-relaxed">
+                    {experiment.description}
+                  </p>
+                  
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    {experiment.technologies.map((tech) => (
+                      <span class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-2 py-1 rounded text-xs">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                <div class="flex gap-3 pt-4 border-t border-macos-gray-200 dark:border-macos-gray-700">
+                  {experiment.githubUrl && (
+                    <a 
+                      href={experiment.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-macos-gray-600 dark:text-macos-gray-400 hover:text-macos-blue-500 dark:hover:text-macos-blue-400 transition-colors text-sm font-medium"
+                    >
+                      View Code
+                    </a>
+                  )}
+                  {experiment.demoUrl && (
+                    <a 
+                      href={experiment.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-macos-blue-500 hover:text-macos-blue-600 dark:text-macos-blue-400 dark:hover:text-macos-blue-300 transition-colors text-sm font-medium"
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                </div>
+              </div>
+            </Window>
+          ))}
+        </div>
+        
+        <div class="text-center mt-12">
+          <p class="text-macos-gray-500 dark:text-macos-gray-500 text-sm">
+            These experiments represent my exploration of emerging technologies and innovative approaches to problem-solving.
+          </p>
+        </div>
       </div>
     </section>
 
