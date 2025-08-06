@@ -1,0 +1,424 @@
+---
+interface Tab {
+  id: string;
+  label: string;
+  content: string;
+  disabled?: boolean;
+}
+
+interface Props {
+  tabs: Tab[];
+  defaultTab?: string;
+  variant?: 'default' | 'pills' | 'underline';
+  orientation?: 'horizontal' | 'vertical';
+  class?: string;
+}
+
+const { 
+  tabs, 
+  defaultTab = tabs[0]?.id, 
+  variant = 'default',
+  orientation = 'horizontal',
+  class: className = '' 
+} = Astro.props;
+
+const tabsId = `tabs-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`tabs-container ${orientation} ${className}`} data-tabs-id={tabsId}>
+  <!-- Tab List -->
+  <div 
+    class={`tab-list ${variant} ${orientation}`}
+    role="tablist"
+    aria-orientation={orientation}
+  >
+    {tabs.map((tab, index) => (
+      <button
+        class={`tab ${variant} ${tab.id === defaultTab ? 'active' : ''} ${tab.disabled ? 'disabled' : ''}`}
+        role="tab"
+        type="button"
+        id={`tab-${tabsId}-${tab.id}`}
+        aria-controls={`panel-${tabsId}-${tab.id}`}
+        aria-selected={tab.id === defaultTab ? 'true' : 'false'}
+        tabindex={tab.id === defaultTab ? '0' : '-1'}
+        disabled={tab.disabled}
+        data-tab-id={tab.id}
+      >
+        <span class="tab-label">{tab.label}</span>
+        <span class="tab-indicator"></span>
+      </button>
+    ))}
+  </div>
+
+  <!-- Tab Panels -->
+  <div class="tab-panels">
+    {tabs.map((tab) => (
+      <div
+        class={`tab-panel ${tab.id === defaultTab ? 'active' : ''}`}
+        role="tabpanel"
+        id={`panel-${tabsId}-${tab.id}`}
+        aria-labelledby={`tab-${tabsId}-${tab.id}`}
+        tabindex="0"
+        hidden={tab.id !== defaultTab}
+        data-panel-id={tab.id}
+      >
+        <div class="panel-content" set:html={tab.content} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tabs-container {
+    @apply w-full;
+  }
+
+  .tabs-container.vertical {
+    @apply flex gap-6;
+  }
+
+  .tab-list {
+    @apply flex border-b border-macos-gray-200 dark:border-macos-gray-700;
+  }
+
+  .tab-list.vertical {
+    @apply flex-col border-b-0 border-r border-macos-gray-200 dark:border-macos-gray-700 min-w-[200px];
+  }
+
+  .tab-list.pills {
+    @apply border-b-0 bg-macos-gray-100 dark:bg-macos-gray-800 rounded-macos p-1;
+  }
+
+  .tab-list.underline {
+    @apply border-b border-macos-gray-200 dark:border-macos-gray-700;
+  }
+
+  .tab {
+    @apply relative px-4 py-3 text-sm font-medium text-macos-gray-600 dark:text-macos-gray-400 
+           hover:text-macos-gray-900 dark:hover:text-white transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-macos-blue-500 focus:ring-offset-2 
+           focus:ring-offset-white dark:focus:ring-offset-macos-gray-900 rounded-md;
+  }
+
+  .tab.disabled {
+    @apply opacity-50 cursor-not-allowed hover:text-macos-gray-600 dark:hover:text-macos-gray-400;
+  }
+
+  .tab.active {
+    @apply text-macos-blue-500 dark:text-macos-blue-500;
+  }
+
+  /* Default variant styles */
+  .tab.default.active {
+    @apply border-b-2 border-macos-blue-500 -mb-px;
+  }
+
+  /* Pills variant styles */
+  .tab.pills {
+    @apply rounded-md;
+  }
+
+  .tab.pills.active {
+    @apply bg-white dark:bg-macos-gray-700 text-macos-blue-500 dark:text-macos-blue-500 shadow-sm;
+  }
+
+  /* Underline variant styles */
+  .tab.underline {
+    @apply relative;
+  }
+
+  .tab.underline .tab-indicator {
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-macos-blue-500 transform scale-x-0 
+           transition-transform duration-200 origin-center;
+  }
+
+  .tab.underline.active .tab-indicator {
+    @apply scale-x-100;
+  }
+
+  /* Vertical orientation adjustments */
+  .vertical .tab {
+    @apply justify-start text-left;
+  }
+
+  .vertical .tab.default.active {
+    @apply border-b-0 border-r-2 border-macos-blue-500 -mr-px;
+  }
+
+  .vertical .tab.underline .tab-indicator {
+    @apply left-auto right-0 top-0 bottom-0 w-0.5 h-full;
+  }
+
+  /* Tab panels */
+  .tab-panels {
+    @apply flex-1;
+  }
+
+  .tab-panel {
+    @apply opacity-0 invisible transform translate-y-2 transition-all duration-200;
+  }
+
+  .tab-panel.active {
+    @apply opacity-100 visible transform translate-y-0;
+  }
+
+  .panel-content {
+    @apply py-6 focus:outline-none;
+  }
+
+  .vertical .panel-content {
+    @apply py-0;
+  }
+
+  /* Animation enhancements */
+  .tab-label {
+    @apply transition-transform duration-200;
+  }
+
+  .tab:hover .tab-label {
+    @apply transform scale-105;
+  }
+
+  .tab.active .tab-label {
+    @apply font-semibold;
+  }
+
+  /* Loading state */
+  .tab-panel[data-loading="true"] .panel-content::before {
+    content: "";
+    @apply block w-full h-32 bg-gradient-to-r from-macos-gray-200 via-macos-gray-100 to-macos-gray-200 
+           dark:from-macos-gray-700 dark:via-macos-gray-600 dark:to-macos-gray-700 
+           animate-pulse rounded-md mb-4;
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .tab, .tab-panel, .tab-indicator, .tab-label {
+      @apply transition-none;
+    }
+  }
+</style>
+
+<script>
+  class TabsComponent {
+    constructor(container: HTMLElement) {
+      this.container = container;
+      this.tabList = container.querySelector('.tab-list') as HTMLElement;
+      this.tabs = Array.from(container.querySelectorAll('.tab')) as HTMLButtonElement[];
+      this.panels = Array.from(container.querySelectorAll('.tab-panel')) as HTMLElement[];
+      this.activeTab = container.querySelector('.tab.active') as HTMLButtonElement;
+      
+      this.bindEvents();
+      this.setInitialFocus();
+    }
+
+    private container: HTMLElement;
+    private tabList: HTMLElement;
+    private tabs: HTMLButtonElement[];
+    private panels: HTMLElement[];
+    private activeTab: HTMLButtonElement;
+
+    private bindEvents() {
+      // Click events
+      this.tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          if (!tab.disabled) {
+            this.activateTab(tab);
+          }
+        });
+      });
+
+      // Keyboard events
+      this.tabList.addEventListener('keydown', (e) => {
+        this.handleKeyDown(e);
+      });
+
+      // Optional: Hash-based navigation
+      window.addEventListener('hashchange', () => {
+        this.handleHashChange();
+      });
+    }
+
+    private handleKeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLButtonElement;
+      if (!target.matches('.tab')) return;
+
+      const isVertical = this.container.classList.contains('vertical');
+      const currentIndex = this.tabs.indexOf(target);
+      let nextIndex = currentIndex;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          if (!isVertical) {
+            e.preventDefault();
+            nextIndex = currentIndex > 0 ? currentIndex - 1 : this.tabs.length - 1;
+          }
+          break;
+        case 'ArrowRight':
+          if (!isVertical) {
+            e.preventDefault();
+            nextIndex = currentIndex < this.tabs.length - 1 ? currentIndex + 1 : 0;
+          }
+          break;
+        case 'ArrowUp':
+          if (isVertical) {
+            e.preventDefault();
+            nextIndex = currentIndex > 0 ? currentIndex - 1 : this.tabs.length - 1;
+          }
+          break;
+        case 'ArrowDown':
+          if (isVertical) {
+            e.preventDefault();
+            nextIndex = currentIndex < this.tabs.length - 1 ? currentIndex + 1 : 0;
+          }
+          break;
+        case 'Home':
+          e.preventDefault();
+          nextIndex = 0;
+          break;
+        case 'End':
+          e.preventDefault();
+          nextIndex = this.tabs.length - 1;
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          if (!target.disabled) {
+            this.activateTab(target);
+          }
+          return;
+        default:
+          return;
+      }
+
+      // Skip disabled tabs
+      while (this.tabs[nextIndex]?.disabled && nextIndex !== currentIndex) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          nextIndex = nextIndex > 0 ? nextIndex - 1 : this.tabs.length - 1;
+        } else {
+          nextIndex = nextIndex < this.tabs.length - 1 ? nextIndex + 1 : 0;
+        }
+      }
+
+      if (nextIndex !== currentIndex && !this.tabs[nextIndex]?.disabled) {
+        this.focusTab(this.tabs[nextIndex]);
+      }
+    }
+
+    private activateTab(tab: HTMLButtonElement) {
+      const tabId = tab.dataset.tabId!;
+      const panel = this.container.querySelector(`[data-panel-id="${tabId}"]`) as HTMLElement;
+      
+      if (!panel) return;
+
+      // Update tab states
+      this.tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('tabindex', '0');
+
+      // Update panel states
+      this.panels.forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('hidden', '');
+      });
+
+      panel.classList.add('active');
+      panel.removeAttribute('hidden');
+
+      this.activeTab = tab;
+
+      // Lazy loading simulation
+      if (panel.dataset.loaded !== 'true') {
+        this.loadPanelContent(panel);
+      }
+
+      // Update URL hash (optional)
+      if (history.replaceState) {
+        history.replaceState(null, '', `#${tabId}`);
+      }
+
+      // Custom event
+      this.container.dispatchEvent(new CustomEvent('tabchange', {
+        detail: { activeTab: tabId, panel }
+      }));
+    }
+
+    private focusTab(tab: HTMLButtonElement) {
+      tab.focus();
+    }
+
+    private setInitialFocus() {
+      if (this.activeTab) {
+        this.activeTab.setAttribute('tabindex', '0');
+      }
+    }
+
+    private handleHashChange() {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        const tab = this.tabs.find(t => t.dataset.tabId === hash);
+        if (tab && !tab.disabled) {
+          this.activateTab(tab);
+        }
+      }
+    }
+
+    private async loadPanelContent(panel: HTMLElement) {
+      // Simulate lazy loading
+      panel.dataset.loading = 'true';
+      
+      // In a real implementation, you might fetch content here
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      panel.dataset.loading = 'false';
+      panel.dataset.loaded = 'true';
+    }
+
+    // Public API
+    public getActiveTab(): string | null {
+      return this.activeTab?.dataset.tabId || null;
+    }
+
+    public activateTabById(tabId: string): boolean {
+      const tab = this.tabs.find(t => t.dataset.tabId === tabId);
+      if (tab && !tab.disabled) {
+        this.activateTab(tab);
+        return true;
+      }
+      return false;
+    }
+
+    public disableTab(tabId: string): void {
+      const tab = this.tabs.find(t => t.dataset.tabId === tabId);
+      if (tab) {
+        tab.disabled = true;
+        tab.classList.add('disabled');
+      }
+    }
+
+    public enableTab(tabId: string): void {
+      const tab = this.tabs.find(t => t.dataset.tabId === tabId);
+      if (tab) {
+        tab.disabled = false;
+        tab.classList.remove('disabled');
+      }
+    }
+  }
+
+  // Initialize all tabs components
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabsContainers = document.querySelectorAll('.tabs-container');
+    tabsContainers.forEach(container => {
+      new TabsComponent(container as HTMLElement);
+    });
+  });
+
+  // Make TabsComponent available globally for manual initialization
+  (window as any).TabsComponent = TabsComponent;
+</script>

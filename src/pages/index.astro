@@ -36,13 +36,13 @@ const projects = [
 // Sample experiments data
 const experiments = [
   {
-    title: "Interactive Animation Library",
-    description: "A lightweight CSS animation library with custom easing functions and timeline controls.",
-    technologies: ["JavaScript", "CSS", "Web Animations API"],
+    title: "Interactive Tabs Component",
+    description: "A flexible and accessible tabs component with smooth animations, keyboard navigation, and customizable styling options.",
+    technologies: ["JavaScript", "CSS", "ARIA", "Web Components"],
     status: "In Progress",
     githubUrl: "https://github.com",
-    demoUrl: "https://example.com",
-    category: "Library"
+    demoUrl: "/tabs-demo",
+    category: "UI Components"
   },
   {
     title: "AI Chat Interface",
@@ -74,7 +74,7 @@ const dockItems = [
   { name: "About", icon: "👤", href: "#about" },
   { name: "Projects", icon: "💼", href: "#projects", isActive: true },
   { name: "Skills", icon: "🛠️", href: "#skills" },
-  { name: "Experiments", icon: "🧪", href: "#experiments" },
+  { name: "Experiments", icon: "🧪", href: "/experiments" },
   { name: "Contact", icon: "📧", href: "#contact" }
 ];
 ---
@@ -308,9 +308,12 @@ const dockItems = [
         </div>
         
         <div class="text-center mt-12">
-          <p class="text-macos-gray-500 dark:text-macos-gray-500 text-sm">
-            These experiments represent my exploration of emerging technologies and innovative approaches to problem-solving.
-          </p>
+          <a 
+            href="/experiments" 
+            class="bg-macos-blue-500 hover:bg-macos-blue-600 text-white px-8 py-3 rounded-macos font-medium transition-colors shadow-macos inline-block"
+          >
+            View All Experiments
+          </a>
         </div>
       </div>
     </section>

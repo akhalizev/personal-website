@@ -1,0 +1,433 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Window from '../components/Window.astro';
+import TabsComponent from '../components/TabsComponent.astro';
+
+// Sample tabs data
+const basicTabs = [
+  {
+    id: 'overview',
+    label: 'Overview',
+    content: `
+      <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Interactive Tabs Component</h3>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4">
+        This is a fully accessible tabs component built with modern web standards. It includes:
+      </p>
+      <ul class="space-y-2 text-macos-gray-600 dark:text-macos-gray-400">
+        <li class="flex items-center"><span class="w-2 h-2 bg-macos-blue-500 rounded-full mr-3"></span>Full keyboard navigation</li>
+        <li class="flex items-center"><span class="w-2 h-2 bg-macos-blue-500 rounded-full mr-3"></span>ARIA compliance</li>
+        <li class="flex items-center"><span class="w-2 h-2 bg-macos-blue-500 rounded-full mr-3"></span>Smooth animations</li>
+        <li class="flex items-center"><span class="w-2 h-2 bg-macos-blue-500 rounded-full mr-3"></span>Multiple style variants</li>
+        <li class="flex items-center"><span class="w-2 h-2 bg-macos-blue-500 rounded-full mr-3"></span>Responsive design</li>
+      </ul>
+    `
+  },
+  {
+    id: 'features',
+    label: 'Features',
+    content: `
+      <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Key Features</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg p-4">
+            <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-2">🎯 Accessibility First</h4>
+            <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">Built with WCAG 2.1 guidelines in mind, including proper ARIA attributes and keyboard navigation.</p>
+          </div>
+          <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg p-4">
+            <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-2">⚡ Performance Optimized</h4>
+            <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">Lightweight implementation with efficient event handling and minimal DOM manipulation.</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg p-4">
+            <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-2">🎨 Customizable</h4>
+            <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">Multiple style variants and easy theming with CSS custom properties.</p>
+          </div>
+          <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg p-4">
+            <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-2">📱 Responsive</h4>
+            <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">Works seamlessly across all device sizes and orientations.</p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'code',
+    label: 'Code Example',
+    content: `
+      <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Usage Example</h3>
+      <div class="bg-macos-gray-900 rounded-lg p-4 overflow-x-auto mb-4">
+        <pre class="text-sm text-green-400"><code>---
+import TabsComponent from '../components/TabsComponent.astro';
+
+const tabs = [
+  {
+    id: 'tab1',
+    label: 'First Tab',
+    content: '&lt;p&gt;Content for first tab&lt;/p&gt;'
+  },
+  {
+    id: 'tab2',
+    label: 'Second Tab',
+    content: '&lt;p&gt;Content for second tab&lt;/p&gt;'
+  }
+];
+---
+
+&lt;TabsComponent 
+  tabs={tabs} 
+  variant="pills" 
+  orientation="horizontal" 
+/&gt;</code></pre>
+      </div>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400">
+        The component automatically handles all accessibility features, keyboard navigation, and state management.
+      </p>
+    `
+  },
+  {
+    id: 'api',
+    label: 'API Reference',
+    content: `
+      <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Component API</h3>
+      <div class="space-y-6">
+        <div>
+          <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Props</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-macos-gray-200 dark:border-macos-gray-700">
+                  <th class="text-left py-2 text-macos-gray-900 dark:text-white">Prop</th>
+                  <th class="text-left py-2 text-macos-gray-900 dark:text-white">Type</th>
+                  <th class="text-left py-2 text-macos-gray-900 dark:text-white">Default</th>
+                  <th class="text-left py-2 text-macos-gray-900 dark:text-white">Description</th>
+                </tr>
+              </thead>
+              <tbody class="text-macos-gray-600 dark:text-macos-gray-400">
+                <tr class="border-b border-macos-gray-100 dark:border-macos-gray-800">
+                  <td class="py-2 font-mono">tabs</td>
+                  <td class="py-2">Tab[]</td>
+                  <td class="py-2">required</td>
+                  <td class="py-2">Array of tab objects</td>
+                </tr>
+                <tr class="border-b border-macos-gray-100 dark:border-macos-gray-800">
+                  <td class="py-2 font-mono">variant</td>
+                  <td class="py-2">'default' | 'pills' | 'underline'</td>
+                  <td class="py-2">'default'</td>
+                  <td class="py-2">Visual style variant</td>
+                </tr>
+                <tr class="border-b border-macos-gray-100 dark:border-macos-gray-800">
+                  <td class="py-2 font-mono">orientation</td>
+                  <td class="py-2">'horizontal' | 'vertical'</td>
+                  <td class="py-2">'horizontal'</td>
+                  <td class="py-2">Tab layout orientation</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-mono">defaultTab</td>
+                  <td class="py-2">string</td>
+                  <td class="py-2">first tab id</td>
+                  <td class="py-2">Initially active tab</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Methods</h4>
+          <div class="space-y-2">
+            <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded p-3">
+              <code class="font-mono text-sm">activateTabById(tabId: string): boolean</code>
+              <p class="text-xs text-macos-gray-600 dark:text-macos-gray-400 mt-1">Programmatically activate a tab</p>
+            </div>
+            <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded p-3">
+              <code class="font-mono text-sm">disableTab(tabId: string): void</code>
+              <p class="text-xs text-macos-gray-600 dark:text-macos-gray-400 mt-1">Disable a specific tab</p>
+            </div>
+            <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded p-3">
+              <code class="font-mono text-sm">enableTab(tabId: string): void</code>
+              <p class="text-xs text-macos-gray-600 dark:text-macos-gray-400 mt-1">Enable a specific tab</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+];
+
+const pillsTabs = [
+  {
+    id: 'design',
+    label: 'Design',
+    content: `
+      <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Design Principles</h4>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4">
+        The pills variant provides a modern, button-like appearance that works well in compact spaces.
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-macos-blue-50 dark:bg-macos-blue-900/20 rounded-lg p-4">
+          <h5 class="font-medium text-macos-blue-900 dark:text-macos-blue-300 mb-2">Visual Hierarchy</h5>
+          <p class="text-sm text-macos-blue-800 dark:text-macos-blue-400">Clear distinction between active and inactive states</p>
+        </div>
+        <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+          <h5 class="font-medium text-green-900 dark:text-green-300 mb-2">User Experience</h5>
+          <p class="text-sm text-green-800 dark:text-green-400">Intuitive interaction patterns</p>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'implementation',
+    label: 'Implementation',
+    content: `
+      <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Technical Implementation</h4>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4">
+        Built with semantic HTML and progressive enhancement in mind.
+      </p>
+      <ul class="space-y-2 text-macos-gray-600 dark:text-macos-gray-400">
+        <li>✅ Works without JavaScript</li>
+        <li>✅ Enhanced with smooth transitions</li>
+        <li>✅ Keyboard accessible</li>
+        <li>✅ Screen reader friendly</li>
+      </ul>
+    `
+  },
+  {
+    id: 'testing',
+    label: 'Testing',
+    content: `
+      <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Accessibility Testing</h4>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4">
+        Thoroughly tested with various assistive technologies and automated tools.
+      </p>
+      <div class="space-y-3">
+        <div class="flex items-center text-green-600 dark:text-green-400">
+          <span class="mr-2">✓</span> NVDA Screen Reader
+        </div>
+        <div class="flex items-center text-green-600 dark:text-green-400">
+          <span class="mr-2">✓</span> VoiceOver (macOS/iOS)
+        </div>
+        <div class="flex items-center text-green-600 dark:text-green-400">
+          <span class="mr-2">✓</span> axe-core Testing
+        </div>
+        <div class="flex items-center text-green-600 dark:text-green-400">
+          <span class="mr-2">✓</span> Lighthouse Accessibility
+        </div>
+      </div>
+    `
+  }
+];
+
+const verticalTabs = [
+  {
+    id: 'overview',
+    label: 'Overview',
+    content: `
+      <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Vertical Layout</h4>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400">
+        Perfect for forms, settings panels, or when you have many tabs to display. 
+        The vertical orientation provides better space utilization on wider screens.
+      </p>
+    `
+  },
+  {
+    id: 'navigation',
+    label: 'Navigation',
+    content: `
+      <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Keyboard Navigation</h4>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-3">
+        In vertical mode, use these keys:
+      </p>
+      <div class="space-y-2 text-sm">
+        <div class="flex items-center">
+          <kbd class="px-2 py-1 bg-macos-gray-100 dark:bg-macos-gray-700 rounded text-xs mr-3">↑</kbd>
+          <span class="text-macos-gray-600 dark:text-macos-gray-400">Previous tab</span>
+        </div>
+        <div class="flex items-center">
+          <kbd class="px-2 py-1 bg-macos-gray-100 dark:bg-macos-gray-700 rounded text-xs mr-3">↓</kbd>
+          <span class="text-macos-gray-600 dark:text-macos-gray-400">Next tab</span>
+        </div>
+        <div class="flex items-center">
+          <kbd class="px-2 py-1 bg-macos-gray-100 dark:bg-macos-gray-700 rounded text-xs mr-3">Home</kbd>
+          <span class="text-macos-gray-600 dark:text-macos-gray-400">First tab</span>
+        </div>
+        <div class="flex items-center">
+          <kbd class="px-2 py-1 bg-macos-gray-100 dark:bg-macos-gray-700 rounded text-xs mr-3">End</kbd>
+          <span class="text-macos-gray-600 dark:text-macos-gray-400">Last tab</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'responsive',
+    label: 'Responsive',
+    content: `
+      <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-3">Responsive Behavior</h4>
+      <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-3">
+        The vertical layout automatically adapts to different screen sizes:
+      </p>
+      <ul class="space-y-2 text-macos-gray-600 dark:text-macos-gray-400 text-sm">
+        <li>📱 Collapses to horizontal on mobile</li>
+        <li>💻 Maintains vertical layout on tablets</li>
+        <li>🖥️ Full vertical layout on desktops</li>
+      </ul>
+    `
+  }
+];
+---
+
+<Layout title="Tabs Experiment - Demo">
+  <main class="min-h-screen bg-gradient-to-br from-macos-blue-500/5 to-macos-gray-100 dark:from-macos-gray-900 dark:to-macos-gray-800 py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-macos-gray-900 dark:text-white mb-4">
+          Interactive Tabs Component
+        </h1>
+        <p class="text-lg text-macos-gray-600 dark:text-macos-gray-400 max-w-2xl mx-auto">
+          A fully accessible, customizable tabs component with smooth animations and keyboard navigation
+        </p>
+      </div>
+
+      <!-- Default Tabs Demo -->
+      <section class="mb-12">
+        <Window title="Default Style Tabs" class="mb-8">
+          <TabsComponent tabs={basicTabs} variant="default" />
+        </Window>
+      </section>
+
+      <!-- Pills Tabs Demo -->
+      <section class="mb-12">
+        <Window title="Pills Style Tabs" class="mb-8">
+          <TabsComponent tabs={pillsTabs} variant="pills" />
+        </Window>
+      </section>
+
+      <!-- Vertical Tabs Demo -->
+      <section class="mb-12">
+        <Window title="Vertical Orientation" class="mb-8">
+          <TabsComponent tabs={verticalTabs} variant="underline" orientation="vertical" />
+        </Window>
+      </section>
+
+      <!-- Features Section -->
+      <section class="mb-12">
+        <Window title="Key Features & Benefits" class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="text-center p-6 border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg">
+              <div class="text-3xl mb-4">♿</div>
+              <h3 class="font-semibold text-macos-gray-900 dark:text-white mb-2">
+                Accessibility First
+              </h3>
+              <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                Full WCAG 2.1 compliance with proper ARIA attributes and keyboard navigation
+              </p>
+            </div>
+            
+            <div class="text-center p-6 border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg">
+              <div class="text-3xl mb-4">⚡</div>
+              <h3 class="font-semibold text-macos-gray-900 dark:text-white mb-2">
+                High Performance
+              </h3>
+              <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                Lightweight implementation with smooth CSS transitions and minimal JavaScript
+              </p>
+            </div>
+            
+            <div class="text-center p-6 border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg">
+              <div class="text-3xl mb-4">🎨</div>
+              <h3 class="font-semibold text-macos-gray-900 dark:text-white mb-2">
+                Fully Customizable
+              </h3>
+              <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                Multiple style variants and easy theming with CSS custom properties
+              </p>
+            </div>
+            
+            <div class="text-center p-6 border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg">
+              <div class="text-3xl mb-4">📱</div>
+              <h3 class="font-semibold text-macos-gray-900 dark:text-white mb-2">
+                Responsive Design
+              </h3>
+              <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                Works seamlessly across all device sizes and orientations
+              </p>
+            </div>
+            
+            <div class="text-center p-6 border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg">
+              <div class="text-3xl mb-4">🔧</div>
+              <h3 class="font-semibold text-macos-gray-900 dark:text-white mb-2">
+                Developer Friendly
+              </h3>
+              <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                Simple API with TypeScript support and comprehensive documentation
+              </p>
+            </div>
+            
+            <div class="text-center p-6 border border-macos-gray-200 dark:border-macos-gray-700 rounded-lg">
+              <div class="text-3xl mb-4">🚀</div>
+              <h3 class="font-semibant text-macos-gray-900 dark:text-white mb-2">
+                Progressive Enhancement
+              </h3>
+              <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                Works without JavaScript and enhances with smooth interactions
+              </p>
+            </div>
+          </div>
+        </Window>
+      </section>
+
+      <!-- Usage Instructions -->
+      <section class="mb-12">
+        <Window title="How to Use" class="max-w-4xl mx-auto">
+          <div class="prose prose-lg dark:prose-invert max-w-none">
+            <h3>Quick Start</h3>
+            <ol class="list-decimal list-inside space-y-2 text-macos-gray-600 dark:text-macos-gray-400">
+              <li>Import the TabsComponent into your Astro page</li>
+              <li>Define your tabs data with id, label, and content</li>
+              <li>Add the component with your preferred variant and orientation</li>
+              <li>Customize the styling to match your design system</li>
+            </ol>
+            
+            <h3>Keyboard Navigation</h3>
+            <p class="text-macos-gray-600 dark:text-macos-gray-400">
+              The component supports full keyboard navigation:
+            </p>
+            <ul class="space-y-1 text-macos-gray-600 dark:text-macos-gray-400">
+              <li><strong>Arrow Keys:</strong> Navigate between tabs</li>
+              <li><strong>Enter/Space:</strong> Activate focused tab</li>
+              <li><strong>Home/End:</strong> Jump to first/last tab</li>
+              <li><strong>Tab:</strong> Move focus to tab panel content</li>
+            </ul>
+          </div>
+        </Window>
+      </section>
+
+      <!-- Back to Experiments -->
+      <div class="text-center">
+        <a 
+          href="/experiments" 
+          class="bg-macos-blue-500 hover:bg-macos-blue-600 text-white px-8 py-3 rounded-macos font-medium transition-colors shadow-macos inline-flex items-center"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to Experiments
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation Back -->
+    <div class="fixed top-6 left-6 z-50">
+      <a 
+        href="/experiments" 
+        class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 text-macos-gray-900 dark:text-white p-3 rounded-macos font-medium transition-colors hover:bg-white/90 dark:hover:bg-macos-gray-800/90 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back
+      </a>
+    </div>
+  </main>
+</Layout>

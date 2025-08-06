@@ -1,0 +1,474 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Window from '../components/Window.astro';
+import Dock from '../components/Dock.astro';
+
+// Extended experiments data - this will be replaced with dynamic data later
+const experiments = [
+  {
+    title: "Interactive Tabs Component",
+    description: "A flexible and accessible tabs component with smooth animations, keyboard navigation, and customizable styling options. Features include support for vertical/horizontal layouts, lazy loading of tab content, and full ARIA compliance.",
+    technologies: ["JavaScript", "CSS", "ARIA", "Web Components"],
+    status: "In Progress",
+    githubUrl: "https://github.com",
+    demoUrl: "/tabs-demo",
+    category: "UI Components",
+    features: [
+      "Smooth CSS transitions and animations",
+      "Full keyboard navigation support",
+      "ARIA accessibility compliance",
+      "Responsive design",
+      "Customizable themes",
+      "Lazy loading of tab content"
+    ],
+    lastUpdated: "2025-08-01"
+  },
+  {
+    title: "AI Chat Interface",
+    description: "Experimental chat interface with voice recognition and natural language processing. Includes real-time transcription, sentiment analysis, and multi-language support.",
+    technologies: ["React", "WebRTC", "OpenAI API", "Speech Recognition API"],
+    status: "Prototype",
+    githubUrl: "https://github.com",
+    demoUrl: "https://example.com/chat-demo",
+    category: "AI/ML",
+    features: [
+      "Real-time voice transcription",
+      "Multi-language support",
+      "Sentiment analysis",
+      "Context-aware responses",
+      "Voice synthesis",
+      "Message history persistence"
+    ],
+    lastUpdated: "2025-07-28"
+  },
+  {
+    title: "WebGL Particle System",
+    description: "Real-time particle system using WebGL shaders for dynamic visual effects. Optimized for performance with GPU-based calculations and interactive controls.",
+    technologies: ["Three.js", "WebGL", "GLSL", "TypeScript"],
+    status: "Complete",
+    demoUrl: "https://example.com/particles",
+    githubUrl: "https://github.com",
+    category: "Graphics",
+    features: [
+      "GPU-accelerated particle physics",
+      "Real-time lighting effects",
+      "Interactive parameter controls",
+      "Multiple particle system types",
+      "Performance monitoring",
+      "Mobile-optimized rendering"
+    ],
+    lastUpdated: "2025-07-15"
+  },
+  {
+    title: "Micro Frontend Framework",
+    description: "Exploring module federation and micro frontend architecture patterns. Includes dynamic module loading, shared state management, and cross-framework compatibility.",
+    technologies: ["Webpack", "React", "Vue", "TypeScript", "Single-SPA"],
+    status: "Research",
+    githubUrl: "https://github.com",
+    category: "Architecture",
+    features: [
+      "Dynamic module federation",
+      "Cross-framework compatibility",
+      "Shared state management",
+      "Independent deployments",
+      "Route-based code splitting",
+      "Development tooling"
+    ],
+    lastUpdated: "2025-07-20"
+  },
+  {
+    title: "CSS Grid Layout Generator",
+    description: "Visual tool for generating CSS Grid layouts with drag-and-drop interface. Includes responsive breakpoints, gap controls, and code export functionality.",
+    technologies: ["Vue.js", "CSS Grid", "Drag & Drop API", "Vite"],
+    status: "Complete",
+    demoUrl: "https://example.com/grid-generator",
+    githubUrl: "https://github.com",
+    category: "Development Tools",
+    features: [
+      "Visual grid builder",
+      "Responsive breakpoints",
+      "Live code preview",
+      "Export to multiple formats",
+      "Template library",
+      "Accessibility guidelines"
+    ],
+    lastUpdated: "2025-07-10"
+  },
+  {
+    title: "Real-time Collaboration Engine",
+    description: "WebSocket-based collaboration system with operational transformation for real-time document editing. Includes conflict resolution and user presence indicators.",
+    technologies: ["Socket.io", "Operational Transform", "Redis", "Node.js"],
+    status: "In Progress",
+    githubUrl: "https://github.com",
+    category: "Real-time Systems",
+    features: [
+      "Operational transformation",
+      "Conflict resolution algorithms",
+      "User presence indicators",
+      "Document versioning",
+      "Offline synchronization",
+      "Multi-room support"
+    ],
+    lastUpdated: "2025-08-03"
+  }
+];
+
+const dockItems = [
+  { name: "About", icon: "👤", href: "/#about" },
+  { name: "Projects", icon: "💼", href: "/projects" },
+  { name: "Skills", icon: "🛠️", href: "/#skills" },
+  { name: "Experiments", icon: "🧪", href: "/experiments", isActive: true },
+  { name: "Contact", icon: "📧", href: "/#contact" }
+];
+
+// Group experiments by category and status
+const experimentsByCategory = experiments.reduce((acc, experiment) => {
+  const category = experiment.category || 'Other';
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(experiment);
+  return acc;
+}, {} as Record<string, typeof experiments>);
+
+const experimentsByStatus = experiments.reduce((acc, experiment) => {
+  const status = experiment.status || 'Unknown';
+  if (!acc[status]) {
+    acc[status] = [];
+  }
+  acc[status].push(experiment);
+  return acc;
+}, {} as Record<string, typeof experiments>);
+
+const statusOrder = ['Complete', 'In Progress', 'Prototype', 'Research'];
+---
+
+<Layout title="Experiments - Your Name">
+  <main class="min-h-screen bg-gradient-to-br from-macos-blue-500/5 to-macos-gray-100 dark:from-macos-gray-900 dark:to-macos-gray-800">
+    <!-- Header -->
+    <section class="pt-20 pb-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h1 class="text-5xl md:text-6xl font-bold text-macos-gray-900 dark:text-white mb-6">
+            Experiments & Research
+          </h1>
+          <p class="text-xl text-macos-gray-600 dark:text-macos-gray-400 max-w-3xl mx-auto">
+            A collection of my explorations into emerging technologies, innovative concepts, 
+            and creative solutions. These experiments showcase my curiosity and drive to push boundaries.
+          </p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 rounded-macos p-6 text-center">
+            <div class="text-2xl font-bold text-macos-blue-500 dark:text-macos-blue-400 mb-2">
+              {experiments.length}
+            </div>
+            <div class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+              Total Experiments
+            </div>
+          </div>
+          
+          <div class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 rounded-macos p-6 text-center">
+            <div class="text-2xl font-bold text-green-500 mb-2">
+              {experiments.filter(e => e.status === 'Complete').length}
+            </div>
+            <div class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+              Completed
+            </div>
+          </div>
+          
+          <div class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 rounded-macos p-6 text-center">
+            <div class="text-2xl font-bold text-blue-500 mb-2">
+              {experiments.filter(e => e.status === 'In Progress').length}
+            </div>
+            <div class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+              In Progress
+            </div>
+          </div>
+          
+          <div class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 rounded-macos p-6 text-center">
+            <div class="text-2xl font-bold text-orange-500 mb-2">
+              {Object.keys(experimentsByCategory).length}
+            </div>
+            <div class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+              Categories
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiments by Status -->
+    <section class="py-12 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-macos-gray-900 dark:text-white mb-8 text-center">
+          Current Status
+        </h2>
+        
+        {statusOrder.filter(status => experimentsByStatus[status]?.length > 0).map((status) => (
+          <div class="mb-12">
+            <Window title={`${status} (${experimentsByStatus[status].length})`} class="mb-8">
+              <div class="grid md:grid-cols-2 gap-6">
+                {experimentsByStatus[status].map((experiment) => (
+                  <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded-macos p-6 hover:shadow-macos transition-shadow">
+                    <div class="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-2">
+                          {experiment.title}
+                        </h3>
+                        <span class="text-sm font-medium text-macos-blue-500 dark:text-macos-blue-400">
+                          {experiment.category}
+                        </span>
+                      </div>
+                      <span class={`text-xs px-2 py-1 rounded-full font-medium ${
+                        experiment.status === 'Complete' 
+                          ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                          : experiment.status === 'In Progress'
+                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+                          : experiment.status === 'Prototype'
+                          ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
+                          : 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400'
+                      }`}>
+                        {experiment.status}
+                      </span>
+                    </div>
+                    
+                    <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4 leading-relaxed">
+                      {experiment.description}
+                    </p>
+                    
+                    {experiment.features && (
+                      <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-macos-gray-900 dark:text-white mb-2">
+                          Key Features:
+                        </h4>
+                        <ul class="text-sm text-macos-gray-600 dark:text-macos-gray-400 space-y-1">
+                          {experiment.features.slice(0, 3).map((feature) => (
+                            <li class="flex items-center">
+                              <span class="w-1.5 h-1.5 bg-macos-blue-500 rounded-full mr-2 flex-shrink-0"></span>
+                              {feature}
+                            </li>
+                          ))}
+                          {experiment.features.length > 3 && (
+                            <li class="text-xs text-macos-gray-500 italic">
+                              +{experiment.features.length - 3} more features
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      {experiment.technologies.map((tech) => (
+                        <span class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-2 py-1 rounded text-xs">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div class="flex items-center justify-between pt-4 border-t border-macos-gray-200 dark:border-macos-gray-700">
+                      <div class="flex gap-3">
+                        {experiment.githubUrl && (
+                          <a 
+                            href={experiment.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-macos-gray-600 dark:text-macos-gray-400 hover:text-macos-blue-500 dark:hover:text-macos-blue-400 transition-colors text-sm font-medium"
+                          >
+                            View Code
+                          </a>
+                        )}
+                        {experiment.demoUrl && (
+                          <a 
+                            href={experiment.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-macos-blue-500 hover:text-macos-blue-600 dark:text-macos-blue-400 dark:hover:text-macos-blue-300 transition-colors text-sm font-medium"
+                          >
+                            Live Demo
+                          </a>
+                        )}
+                      </div>
+                      {experiment.lastUpdated && (
+                        <span class="text-xs text-macos-gray-500">
+                          Updated {experiment.lastUpdated}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Window>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Experiments by Category -->
+    <section class="py-12 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-macos-gray-900 dark:text-white mb-8 text-center">
+          Browse by Category
+        </h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Object.entries(experimentsByCategory).map(([category, categoryExperiments]) => (
+            <Window title={category} class="h-full">
+              <div class="space-y-4">
+                <div class="text-sm text-macos-gray-600 dark:text-macos-gray-400 mb-4">
+                  {categoryExperiments.length} experiment{categoryExperiments.length !== 1 ? 's' : ''}
+                </div>
+                
+                {categoryExperiments.map((experiment) => (
+                  <div class="border-l-2 border-macos-blue-500 pl-4 py-2">
+                    <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-1">
+                      {experiment.title}
+                    </h4>
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class={`text-xs px-2 py-1 rounded-full font-medium ${
+                        experiment.status === 'Complete' 
+                          ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                          : experiment.status === 'In Progress'
+                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+                          : experiment.status === 'Prototype'
+                          ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
+                          : 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400'
+                      }`}>
+                        {experiment.status}
+                      </span>
+                    </div>
+                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400 line-clamp-2">
+                      {experiment.description.split('.')[0]}.
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </Window>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Goals -->
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <Window title="Research & Development Goals" class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">
+                Current Focus Areas
+              </h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-macos-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <div>
+                    <strong class="text-macos-gray-900 dark:text-white">Accessibility & Inclusivity</strong>
+                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                      Developing components and patterns that work for everyone
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-macos-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <div>
+                    <strong class="text-macos-gray-900 dark:text-white">Performance Optimization</strong>
+                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                      Exploring cutting-edge techniques for faster, more efficient applications
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-macos-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <div>
+                    <strong class="text-macos-gray-900 dark:text-white">AI Integration</strong>
+                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                      Incorporating machine learning and AI into user interfaces
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">
+                Upcoming Experiments
+              </h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <div>
+                    <strong class="text-macos-gray-900 dark:text-white">WebAssembly Graphics Engine</strong>
+                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                      High-performance graphics rendering in the browser
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <div>
+                    <strong class="text-macos-gray-900 dark:text-white">Quantum Computing Simulator</strong>
+                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                      Educational tool for understanding quantum algorithms
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <span class="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <div>
+                    <strong class="text-macos-gray-900 dark:text-white">Voice-Controlled IDE</strong>
+                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400">
+                      Accessibility-focused development environment
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="mt-8 pt-8 border-t border-macos-gray-200 dark:border-macos-gray-700 text-center">
+            <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-6">
+              Interested in collaborating on any of these experiments? I'm always open to 
+              discussing ideas and working with fellow developers and researchers.
+            </p>
+            
+            <a 
+              href="/#contact" 
+              class="bg-macos-blue-500 hover:bg-macos-blue-600 text-white px-8 py-3 rounded-macos font-medium transition-colors shadow-macos inline-flex items-center"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+              </svg>
+              Let's Collaborate
+            </a>
+          </div>
+        </Window>
+      </div>
+    </section>
+
+    <!-- Navigation Back -->
+    <div class="fixed top-6 left-6 z-50">
+      <a 
+        href="/" 
+        class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 text-macos-gray-900 dark:text-white p-3 rounded-macos font-medium transition-colors hover:bg-white/90 dark:hover:bg-macos-gray-800/90 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <!-- Dock Navigation -->
+    <Dock items={dockItems} />
+  </main>
+</Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
