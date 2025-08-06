@@ -1,0 +1,30 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Modern portfolio website" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    
+    <!-- macOS-style system fonts -->
+    <style>
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+  </head>
+  <body class="bg-macos-gray-50 dark:bg-macos-gray-900 text-macos-gray-900 dark:text-macos-gray-100 font-sf-pro">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,150 @@
+---
+export interface Props {
+  project?: any;
+  isEdit?: boolean;
+}
+
+const { project, isEdit = false } = Astro.props;
+---
+
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-macos-gray-900 dark:text-white">
+      {isEdit ? 'Edit Project' : 'Create New Project'}
+    </h2>
+    <button 
+      type="button"
+      class="text-macos-gray-400 hover:text-macos-gray-600 dark:hover:text-macos-gray-200 project-modal-close"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <form id="project-form" class="space-y-6">
+    <div>
+      <label class="block text-sm font-medium text-macos-gray-700 dark:text-macos-gray-300 mb-2">
+        Project Title *
+      </label>
+      <input 
+        type="text" 
+        name="title"
+        required
+        placeholder="Enter project title"
+        class="w-full px-4 py-2 border border-macos-gray-300 dark:border-macos-gray-600 rounded-macos bg-white/50 dark:bg-macos-gray-700/50 focus:outline-none focus:ring-2 focus:ring-macos-blue-500"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-macos-gray-700 dark:text-macos-gray-300 mb-2">
+        Description *
+      </label>
+      <textarea 
+        name="description"
+        required
+        rows="3"
+        placeholder="Brief description of your project"
+        class="w-full px-4 py-2 border border-macos-gray-300 dark:border-macos-gray-600 rounded-macos bg-white/50 dark:bg-macos-gray-700/50 focus:outline-none focus:ring-2 focus:ring-macos-blue-500"
+      ></textarea>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-macos-gray-700 dark:text-macos-gray-300 mb-2">
+          Category *
+        </label>
+        <select 
+          name="category"
+          required
+          class="w-full px-4 py-2 border border-macos-gray-300 dark:border-macos-gray-600 rounded-macos bg-white/50 dark:bg-macos-gray-700/50 focus:outline-none focus:ring-2 focus:ring-macos-blue-500"
+        >
+          <option value="">Select a category</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Mobile Development">Mobile Development</option>
+          <option value="Data Science">Data Science</option>
+          <option value="Machine Learning">Machine Learning</option>
+          <option value="Design">Design</option>
+          <option value="DevOps">DevOps</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="flex items-end">
+        <label class="flex items-center space-x-2">
+          <input 
+            type="checkbox" 
+            name="featured"
+            class="w-4 h-4 text-macos-blue-500 bg-white border-macos-gray-300 rounded focus:ring-macos-blue-500 focus:ring-2"
+          />
+          <span class="text-sm text-macos-gray-700 dark:text-macos-gray-300">Featured Project</span>
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-macos-gray-700 dark:text-macos-gray-300 mb-2">
+        Technologies Used *
+      </label>
+      <input 
+        type="text" 
+        name="technologies"
+        placeholder="React, TypeScript, Node.js"
+        class="w-full px-4 py-2 border border-macos-gray-300 dark:border-macos-gray-600 rounded-macos bg-white/50 dark:bg-macos-gray-700/50 focus:outline-none focus:ring-2 focus:ring-macos-blue-500"
+      />
+      <p class="text-xs text-macos-gray-500 mt-1">Separate multiple technologies with commas</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-macos-gray-700 dark:text-macos-gray-300 mb-2">
+          GitHub URL
+        </label>
+        <input 
+          type="url" 
+          name="githubUrl"
+          placeholder="https://github.com/username/repo"
+          class="w-full px-4 py-2 border border-macos-gray-300 dark:border-macos-gray-600 rounded-macos bg-white/50 dark:bg-macos-gray-700/50 focus:outline-none focus:ring-2 focus:ring-macos-blue-500"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-macos-gray-700 dark:text-macos-gray-300 mb-2">
+          Live Demo URL
+        </label>
+        <input 
+          type="url" 
+          name="liveUrl"
+          placeholder="https://your-project.com"
+          class="w-full px-4 py-2 border border-macos-gray-300 dark:border-macos-gray-600 rounded-macos bg-white/50 dark:bg-macos-gray-700/50 focus:outline-none focus:ring-2 focus:ring-macos-blue-500"
+        />
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center pt-6 border-t border-macos-gray-200 dark:border-macos-gray-700">
+      <button 
+        type="button" 
+        class="px-6 py-2 text-macos-gray-600 dark:text-macos-gray-400 hover:text-macos-gray-800 dark:hover:text-macos-gray-200 project-modal-close"
+      >
+        Cancel
+      </button>
+      
+      <div class="flex space-x-3">
+        <button 
+          type="button"
+          id="save-as-draft-btn"
+          class="bg-macos-gray-500 hover:bg-macos-gray-600 text-white px-6 py-2 rounded-macos font-medium transition-colors"
+        >
+          Save as Draft
+        </button>
+        
+        <button 
+          type="submit"
+          class="bg-macos-blue-500 hover:bg-macos-blue-600 text-white px-6 py-2 rounded-macos font-medium transition-colors"
+        >
+          {isEdit ? 'Update Project' : 'Create & Publish'}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
