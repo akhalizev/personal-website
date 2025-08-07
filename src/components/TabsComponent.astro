@@ -96,8 +96,8 @@ const tabsId = `tabs-${Math.random().toString(36).substr(2, 9)}`;
   .tab {
     @apply relative px-4 py-3 text-sm font-medium text-macos-gray-600 dark:text-macos-gray-400 
            hover:text-macos-gray-900 dark:hover:text-white transition-all duration-200 
-           focus:outline-none focus:ring-2 focus:ring-macos-blue-500 focus:ring-offset-2 
-           focus:ring-offset-white dark:focus:ring-offset-macos-gray-900 rounded-md;
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500 focus-visible:ring-offset-2 
+           focus-visible:ring-offset-white dark:focus-visible:ring-offset-macos-gray-900 rounded-md;
   }
 
   .tab.disabled {
@@ -224,6 +224,8 @@ const tabsId = `tabs-${Math.random().toString(36).substr(2, 9)}`;
         tab.addEventListener('click', () => {
           if (!tab.disabled) {
             this.activateTab(tab);
+            // Remove focus after click to avoid focus ring on mouse interaction
+            tab.blur();
           }
         });
       });
