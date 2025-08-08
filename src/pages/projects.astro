@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Window from '../components/Window.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Dock from '../components/Dock.astro';
+import ProjectListItem from '../components/ProjectListItem.astro';
 
 // Extended project data - this will be replaced with dynamic data later
 const projects = [
@@ -82,27 +83,48 @@ const projectsByCategory = projects.reduce((acc, project) => {
 <Layout title="Projects - Your Name">
   <main class="min-h-screen bg-gradient-to-br from-macos-blue-500/5 to-macos-gray-100 dark:from-macos-gray-900 dark:to-macos-gray-800">
     <!-- Header -->
-    <section class="pt-20 pb-16 px-6">
+    <section class="pt-20 pb-6 px-6">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-          <h1 class="text-5xl md:text-6xl font-bold text-macos-gray-900 dark:text-white mb-6">
-            My Projects
-          </h1>
-          <p class="text-xl text-macos-gray-600 dark:text-macos-gray-400 max-w-2xl mx-auto">
-            A collection of my work showcasing various technologies and problem-solving approaches
-          </p>
+        <div class="flex flex-col items-center gap-6">
+          <div class="text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-macos-gray-900 dark:text-white mb-3">
+              My Projects
+            </h1>
+            <p class="text-xl text-macos-gray-600 dark:text-macos-gray-400 max-w-2xl mx-auto">
+              A collection of my work showcasing various technologies and problem-solving approaches
+            </p>
+          </div>
+
+          <!-- View Toggle -->
+          <div class="flex items-center gap-2 bg-white/70 dark:bg-macos-gray-800/70 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/40 rounded-macos px-2 py-1 shadow-macos" id="view-toggle" role="group" aria-label="Toggle project view">
+            <button type="button" class="view-btn grid-view active inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm text-macos-gray-800 dark:text-macos-gray-100 hover:bg-macos-gray-100 dark:hover:bg-macos-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500" aria-pressed="true" data-view="grid">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z"/></svg>
+              Grid
+            </button>
+            <button type="button" class="view-btn list-view inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm text-macos-gray-700 dark:text-macos-gray-300 hover:bg-macos-gray-100 dark:hover:bg-macos-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500" aria-pressed="false" data-view="list">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>
+              List
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Projects by Category -->
     {Object.entries(projectsByCategory).map(([category, categoryProjects]) => (
-      <section class="py-12 px-6">
+      <section class="py-8 px-6">
         <div class="max-w-6xl mx-auto">
           <Window title={category} class="mb-8">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Grid View -->
+            <div class="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-view-section="grid">
               {categoryProjects.map((project) => (
                 <ProjectCard {...project} />
+              ))}
+            </div>
+            <!-- List View -->
+            <div class="projects-list hidden flex-col gap-2" data-view-section="list">
+              {categoryProjects.map((project) => (
+                <ProjectListItem {...project} />
               ))}
             </div>
           </Window>
@@ -162,3 +184,41 @@ const projectsByCategory = projects.reduce((acc, project) => {
     <Dock items={dockItems} />
   </main>
 </Layout>
+
+<script>
+  const STORAGE_KEY = 'projects:view';
+  function applyView(view) {
+    const isGrid = view === 'grid';
+    document.querySelectorAll('[data-view-section="grid"]').forEach(el => {
+      el.classList.toggle('hidden', !isGrid);
+    });
+    document.querySelectorAll('[data-view-section="list"]').forEach(el => {
+      el.classList.toggle('hidden', isGrid);
+      el.classList.toggle('flex', !isGrid);
+    });
+    const gridBtn = document.querySelector('#view-toggle .grid-view');
+    const listBtn = document.querySelector('#view-toggle .list-view');
+    if (gridBtn && listBtn) {
+      gridBtn.classList.toggle('active', isGrid);
+      listBtn.classList.toggle('active', !isGrid);
+      gridBtn.setAttribute('aria-pressed', String(isGrid));
+      listBtn.setAttribute('aria-pressed', String(!isGrid));
+      gridBtn.classList.toggle('text-macos-gray-800', isGrid);
+      gridBtn.classList.toggle('dark:text-macos-gray-100', isGrid);
+      listBtn.classList.toggle('text-macos-gray-800', !isGrid);
+      listBtn.classList.toggle('dark:text-macos-gray-100', !isGrid);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const initial = localStorage.getItem(STORAGE_KEY) || 'grid';
+    applyView(initial);
+    document.querySelectorAll('#view-toggle .view-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.getAttribute('data-view');
+        if (!view) return;
+        localStorage.setItem(STORAGE_KEY, view);
+        applyView(view);
+      });
+    });
+  });
+</script>
