@@ -1,4 +1,6 @@
 ---
+import DarkModeToggle from '../components/DarkModeToggle.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -16,6 +18,21 @@ const { title, description = "Modern portfolio website" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     
+    <!-- Prevent flash of unstyled content -->
+    <script>
+      // Set theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+    
     <!-- macOS-style system fonts -->
     <style>
       * {
@@ -26,5 +43,6 @@ const { title, description = "Modern portfolio website" } = Astro.props;
   </head>
   <body class="bg-macos-gray-50 dark:bg-macos-gray-900 text-macos-gray-900 dark:text-macos-gray-100 font-sf-pro">
     <slot />
+    <DarkModeToggle />
   </body>
 </html>
