@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Dark Mode Test">
+  <div class="min-h-screen p-8">
+    <h1 class="text-3xl font-bold mb-4">Dark Mode Toggle Test</h1>
+    <p class="mb-4">Click the toggle in the top-right to test dark mode.</p>
+    
+    <div class="bg-white dark:bg-gray-800 p-4 rounded border">
+      <p class="text-gray-900 dark:text-white">This text should change color when you toggle modes.</p>
+    </div>
+    
+    <button 
+      id="test-toggle" 
+      class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      onclick="testToggle()"
+    >
+      Test Toggle Function
+    </button>
+  </div>
+</Layout>
+
+<script>
+  function testToggle() {
+    const html = document.documentElement;
+    const toggle = document.getElementById('dark-mode-toggle');
+    
+    console.log('HTML element:', html);
+    console.log('Toggle element:', toggle);
+    console.log('Current classes:', html.className);
+    console.log('Has dark class:', html.classList.contains('dark'));
+    
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+      console.log('Removed dark class');
+    } else {
+      html.classList.add('dark');
+      console.log('Added dark class');
+    }
+  }
+  
+  // Check if toggle is working
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (toggle) {
+      console.log('Toggle found!');
+      toggle.addEventListener('click', () => {
+        console.log('Toggle was clicked!');
+      });
+    } else {
+      console.log('Toggle not found!');
+    }
+  });
+</script>

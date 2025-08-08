@@ -9,7 +9,7 @@ interface Tab {
 interface Props {
   tabs: Tab[];
   defaultTab?: string;
-  variant?: 'default' | 'pills' | 'underline';
+  variant?: 'default' | 'pills' | 'underline' | 'figma';
   orientation?: 'horizontal' | 'vertical';
   class?: string;
 }
@@ -134,6 +134,31 @@ const tabsId = `tabs-${Math.random().toString(36).substr(2, 9)}`;
 
   .tab.underline.active .tab-indicator {
     @apply scale-x-100;
+  }
+
+  /* Figma variant styles */
+  .tab-list.figma {
+    @apply border-b-0 flex;
+  }
+
+  .tab.figma {
+    @apply relative px-6 py-0 h-[34px] text-sm font-normal text-[#6e6e6e] 
+           hover:text-[#888787] hover:font-semibold hover:bg-[#f2f2f2] 
+           active:bg-[#d1d2d4] transition-all duration-200 
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-[#333333] focus-visible:ring-offset-0
+           rounded-none flex items-center justify-center;
+  }
+
+  .tab.figma.active {
+    @apply text-[#333333] font-semibold;
+  }
+
+  .tab.figma .tab-indicator {
+    @apply absolute bottom-0 left-0 right-0 h-px bg-[#6e6e6e] w-full;
+  }
+
+  .tab.figma.active .tab-indicator {
+    @apply h-0.5 bg-[#c34400] rounded-[1px];
   }
 
   /* Vertical orientation adjustments */
