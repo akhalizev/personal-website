@@ -154,11 +154,15 @@ const tabsId = `tabs-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   .tab.figma .tab-indicator {
-    @apply absolute bottom-0 left-0 right-0 h-px bg-[#6e6e6e] w-full;
+    @apply absolute bottom-0 left-0 right-0 h-px bg-[#6e6e6e] w-full transition-all duration-200;
+  }
+
+  .tab.figma:hover:not(.active) .tab-indicator {
+    @apply h-0.5 bg-[#6e6e6e];
   }
 
   .tab.figma.active .tab-indicator {
-    @apply h-0.5 bg-[#c34400] rounded-[1px];
+  @apply h-0.5 bg-macos-orange-500 rounded-[1px];
   }
 
   /* Vertical orientation adjustments */

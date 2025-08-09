@@ -158,7 +158,7 @@ const figmaDesignTabs = [
         This is the exact implementation of your Figma tabs design with pixel-perfect accuracy:
       </p>
       <ul class="space-y-2 text-[#6e6e6e]">
-        <li class="flex items-center"><span class="w-2 h-2 bg-[#c34400] rounded-full mr-3"></span>Orange active indicator (#c34400)</li>
+  <li class="flex items-center"><span class="w-2 h-2 bg-macos-orange-500 rounded-full mr-3"></span>Orange active indicator (macos-orange-500)</li>
         <li class="flex items-center"><span class="w-2 h-2 bg-[#333333] rounded-full mr-3"></span>Active text color (#333333)</li>
         <li class="flex items-center"><span class="w-2 h-2 bg-[#6e6e6e] rounded-full mr-3"></span>Inactive text color (#6e6e6e)</li>
         <li class="flex items-center"><span class="w-2 h-2 bg-[#f2f2f2] rounded-full mr-3"></span>Hover background (#f2f2f2)</li>
@@ -178,8 +178,8 @@ const figmaDesignTabs = [
             <div class="flex items-center justify-between p-2 border rounded">
               <span>Active Indicator</span>
               <div class="flex items-center">
-                <div class="w-4 h-4 bg-[#c34400] rounded mr-2"></div>
-                <code>#c34400</code>
+                <div class="w-4 h-4 bg-macos-orange-500 rounded mr-2"></div>
+                <code>macos-orange-500</code>
               </div>
             </div>
             <div class="flex items-center justify-between p-2 border rounded">
@@ -260,6 +260,7 @@ const figmaDesignTabs = [
           <div class="p-3 border rounded bg-gradient-to-r from-orange-50 to-orange-100">
             <div class="font-semibold text-[#333333]">Selected State</div>
             <div class="text-[#6e6e6e]">Orange underline, semibold text</div>
+            <div class="mt-2 h-0.5 bg-macos-orange-500 rounded"></div>
           </div>
           <div class="p-3 border rounded">
             <div class="font-semibold text-[#333333]">Disabled State</div>
@@ -295,7 +296,8 @@ const figmaDesignTabs = [
 .tab.figma.active {
   color: #333333;
   font-weight: 600;
-  border-bottom: 2px solid #c34400;
+  /* Use site token if available, fallback to hex */
+  border-bottom: 2px solid var(--tw-color-macos-orange-500, #FF8C00);
 }
 
 .tab.figma:hover {
@@ -454,7 +456,7 @@ const placeholderTabs = [
                 <div class="mt-4 space-y-2">
                   <div class="flex justify-between items-center text-sm">
                     <span>Tab Name</span>
-                    <div class="h-0.5 bg-[#c34400] w-16 rounded"></div>
+                    <div class="h-0.5 bg-macos-orange-500 w-16 rounded"></div>
                   </div>
                   <div class="text-xs text-[#6e6e6e] text-center">
                     Figma Component Specs
@@ -687,7 +689,7 @@ const placeholderTabs = [
               <div class="flex justify-center space-x-4">
                 <div class="bg-white border border-[#6e6e6e] rounded-lg p-3 text-center">
                   <div class="font-semibold text-[#333333]">Design Fidelity</div>
-                  <div class="text-2xl font-bold text-[#c34400]">100%</div>
+                  <div class="text-2xl font-bold text-macos-orange-500">100%</div>
                 </div>
                 <div class="bg-white border border-[#6e6e6e] rounded-lg p-3 text-center">
                   <div class="font-semibold text-[#333333]">Accessibility Score</div>

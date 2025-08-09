@@ -1,141 +1,135 @@
-# macOS Portfolio Website
+# Personal Website (Astro + Tailwind)
 
-A modern, responsive portfolio website built with Astro and styled with Tailwind CSS, featuring a macOS-inspired design.
+A modern, macOS‑inspired portfolio built with Astro, Tailwind CSS, and optional React islands. Includes a project showcase, experiments, themed UI components, and an in‑progress admin dashboard backed by in‑browser storage.
 
-## Features
+## What’s inside
 
-### 🚀 Core Functionality (Implemented)
-- **Modern macOS-inspired design** with glassmorphism effects
-- **Responsive layout** that works on all devices
-- **Project showcase** with detailed project cards
-- **About section** with personal information
-- **Skills display** organized by categories
-- **Contact information** with social links
-- **Dock navigation** for smooth scrolling between sections
+- Astro 5 with Tailwind and MDX integrations
+- Class-based dark mode with a `DarkModeToggle`
+- macOS-style components: Dock, Window, Tabs, and more
+- Home page with grid/list view toggle (persisted in localStorage)
+- Experiments section powered by structured data
+- Admin dashboard scaffolding (stats, search/filters, publish/draft flags)
+- Simple data layer using localStorage (no external DB yet)
 
-### 🔧 Management Features (Implemented)
-- **Admin dashboard** for managing projects and portfolio settings
-- **Project CRUD operations** (Create, Read, Update, Delete)
-- **Project categorization** with filtering capabilities
-- **Draft/Published status** for projects
-- **Featured projects** highlighting
-- **Portfolio settings** management
-- **Local storage** for data persistence (can be replaced with a backend)
+## Requirements
 
-## Technology Stack
+- Node.js 18+ (LTS recommended)
+- npm (or pnpm/yarn, adjust commands accordingly)
 
-- **[Astro](https://astro.build/)** - Static site generator
-- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
-- **[React](https://reactjs.org/)** - Interactive components (where needed)
+## Getting started
 
-## 🧞 Commands
+1. Install dependencies
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-
-## Quick Start
-
-1. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-2. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-3. **Open your browser**
-   Navigate to `http://localhost:4321`
-
-4. **Admin Dashboard**
-   Navigate to `http://localhost:4321/admin` to manage projects
-
-## Project Structure
-
+```bash
+npm install
 ```
-├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── Dock.astro      # Navigation dock
-│   │   ├── Window.astro    # macOS-style window
-│   │   ├── ProjectCard.astro # Project display card
-│   │   └── ProjectForm.astro # Project creation/edit form
-│   ├── layouts/            # Page layouts
-│   │   └── Layout.astro    # Main layout wrapper
-│   ├── pages/              # Route pages
-│   │   ├── index.astro     # Homepage
-│   │   ├── projects.astro  # Projects gallery
-│   │   └── admin.astro     # Management dashboard
-│   ├── types/              # TypeScript type definitions
-│   │   └── index.ts        # Project and portfolio types
-│   └── utils/              # Utility functions
-│       └── dataStore.ts    # Data management
-├── public/                 # Static assets
-└── tailwind.config.mjs     # Tailwind configuration
+
+1. Start the dev server
+
+```bash
+npm run dev
 ```
+
+1. Open the site
+
+- App: <http://localhost:4321>
+- Admin (WIP): <http://localhost:4321/admin>
+
+## Scripts
+
+- `npm run dev` — Start Astro dev server
+- `npm run build` — Build to `dist/` (static output)
+- `npm run preview` — Preview the production build locally
+
+## Project structure
+
+```text
+astro.config.mjs
+package.json
+public/
+  favicon.svg
+src/
+  components/
+    DarkModeToggle.astro
+    Dock.astro
+    ProjectCard.astro
+    ProjectForm.astro
+    ProjectListItem.astro
+    TabsComponent.astro
+    Window.astro
+  layouts/
+    Layout.astro
+  pages/
+    admin.astro
+    experiments.astro
+    figma-tabs-demo.astro
+    index.astro
+    projects.astro
+    tabs-demo.astro
+    test-dark-mode.astro
+  types/
+    index.ts
+  utils/
+    dataStore.ts
+    experimentsData.ts
+```
+
+## Routes and features
+
+- `/` Home
+  - Hero, About, Skills, Contact
+  - Projects section with grid/list toggle (persisted via `localStorage`)
+  - Dock navigation to sections and pages
+- `/projects` Projects listing page
+- `/experiments` Experiments overview (data from `src/utils/experimentsData.ts`)
+- `/admin` Admin dashboard (WIP)
+  - Stats, search, filters, publish/draft/featured flags
+  - Portfolio settings form (title, description, bio, custom URL)
+  - Project modal/form is not implemented yet (currently a placeholder alert)
+- `/tabs-demo`, `/figma-tabs-demo` UI demos
+- `/test-dark-mode` Dark mode demo
+
+## Tech notes
+
+- Astro config integrates Tailwind, React, and MDX, with `output: 'static'` for simple static hosting
+- Tailwind dark mode: `darkMode: 'class'` (toggle by adding/removing the `dark` class on `<html>`)
+- Data store (`src/utils/dataStore.ts`) persists portfolio/projects to `localStorage`
+  - Works in the browser; there’s no server/database by default
+  - Image/file uploads are stubbed; replace with real handling if needed
+- Type definitions live in `src/types`
 
 ## Customization
 
-### Personal Information
-Edit the content in `src/pages/index.astro` to update:
-- Your name and title
-- Bio/about section  
-- Contact information
-- Skills and technologies
-
-### Projects
-Use the admin dashboard at `/admin` to:
-- Add new projects
-- Edit existing projects
-- Manage project categories
-- Set featured projects
-- Publish/unpublish projects
+- Content: edit page content in `src/pages/*`
+- Styling: update Tailwind config (`tailwind.config.mjs`) and component classes
+- Components: reuse or extend `Dock`, `Window`, `TabsComponent`, etc.
+- Experiments: add/edit items in `src/utils/experimentsData.ts`
 
 ## Deployment
 
-### Netlify
-1. Build the project: `npm run build`
-2. Deploy the `dist` folder to Netlify
+This site builds to static assets (`dist/`). Deploy the `dist/` folder to any static host (Netlify, Vercel static, GitHub Pages, Cloudflare Pages, etc.).
 
-### GitHub Pages  
-1. Build the project: `npm run build`
-2. Deploy the `dist` folder to your GitHub Pages repository
+```bash
+npm run build
+npm run preview # optional local smoke test
+```
 
-## PRD Implementation Status
+## Current limitations (WIP)
 
-### ✅ Completed Features
+- Project creation/edit modal in `/admin` is not implemented yet
+- File/image uploads are placeholders
+- Contact info capture is minimal; no email backend
+- Home projects are sample data; hook up to the store or a CMS/backend as next steps
 
-#### Project Management (FR001-FR005, FR011, FR014)
-- [x] Creating new projects with form validation
-- [x] Adding project details (title, description, images, links, technologies)
-- [x] Viewing all projects in a responsive grid
-- [x] Editing project details with pre-filled forms
-- [x] Deleting projects with confirmation prompts
-- [x] Dashboard view for project management
-- [x] Project categorization and filtering
+## Roadmap ideas
 
-#### Portfolio Management (FR006-FR008, FR012-FR013, FR015)
-- [x] Custom URL configuration (ready for backend)
-- [x] Automatic URL generation
-- [x] Portfolio publishing system
-- [x] Portfolio deletion functionality
-- [x] Bio/About section management
-- [x] Portfolio preview mode
+- Implement full CRUD modal/forms in Admin with validation
+- Replace localStorage with a real backend or CMS (Supabase, Firebase, etc.)
+- Drive homepage/projects from the store instead of samples
+- Add basic unit tests and accessibility checks
+- Optional: image optimization pipeline and upload handling
 
-#### Sharing and Access (FR009-FR010)
-- [x] Shareable portfolio URL
-- [x] Public portfolio view
-- [x] Social media integration ready
+## License
 
-## 👀 Want to learn more?
-
-Feel free to check [Astro documentation](https://docs.astro.build) or join the [Discord server](https://astro.build/chat).
-
-**Built with ❤️ using modern web technologies**
+MIT (or your preferred license)

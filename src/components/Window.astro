@@ -15,19 +15,18 @@ const {
   class: className = ""
 } = Astro.props;
 ---
-
-<div class={`bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 rounded-macos shadow-macos ${className}`}>
+<div data-window class={`bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 rounded-macos shadow-macos ${className}`}>
   <!-- Title Bar -->
-  <div class="flex items-center justify-between px-4 py-3 border-b border-macos-gray-200/50 dark:border-macos-gray-700/50">
+  <div class="flex items-center justify-between px-4 py-3 border-b border-macos-gray-200/50 dark:border-macos-gray-700/50 select-none">
     <div class="flex items-center space-x-2">
       {isClosable && (
-        <div class="w-3 h-3 bg-macos-red-500 rounded-full"></div>
+  <button type="button" title="Close" aria-label="Close" data-action="close" class="w-3 h-3 rounded-full bg-macos-red-500 cursor-pointer focus:outline-none focus:ring-2 focus:ring-macos-red-500/40"></button>
       )}
       {isMinimizable && (
-        <div class="w-3 h-3 bg-macos-yellow-500 rounded-full"></div>
+        <div class="w-3 h-3 rounded-full bg-macos-yellow-500"></div>
       )}
       {isMaximizable && (
-        <div class="w-3 h-3 bg-macos-green-500 rounded-full"></div>
+  <button type="button" title="Expand" aria-label="Expand" data-action="expand" class="w-3 h-3 rounded-full bg-macos-green-500 cursor-pointer focus:outline-none focus:ring-2 focus:ring-macos-green-500/40"></button>
       )}
     </div>
     
@@ -39,7 +38,66 @@ const {
   </div>
   
   <!-- Content -->
-  <div class="p-6">
+  <div class="p-6" data-window-content>
     <slot />
   </div>
 </div>
+
+<script is:inline>
+  // Lightweight interactivity for macOS-style window controls
+  // Binds once per page and delegates clicks to the nearest [data-window]
+  (() => {
+    if (document.body.dataset.windowControlsBound === 'true') return;
+    document.body.dataset.windowControlsBound = 'true';
+
+    document.addEventListener('click', (ev) => {
+      const target = ev.target;
+      if (!(target instanceof HTMLElement)) return;
+
+      const actionEl = target.closest('[data-action]');
+      if (!(actionEl instanceof HTMLElement)) return;
+
+      const action = actionEl.getAttribute('data-action');
+      if (!action) return;
+
+      const root = actionEl.closest('[data-window]');
+      if (!(root instanceof HTMLElement)) return;
+
+      if (action === 'close') {
+        root.classList.add('hidden');
+        return;
+      }
+
+      if (action === 'expand') {
+        root.classList.toggle('expanded');
+        const pressed = root.classList.contains('expanded');
+        actionEl.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+      }
+    });
+  })();
+</script>
+
+<style>
+  /* Expanded window behavior without relying on dynamic Tailwind classes */
+  [data-window].expanded {
+    position: fixed;
+    inset: 1rem;
+    z-index: 50;
+    max-width: none;
+    width: auto;
+    height: auto;
+  }
+  [data-window].expanded [data-window-content] {
+    /* Make content scroll if needed while expanded */
+    overflow: auto;
+    height: calc(100vh - 4.5rem); /* approx tiltebar (py-3 + borders) + margins */
+  }
+  @media (max-width: 640px) {
+    [data-window].expanded {
+      inset: 0.5rem;
+    }
+    [data-window].expanded [data-window-content] {
+      height: calc(100vh - 4rem);
+    }
+  }
+</style>
