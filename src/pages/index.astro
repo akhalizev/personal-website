@@ -66,7 +66,8 @@ const dockItems = [
   <section data-ux-note="Consistency builds intuitive interfaces." data-ux-side="left" class="relative h-screen flex items-center justify-center px-6">
       <div class="text-center max-w-4xl mx-auto">
         <div class="mb-10 relative">
-          <div class="w-40 h-40 mx-auto mb-6 rounded-full shadow-macos-lg ring-4 ring-white/70 dark:ring-macos-gray-800/80 overflow-hidden bg-gradient-to-br from-macos-blue-500 to-macos-blue-600 flex items-center justify-center">
+          <div class="w-40 h-40 mx-auto mb-6 rounded-full shadow-macos-lg ring-4 ring-white/70 dark:ring-macos-gray-800/80 overflow-hidden bg-gradient-to-br from-macos-blue-500 to-macos-blue-600 flex items-center justify-center glitch-avatar" style={`--avatar-url: url(${me.photo})`}>
+            <div class="glitch-overlay" aria-hidden="true"></div>
             <!-- Responsive avatar -->
             <picture>
               <!-- Future: add WebP sources if available -->
@@ -239,15 +240,58 @@ const dockItems = [
             
             <div>
               <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Tools</h3>
-              <div class="space-y-2">
-                {["Git", "Docker", "AWS", "Figma", "VS Code"].map((skill) => (
-                  <div class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm">
-                    {skill}
+              <div class="relative flip-wrapper perspective-1200">
+                <div id="tools-flip-card" class="flip-card-inner duration-700 ease-in-out will-change-transform">
+                  <div class="flip-face flip-front space-y-2">
+                    {["Git", "Docker", "AWS", "Figma", "VS Code"].map((skill) => (
+                      skill === 'Git' ? (
+                        <button
+                          type="button"
+                          id="git-flip-btn"
+                          class="group relative w-full text-left bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm hover:bg-macos-blue-500 hover:text-white dark:hover:bg-macos-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500 transition-colors"
+                          aria-expanded="false"
+                          aria-controls="git-activity-panel"
+                        >
+                          Git <span class="ml-1 text-[10px] uppercase tracking-wide opacity-60 group-hover:opacity-80">activity</span>
+                        </button>
+                      ) : (
+                        <div class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm">
+                          {skill}
+                        </div>
+                      )
+                    ))}
                   </div>
-                ))}
+                  <div id="git-activity-panel" class="flip-face flip-back flex flex-col rounded-md overflow-hidden bg-white dark:bg-macos-gray-800 border border-macos-gray-200 dark:border-macos-gray-700">
+                    <div class="flex items-center justify-between px-3 py-2 border-b border-macos-gray-200 dark:border-macos-gray-700 bg-macos-gray-50 dark:bg-macos-gray-700/40">
+                      <h4 class="text-xs font-semibold text-macos-gray-700 dark:text-macos-gray-200 tracking-wide">Recent Git Commits</h4>
+                      <div class="flex items-center gap-2">
+                        <a href="https://github.com/akhalizev" target="_blank" rel="noopener noreferrer" class="text-macos-blue-600 dark:text-macos-blue-400 hover:underline text-[10px] font-medium">Profile</a>
+                        <button type="button" id="git-back-btn" class="w-6 h-6 inline-flex items-center justify-center rounded-md hover:bg-macos-gray-200 dark:hover:bg-macos-gray-600 text-macos-gray-500 dark:text-macos-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500" aria-label="Back to tools">↺</button>
+                      </div>
+                    </div>
+                    <div class="git-activity-chart-wrapper px-3 pt-2 pb-1 border-b border-macos-gray-200 dark:border-macos-gray-700">
+                      <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-medium tracking-wide text-macos-gray-500 dark:text-macos-gray-400">Last 14 Days</span>
+                        <span id="git-activity-total" class="text-[10px] text-macos-blue-600 dark:text-macos-blue-400"></span>
+                      </div>
+                      <div id="git-activity-chart" class="git-activity-chart" role="img" aria-label="Git commits last 14 days"></div>
+                      <div class="flex items-center justify-end gap-1 mt-1 opacity-70">
+                        <span class="git-legend-box level-0"></span><span class="git-legend-box level-1"></span><span class="git-legend-box level-2"></span><span class="git-legend-box level-3"></span><span class="git-legend-box level-4"></span>
+                      </div>
+                    </div>
+                    <div id="git-activity-content" class="flex-1 overflow-auto p-2 text-[11px] leading-snug space-y-2 custom-scrollbar">
+                      <div class="text-macos-gray-400 dark:text-macos-gray-500">Click Git to load activity…</div>
+                    </div>
+                    <div class="px-3 py-1.5 text-[9px] text-macos-gray-400 dark:text-macos-gray-500 border-t border-macos-gray-200 dark:border-macos-gray-700 flex items-center justify-between uppercase tracking-wide">
+                      <span>Public Events</span>
+                      <button type="button" id="git-refresh" class="font-semibold px-1 py-0.5 rounded bg-macos-gray-100 dark:bg-macos-gray-700 hover:bg-macos-blue-500 dark:hover:bg-macos-blue-600 hover:text-white transition-colors">Refresh</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <!-- (popover removed; replaced by flip card) -->
         </Window>
       </div>
     </section>
@@ -448,72 +492,185 @@ const dockItems = [
       });
     });
 
-    // Rotate hybrid titles
-    const rotator = document.getElementById('role-rotator');
+    // === Rotating hybrid titles animation ===
     const titleLine = document.getElementById('title-line');
-    if (rotator && titleLine) {
-      try {
-        const roles = JSON.parse(titleLine.getAttribute('data-roles') || '[]');
-        let i = 0;
-        if (Array.isArray(roles) && roles.length > 1) {
-          setInterval(() => {
-            i = (i + 1) % roles.length;
-            rotator.classList.add('opacity-0', 'translate-y-1', 'transition-all');
-            setTimeout(() => {
-              rotator.textContent = roles[i];
-              rotator.classList.remove('translate-y-1');
-              rotator.classList.add('-translate-y-1');
-              requestAnimationFrame(() => {
-                rotator.classList.remove('opacity-0', '-translate-y-1');
-              });
-            }, 180);
-          }, 3200);
-        }
-      } catch { /* ignore */ }
+    const roleRotator = document.getElementById('role-rotator');
+    let roles = [];
+    try { roles = JSON.parse(titleLine?.getAttribute('data-roles') || '[]'); } catch { roles = []; }
+    let roleIdx = 0;
+    if (roleRotator) {
+      roleRotator.setAttribute('aria-live','polite');
+      roleRotator.setAttribute('role','status');
+    }
+    const advanceRole = () => {
+      if (!roleRotator || roles.length < 2) return;
+      const next = (roleIdx + 1) % roles.length;
+      // fade out
+      roleRotator.classList.add('role-fade-out');
+      setTimeout(() => {
+        roleRotator.textContent = roles[next];
+        roleIdx = next;
+        roleRotator.classList.remove('role-fade-out');
+        roleRotator.classList.add('role-fade-in');
+        // cleanup after animation
+        setTimeout(()=> roleRotator.classList.remove('role-fade-in'), 600);
+      }, 250);
+    };
+    if (roles.length > 1) {
+      setInterval(advanceRole, 4000); // every 4s
     }
 
-    // Side gutter UX concept sentences (subtle)
-    const uxSections = document.querySelectorAll('section[data-ux-note]');
-    const gutterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('ux-note-visible');
-        else entry.target.classList.remove('ux-note-visible');
+    // Extra glitch burst randomness
+    const avatar = document.querySelector('.glitch-avatar');
+    if (avatar) {
+      let burstTimer; let running=false;
+      avatar.addEventListener('mouseenter', () => {
+        if (running) return; running=true;
+        const loop = () => {
+          const delay = 500 + Math.random()*1200;
+            burstTimer = setTimeout(()=> {
+              avatar.classList.add('glitch-burst');
+              setTimeout(()=> avatar.classList.remove('glitch-burst'), 180 + Math.random()*200);
+              loop();
+            }, delay);
+        }; loop();
       });
-    }, { threshold: 0.25, rootMargin: '-10% 0px -10% 0px' });
-    uxSections.forEach(s => gutterObserver.observe(s));
+      avatar.addEventListener('mouseleave', () => { running=false; clearTimeout(burstTimer); avatar.classList.remove('glitch-burst'); });
+    }
 
-    // Micro parallax (very small) to add life
-    const updateUxNoteShift = () => {
+  // Git activity flip card logic
+  const flipCard = document.getElementById('tools-flip-card');
+  const gitFlipBtn = document.getElementById('git-flip-btn');
+  const gitBackBtn = document.getElementById('git-back-btn');
+  const gitContent = document.getElementById('git-activity-content');
+  const gitRefresh = document.getElementById('git-refresh');
+  const gitChart = document.getElementById('git-activity-chart');
+  const gitTotal = document.getElementById('git-activity-total');
+  const GITHUB_USER = 'akhalizev';
+  let eventsCache = null; let lastFetch = 0; let loading = false;
+    const formatTimeAgo = (iso) => {
+      try {
+        const d = new Date(iso);
+        const diff = (Date.now() - d.getTime()) / 1000;
+        if (diff < 60) return `${Math.floor(diff)}s`;
+        if (diff < 3600) return `${Math.floor(diff/60)}m`;
+        if (diff < 86400) return `${Math.floor(diff/3600)}h`;
+        return d.toLocaleDateString();
+      } catch { return iso; }
+    };
+    const renderEvents = (events) => {
+      if (!gitContent) return;
+      gitContent.innerHTML = '';
+      const commits = [];
+      events.forEach(e => {
+        if (e.type === 'PushEvent' && e.payload?.commits) {
+          e.payload.commits.forEach(c => {
+            commits.push({
+              repo: e.repo.name,
+              msg: c.message.split('\n')[0],
+              sha: c.sha,
+              time: e.created_at,
+              url: `https://github.com/${e.repo.name}/commit/${c.sha}`
+            });
+          });
+        }
+      });
+  renderChart(commits);
+      commits.sort((a,b) => new Date(b.time) - new Date(a.time));
+      const list = commits.slice(0, 15);
+      if (!list.length) {
+        gitContent.innerHTML = '<div class="text-macos-gray-400 dark:text-macos-gray-500">No recent public commits.</div>';
+        return;
+      }
+      const ul = document.createElement('ul');
+      ul.className = 'space-y-1.5';
+      list.forEach(c => {
+        const li = document.createElement('li');
+        li.className = 'group border border-transparent hover:border-macos-gray-200 dark:hover:border-macos-gray-600 rounded-md transition-colors';
+        const repoShort = c.repo.replace(/^[^/]+\//,'');
+        const msg = c.msg.replace(/"/g,'&quot;');
+        li.innerHTML = `<a href="${c.url}" target="_blank" rel="noopener noreferrer" class="block p-1.5">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-medium text-[10px] text-macos-blue-600 dark:text-macos-blue-400 truncate max-w-[150px] group-hover:underline">${repoShort}</span>
+            <span class="text-[9px] text-macos-gray-400 dark:text-macos-gray-500 whitespace-nowrap">${formatTimeAgo(c.time)}</span>
+          </div>
+          <p class="mt-0.5 text-[10px] leading-snug text-macos-gray-700 dark:text-macos-gray-300 line-clamp-2">${msg}</p>
+        </a>`;
+        ul.appendChild(li);
+      });
+      gitContent.appendChild(ul);
+    };
+    const renderChart = (commits) => {
+      if (!gitChart) return;
+      // Prepare last 14 days buckets
+      const days = [];
+      const today = new Date();
+      for (let i=13;i>=0;i--) {
+        const d = new Date(today); d.setDate(d.getDate()-i);
+        const key = d.toISOString().slice(0,10);
+        days.push({ key, date: new Date(d.getFullYear(), d.getMonth(), d.getDate()), count:0 });
+      }
+      commits.forEach(c => {
+        const dayKey = c.time.slice(0,10);
+        const bucket = days.find(d => d.key === dayKey);
+        if (bucket) bucket.count += 1;
+      });
+      const max = days.reduce((m,d)=> d.count>m?d.count:m,0);
+      if (gitTotal) gitTotal.textContent = commits.length ? commits.length + ' commits' : '';
+      gitChart.innerHTML = days.map(d => {
+        const level = max === 0 ? 0 : Math.min(4, Math.round((d.count / max) * 4));
+        const label = `${d.key}: ${d.count} commit${d.count!==1?'s':''}`;
+        return `<div class="git-day level-${level}" data-count="${d.count}" aria-label="${label}" title="${label}"><span class="sr-only">${label}</span></div>`;
+      }).join('');
+    };
+    const fetchEvents = async (force = false) => {
+      if (loading) return;
+      if (!force && eventsCache && Date.now() - lastFetch < 60000) { renderEvents(eventsCache); return; }
+      loading = true;
+      if (gitContent) gitContent.innerHTML = '<div class="animate-pulse text-macos-gray-400 dark:text-macos-gray-500">Loading…</div>';
+      try {
+        const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/events/public`);
+        if (!res.ok) throw new Error(String(res.status));
+        const data = await res.json();
+        eventsCache = data; lastFetch = Date.now();
+        renderEvents(data);
+      } catch (e) {
+        if (gitContent) gitContent.innerHTML = '<div class="text-red-500 text-[10px]">Failed to load (rate limit?)</div>';
+      } finally { loading = false; }
+    };
+  gitFlipBtn?.addEventListener('click', ()=> { if(!flipCard) return; flipCard.classList.add('flipped'); gitFlipBtn.setAttribute('aria-expanded','true'); if(!eventsCache) fetchEvents(); });
+  gitBackBtn?.addEventListener('click', ()=> { if(!flipCard) return; flipCard.classList.remove('flipped'); gitFlipBtn?.setAttribute('aria-expanded','false'); });
+  gitRefresh?.addEventListener('click', ()=> fetchEvents(true));
+    // === UX side gutter quotes logic (re-added) ===
+    const uxSections = Array.from(document.querySelectorAll('section[data-ux-note]'));
+    const clamp = (n, min, max) => n < min ? min : (n > max ? max : n);
+    function updateUxNoteVertical() {
+      uxSections.forEach(sec => {
+        // Center by default; could adapt per section height if desired
+        sec.style.setProperty('--ux-note-top', '50%');
+      });
+    }
+    function updateUxNoteShift() {
       const vh = window.innerHeight;
       uxSections.forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const delta = (center - vh / 2) / vh; // -1..1
-        const shift = Math.max(-12, Math.min(12, -delta * 20));
-        sec.style.setProperty('--ux-note-shift', shift.toFixed(1) + 'px');
+        const r = sec.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) {
+          sec.classList.remove('ux-note-visible');
+          return;
+        }
+        // Make visible once it enters viewport
+        sec.classList.add('ux-note-visible');
+        // Parallax-esque subtle shift: map section center to -40..40px
+        const center = r.top + r.height/2;
+        const ratio = (center - vh/2) / (vh/2); // -1..1
+        const shift = clamp(ratio * 40, -40, 40);
+        sec.style.setProperty('--ux-note-shift', shift.toFixed(1)+'px');
       });
-    };
-    // Adaptive vertical placement based on section height
-    const updateUxNoteVertical = () => {
-      const vh = window.innerHeight;
-      uxSections.forEach(sec => {
-        const h = sec.offsetHeight || 0;
-        const r = h / vh; // ratio section height to viewport height
-        let top; // percentage
-        if (r >= 1.4) top = 34; // very tall section
-        else if (r >= 1.2) top = 36;
-        else if (r >= 1.0) top = 39; // full screen
-        else if (r >= 0.85) top = 42;
-        else if (r >= 0.7) top = 45;
-        else if (r >= 0.55) top = 47;
-        else top = 50; // short sections -> closer to center
-        sec.style.setProperty('--ux-note-top', top + '%');
-      });
-    };
-    updateUxNoteShift();
+    }
     updateUxNoteVertical();
+    updateUxNoteShift();
     window.addEventListener('scroll', updateUxNoteShift, { passive: true });
-    window.addEventListener('resize', () => { updateUxNoteShift(); updateUxNoteVertical(); });
+    window.addEventListener('resize', () => { updateUxNoteVertical(); updateUxNoteShift(); });
   });
 </script>
 
@@ -555,4 +712,76 @@ const dockItems = [
   @media (prefers-reduced-motion: reduce) {
     section[data-ux-note]::before { transition: opacity .6s ease !important; }
   }
+</style>
+<style>
+  /* Flip card styles for Tools section */
+  .perspective-1200 { perspective: 1200px; }
+  .flip-card-inner { position: relative; transform-style: preserve-3d; }
+  .flip-card-inner.flipped { transform: rotateY(180deg); }
+  .flip-card-inner, .flip-card-inner.flipped { transition-property: transform; transition-duration: .75s; }
+  .flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .flip-front { position: relative; }
+  .flip-back { position: absolute; inset: 0; transform: rotateY(180deg); display: flex; }
+  .flip-wrapper { min-height: 190px; }
+  /* Scrollbar inside activity panel */
+  #git-activity-content.custom-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(100,116,139,0.35) transparent; }
+  #git-activity-content.custom-scrollbar::-webkit-scrollbar { width: 8px; }
+  #git-activity-content.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  #git-activity-content.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.35); border-radius: 999px; }
+  #git-activity-content.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(100,116,139,0.55); }
+  #git-activity-content .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  /* Rotating role animation */
+  #role-rotator { position: relative; display: inline-block; transition: opacity .25s ease, transform .25s ease; }
+  #role-rotator.role-fade-out { opacity: 0; transform: translateY(-0.35em); }
+  #role-rotator.role-fade-in { animation: roleFadeIn .45s ease; }
+  @keyframes roleFadeIn { 0% { opacity:0; transform: translateY(0.35em);} 100% { opacity:1; transform: translateY(0);} }
+  /* Glitch avatar effect */
+  .glitch-avatar { position: relative; }
+  .glitch-avatar picture, .glitch-avatar img { position: relative; z-index: 2; }
+  .glitch-avatar::before, .glitch-avatar::after { content:''; position:absolute; inset:0; background: var(--avatar-url) center/cover no-repeat; opacity:0; mix-blend-mode:screen; pointer-events:none; will-change:transform, clip-path, filter; }
+  .glitch-avatar::before { filter: hue-rotate(30deg) saturate(2) brightness(1.15); }
+  .glitch-avatar::after { filter: hue-rotate(-35deg) saturate(2.2) brightness(1.1); }
+  .glitch-avatar:hover { filter: contrast(1.2) saturate(1.15); }
+  .glitch-avatar:hover::before, .glitch-avatar:hover::after { opacity:.65; animation: avatarGlitchSlices 1s steps(3,end) infinite, avatarHue 6s linear infinite; }
+  .glitch-avatar:hover::after { animation-duration:1.15s, 6s; animation-delay:.1s, 0s; }
+  .glitch-avatar:hover img { animation: avatarJitter 1.5s ease-in-out infinite; }
+  .glitch-avatar.glitch-burst::before, .glitch-avatar.glitch-burst::after { animation-duration:0.55s, 6s; }
+  .glitch-avatar .glitch-overlay { position:absolute; inset:0; background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.05) 0 2px, transparent 2px 4px); mix-blend-mode:overlay; opacity:0; pointer-events:none; z-index:3; }
+  .glitch-avatar:hover .glitch-overlay { animation: scanlines 4s linear infinite; opacity:0.4; }
+  @keyframes scanlines { 0% { transform:translateY(0); } 100% { transform:translateY(4px); } }
+  @keyframes avatarHue { 0% { filter:hue-rotate(0deg); } 100% { filter:hue-rotate(360deg); } }
+  @keyframes avatarGlitchSlices {
+    0% { transform:translate(0,0) skew(0deg); clip-path:inset(0 0 0 0); }
+    7% { transform:translate(-4px,1px) skew(-2deg); clip-path:inset(5% 0 60% 0); }
+    14% { transform:translate(3px,-2px) skew(2deg); clip-path:inset(55% 0 8% 0); }
+    21% { transform:translate(-2px,3px) skew(-3deg); clip-path:inset(12% 0 35% 0); }
+    28% { transform:translate(5px,-1px) skew(1deg); clip-path:inset(38% 0 25% 0); }
+    35% { transform:translate(-6px,0) skew(0deg); clip-path:inset(18% 0 40% 0); }
+    48% { transform:translate(4px,2px) skew(-1deg); clip-path:inset(30% 0 15% 0); }
+    60% { transform:translate(-3px,-2px) skew(1deg); clip-path:inset(50% 0 20% 0); }
+    72% { transform:translate(6px,1px) skew(-2deg); clip-path:inset(8% 0 55% 0); }
+    84% { transform:translate(-5px,-3px) skew(2deg); clip-path:inset(45% 0 10% 0); }
+    100% { transform:translate(0,0) skew(0deg); clip-path:inset(0 0 0 0); }
+  }
+  @keyframes avatarJitter { 0%,100% { transform:translate(0,0); filter:none; } 10% { transform:translate(.8px,-.6px); } 20% { transform:translate(-1px,.9px); } 30% { transform:translate(1.1px,-1.1px); } 40% { transform:translate(-.8px,.5px); } 50% { transform:translate(.6px,-.4px); filter:brightness(1.05); } 60% { transform:translate(-1.2px,.7px); } 70% { transform:translate(.9px,-.9px); } 80% { transform:translate(-.7px,.4px); } 90% { transform:translate(.5px,-.5px); } }
+  @media (prefers-reduced-motion: reduce) { .glitch-avatar:hover::before, .glitch-avatar:hover::after, .glitch-avatar:hover img, .glitch-avatar .glitch-overlay { animation: none !important; opacity:0 !important; } }
+  /* Git activity mini chart */
+  .git-activity-chart { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, 10px); gap: 3px 4px; align-items: center; }
+  .git-day { width: 14px; height: 10px; border-radius: 2px; background: var(--git-l0); position: relative; }
+  .git-day.level-0 { --git-bg: var(--git-l0); }
+  .git-day.level-1 { --git-bg: var(--git-l1); }
+  .git-day.level-2 { --git-bg: var(--git-l2); }
+  .git-day.level-3 { --git-bg: var(--git-l3); }
+  .git-day.level-4 { --git-bg: var(--git-l4); }
+  .git-day { background: var(--git-bg); transition: background .25s ease, transform .2s ease; cursor: default; }
+  .git-day:hover { transform: scale(1.35); z-index: 10; }
+  .git-legend-box { width: 10px; height: 10px; border-radius: 2px; background: var(--git-l0); }
+  .git-legend-box.level-0 { background: var(--git-l0); }
+  .git-legend-box.level-1 { background: var(--git-l1); }
+  .git-legend-box.level-2 { background: var(--git-l2); }
+  .git-legend-box.level-3 { background: var(--git-l3); }
+  .git-legend-box.level-4 { background: var(--git-l4); }
+  :root { --git-l0: rgba(148,163,184,0.18); --git-l1: #cfe1ff; --git-l2: #9ec5ff; --git-l3: #5aa5ff; --git-l4: #1d72e7; }
+  .dark :root, .dark { --git-l0: rgba(100,116,139,0.18); --git-l1: #1e3a8a; --git-l2: #1d4ed8; --git-l3: #2563eb; --git-l4: #3b82f6; }
+  .git-activity-chart-wrapper { background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0)); }
 </style>
