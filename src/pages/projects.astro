@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { personalInfo } from '../utils/personal';
 import Window from '../components/Window.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Dock from '../components/Dock.astro';
@@ -151,7 +152,7 @@ const projectsByCategory = projects.reduce((acc, project) => {
               </a>
               
               <a 
-                href="https://github.com/yourusername" 
+                href={personalInfo.github} 
                 target="_blank"
                 rel="noopener noreferrer"
                 class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 text-macos-gray-900 dark:text-white px-8 py-3 rounded-macos font-medium transition-colors hover:bg-white/90 dark:hover:bg-macos-gray-800/90 inline-flex items-center justify-center"
@@ -186,6 +187,7 @@ const projectsByCategory = projects.reduce((acc, project) => {
 </Layout>
 
 <script>
+  // @ts-nocheck
   const STORAGE_KEY = 'projects:view';
   function applyView(view) {
     const isGrid = view === 'grid';

@@ -1,5 +1,6 @@
 ---
 import DarkModeToggle from '../components/DarkModeToggle.astro';
+import { personalInfo } from '../utils/personal';
 
 export interface Props {
   title: string;
@@ -15,6 +16,24 @@ const { title, description = "Modern portfolio website" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Basic contact / social -->
+    <meta name="author" content={personalInfo.name} />
+    <link rel="me" href={`mailto:${personalInfo.email}`} />
+    <link rel="me" href={personalInfo.github} />
+    <link rel="me" href={personalInfo.linkedin} />
+    <meta name="contact:email" content={personalInfo.email} />
+    <meta name="og:email" content={personalInfo.email} />
+    <meta name="og:site_name" content={personalInfo.name} />
+    <meta name="twitter:creator" content={`@${personalInfo.github.split('/').pop()}`} />
+    <!-- JSON-LD Person schema -->
+    <script type="application/ld+json">{JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: personalInfo.name,
+      email: `mailto:${personalInfo.email}`,
+      url: personalInfo.github,
+      sameAs: [personalInfo.github, personalInfo.linkedin]
+    })}</script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     
@@ -43,6 +62,20 @@ const { title, description = "Modern portfolio website" } = Astro.props;
   </head>
   <body class="bg-macos-gray-50 dark:bg-macos-gray-900 text-macos-gray-900 dark:text-macos-gray-100 font-sf-pro">
     <slot />
+    <footer class="mt-32 pb-12 pt-8 border-t border-macos-gray-200 dark:border-macos-gray-800 text-center text-sm text-macos-gray-500 dark:text-macos-gray-400">
+      <div class="flex flex-col items-center gap-4">
+        <div class="flex gap-4 flex-wrap justify-center">
+          <a href={`mailto:${personalInfo.email}`} class="hover:text-macos-blue-500 dark:hover:text-macos-blue-400 font-medium">{personalInfo.email}</a>
+          <span aria-hidden="true" class="hidden sm:inline">•</span>
+          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" class="hover:text-macos-blue-500 dark:hover:text-macos-blue-400 font-medium">GitHub</a>
+          <span aria-hidden="true" class="hidden sm:inline">•</span>
+          <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-macos-blue-500 dark:hover:text-macos-blue-400 font-medium">LinkedIn</a>
+        </div>
+        <div>
+          &copy; {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
+        </div>
+      </div>
+    </footer>
     <DarkModeToggle />
   </body>
 </html>
