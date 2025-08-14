@@ -6,6 +6,21 @@ import Dock from '../components/Dock.astro';
 import ProjectListItem from '../components/ProjectListItem.astro';
 import { experiments as allExperiments } from '../utils/experimentsData';
 
+// Personalization (update these values as needed)
+const me = {
+  name: 'Anatoly Khalizev',
+  title: 'Senior UX Designer', // Primary / core title
+  // Secondary / rotating modern hybrid titles (feel free to edit / reorder)
+  roles: [
+    'Design Engineer',
+    'AI Interaction Architect',
+    'Creative Technologist',
+    'AI-enhanced Product Designer'
+  ],
+  tagline: 'I craft reliable, elegant software and love turning ideas into polished products.',
+  photo: '/anatoly.png', // Place your profile photo at public/anatoly.png (square ~640x640). Optional: add /anatoly.webp for smaller size.
+};
+
 // Sample project data - this will be replaced with dynamic data later
 const projects = [
   {
@@ -44,28 +59,44 @@ const dockItems = [
 ];
 ---
 
-<Layout title="Portfolio - Your Name">
+<Layout title={`Portfolio - ${me.name}`}>
   <main class="min-h-screen bg-gradient-to-br from-macos-blue-500/5 to-macos-gray-100 dark:from-macos-gray-900 dark:to-macos-gray-800">
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center px-6">
       <div class="text-center max-w-4xl mx-auto">
-        <div class="mb-8">
-          <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-macos-blue-500 to-macos-blue-600 rounded-full flex items-center justify-center text-4xl text-white shadow-macos-lg">
-            👨‍💻
+        <div class="mb-10 relative">
+          <div class="w-40 h-40 mx-auto mb-6 rounded-full shadow-macos-lg ring-4 ring-white/70 dark:ring-macos-gray-800/80 overflow-hidden bg-gradient-to-br from-macos-blue-500 to-macos-blue-600 flex items-center justify-center">
+            <!-- Responsive avatar -->
+            <picture>
+              <!-- Future: add WebP sources if available -->
+              <source srcset="/anatoly-256.png 256w, /anatoly-512.png 512w, /anatoly.png 1024w" sizes="160px" />
+              <img 
+                src={me.photo} 
+                alt={`${me.name} portrait`} 
+                loading="eager" 
+                width="640" height="640"
+                class="w-full h-full object-cover" 
+                style="object-position:center;" 
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+            </picture>
+            <div class="hidden w-full h-full items-center justify-center text-5xl text-white font-semibold select-none">
+              {me.name.split(' ').map(p=>p[0]).slice(0,2).join('')}
+            </div>
           </div>
         </div>
-        
-        <h1 class="text-5xl md:text-7xl font-bold text-macos-gray-900 dark:text-white mb-6">
-          Your Name
+
+        <h1 class="text-5xl md:text-7xl font-bold text-macos-gray-900 dark:text-white mb-6 tracking-tight">
+          {me.name}
         </h1>
-        
-        <p class="text-xl md:text-2xl text-macos-gray-600 dark:text-macos-gray-400 mb-8">
-          Full Stack Developer & Designer
+
+        <p id="title-line" data-roles={JSON.stringify(me.roles)} class="text-xl md:text-2xl text-macos-gray-700 dark:text-macos-gray-300 mb-6 font-medium flex flex-col gap-1 md:block md:space-x-2">
+          <span>{me.title}</span>
+          <span class="before:content-['•'] before:mx-2 hidden md:inline" aria-hidden="true"></span>
+          <span class="text-macos-blue-600 dark:text-macos-blue-400 inline-block" id="role-rotator">{me.roles[0]}</span>
         </p>
-        
-        <p class="text-lg text-macos-gray-500 dark:text-macos-gray-500 max-w-2xl mx-auto mb-12">
-          Passionate about creating beautiful, functional, and user-friendly applications 
-          that solve real-world problems and deliver exceptional user experiences.
+
+        <p class="text-lg text-macos-gray-500 dark:text-macos-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed">
+          {me.tagline}
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -364,8 +395,11 @@ const dockItems = [
 </Layout>
 
 <script>
+  // @ts-nocheck
   const HOME_VIEW_KEY = 'home:view';
-  function applyHomeView(view) {
+  // @ts-ignore - inline script in .astro not picking up JSDoc param type reliably
+  /** @type {(view: 'grid' | 'list') => void} */
+  const applyHomeView = (view) => {
     const isGrid = view === 'grid';
     document.querySelectorAll('[data-view-section="grid"]').forEach(el => {
       el.classList.toggle('hidden', !isGrid);
@@ -386,7 +420,7 @@ const dockItems = [
       listBtn.classList.toggle('text-macos-gray-800', !isGrid);
       listBtn.classList.toggle('dark:text-macos-gray-100', !isGrid);
     }
-  }
+  };
   document.addEventListener('DOMContentLoaded', () => {
     const initial = localStorage.getItem(HOME_VIEW_KEY) || 'grid';
     applyHomeView(initial);
@@ -398,5 +432,29 @@ const dockItems = [
         applyHomeView(view);
       });
     });
+
+    // Rotate hybrid titles
+    const rotator = document.getElementById('role-rotator');
+    const titleLine = document.getElementById('title-line');
+    if (rotator && titleLine) {
+      try {
+        const roles = JSON.parse(titleLine.getAttribute('data-roles') || '[]');
+        let i = 0;
+        if (Array.isArray(roles) && roles.length > 1) {
+          setInterval(() => {
+            i = (i + 1) % roles.length;
+            rotator.classList.add('opacity-0', 'translate-y-1', 'transition-all');
+            setTimeout(() => {
+              rotator.textContent = roles[i];
+              rotator.classList.remove('translate-y-1');
+              rotator.classList.add('-translate-y-1');
+              requestAnimationFrame(() => {
+                rotator.classList.remove('opacity-0', '-translate-y-1');
+              });
+            }, 180);
+          }, 3200);
+        }
+      } catch { /* ignore */ }
+    }
   });
 </script>
