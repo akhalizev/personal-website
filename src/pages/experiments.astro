@@ -104,94 +104,97 @@ const statusOrder = ['Complete', 'In Progress', 'Prototype', 'Research'];
           <div class="mb-12">
             <Window title={`${status} (${experimentsByStatus[status].length})`} class="mb-8">
               <div class="grid md:grid-cols-2 gap-6">
-                {experimentsByStatus[status].map((experiment) => (
-                  <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded-macos p-6 hover:shadow-macos transition-shadow">
-                    <div class="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-2">
-                          {experiment.title}
-                        </h3>
-                        <span class="text-sm font-medium text-macos-blue-500 dark:text-macos-blue-400">
-                          {experiment.category}
-                        </span>
-                      </div>
-                      <span class={`text-xs px-2 py-1 rounded-full font-medium ${
-                        experiment.status === 'Complete' 
-                          ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
-                          : experiment.status === 'In Progress'
-                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
-                          : experiment.status === 'Prototype'
-                          ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
-                          : 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400'
-                      }`}>
-                        {experiment.status}
-                      </span>
-                    </div>
-                    
-                    <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4 leading-relaxed">
-                      {experiment.description}
-                    </p>
-                    
-                    {experiment.features && (
-                      <div class="mb-4">
-                        <h4 class="text-sm font-semibold text-macos-gray-900 dark:text-white mb-2">
-                          Key Features:
-                        </h4>
-                        <ul class="text-sm text-macos-gray-600 dark:text-macos-gray-400 space-y-1">
-                          {experiment.features.slice(0, 3).map((feature) => (
-                            <li class="flex items-center">
-                              <span class="w-1.5 h-1.5 bg-macos-blue-500 rounded-full mr-2 flex-shrink-0"></span>
-                              {feature}
-                            </li>
+                {experimentsByStatus[status].map((experiment) => {
+                  const primaryUrl = experiment.demoUrl || experiment.githubUrl;
+                  const isExternal = primaryUrl && (primaryUrl.startsWith('http://') || primaryUrl.startsWith('https://'));
+                  
+                  return (
+                    <a 
+                      href={primaryUrl}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      class="block group cursor-pointer transition-all duration-200 hover:scale-[1.02]"
+                      aria-label={`View ${experiment.title} - ${experiment.category}`}
+                    >
+                      <div class="border border-macos-gray-200 dark:border-macos-gray-700 rounded-macos p-6 hover:shadow-macos transition-all duration-200 group-hover:shadow-xl group-hover:border-macos-blue-300 dark:group-hover:border-macos-blue-600">
+                        <div class="flex items-start justify-between mb-4">
+                          <div>
+                            <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-2 group-hover:text-macos-blue-600 dark:group-hover:text-macos-blue-400 transition-colors">
+                              {experiment.title}
+                            </h3>
+                            <span class="text-sm font-medium text-macos-blue-500 dark:text-macos-blue-400 group-hover:text-macos-blue-600 dark:group-hover:text-macos-blue-300 transition-colors">
+                              {experiment.category}
+                            </span>
+                          </div>
+                          <span class={`text-xs px-2 py-1 rounded-full font-medium ${
+                            experiment.status === 'Complete' 
+                              ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                              : experiment.status === 'In Progress'
+                              ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+                              : experiment.status === 'Prototype'
+                              ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
+                              : 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400'
+                          }`}>
+                            {experiment.status}
+                          </span>
+                        </div>
+                        
+                        <p class="text-macos-gray-600 dark:text-macos-gray-400 mb-4 leading-relaxed group-hover:text-macos-gray-700 dark:group-hover:text-macos-gray-300 transition-colors">
+                          {experiment.description}
+                        </p>
+                        
+                        {experiment.features && (
+                          <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-macos-gray-900 dark:text-white mb-2">
+                              Key Features:
+                            </h4>
+                            <ul class="text-sm text-macos-gray-600 dark:text-macos-gray-400 space-y-1">
+                              {experiment.features.slice(0, 3).map((feature) => (
+                                <li class="flex items-center">
+                                  <span class="w-1.5 h-1.5 bg-macos-blue-500 rounded-full mr-2 flex-shrink-0 group-hover:bg-macos-blue-600 transition-colors"></span>
+                                  {feature}
+                                </li>
+                              ))}
+                              {experiment.features.length > 3 && (
+                                <li class="text-xs text-macos-gray-500 italic">
+                                  +{experiment.features.length - 3} more features
+                                </li>
+                              )}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                          {experiment.technologies.map((tech) => (
+                            <span class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-2 py-1 rounded text-xs group-hover:bg-macos-gray-200 dark:group-hover:bg-macos-gray-600 transition-colors">
+                              {tech}
+                            </span>
                           ))}
-                          {experiment.features.length > 3 && (
-                            <li class="text-xs text-macos-gray-500 italic">
-                              +{experiment.features.length - 3} more features
-                            </li>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-4 border-t border-macos-gray-200 dark:border-macos-gray-700">
+                          <div class="flex gap-3">
+                            {experiment.githubUrl && (
+                              <span class="text-macos-gray-600 dark:text-macos-gray-400 text-sm font-medium pointer-events-none">
+                                View Code
+                              </span>
+                            )}
+                            {experiment.demoUrl && (
+                              <span class="text-macos-blue-500 dark:text-macos-blue-400 text-sm font-medium pointer-events-none">
+                                Live Demo
+                              </span>
+                            )}
+                          </div>
+                          {experiment.lastUpdated && (
+                            <span class="text-xs text-macos-gray-500">
+                              Updated {experiment.lastUpdated}
+                            </span>
                           )}
-                        </ul>
+                        </div>
                       </div>
-                    )}
-                    
-                    <div class="flex flex-wrap gap-2 mb-4">
-                      {experiment.technologies.map((tech) => (
-                        <span class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-2 py-1 rounded text-xs">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div class="flex items-center justify-between pt-4 border-t border-macos-gray-200 dark:border-macos-gray-700">
-                      <div class="flex gap-3">
-                        {experiment.githubUrl && (
-                          <a 
-                            href={experiment.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="text-macos-gray-600 dark:text-macos-gray-400 hover:text-macos-blue-500 dark:hover:text-macos-blue-400 transition-colors text-sm font-medium"
-                          >
-                            View Code
-                          </a>
-                        )}
-                        {experiment.demoUrl && (
-                          <a 
-                            href={experiment.demoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="text-macos-blue-500 hover:text-macos-blue-600 dark:text-macos-blue-400 dark:hover:text-macos-blue-300 transition-colors text-sm font-medium"
-                          >
-                            Live Demo
-                          </a>
-                        )}
-                      </div>
-                      {experiment.lastUpdated && (
-                        <span class="text-xs text-macos-gray-500">
-                          Updated {experiment.lastUpdated}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                    </a>
+                  );
+                })}
               </div>
             </Window>
           </div>
@@ -214,29 +217,42 @@ const statusOrder = ['Complete', 'In Progress', 'Prototype', 'Research'];
                   {categoryExperiments.length} experiment{categoryExperiments.length !== 1 ? 's' : ''}
                 </div>
                 
-                {categoryExperiments.map((experiment) => (
-                  <div class="border-l-2 border-macos-blue-500 pl-4 py-2">
-                    <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-1">
-                      {experiment.title}
-                    </h4>
-                    <div class="flex items-center gap-2 mb-2">
-                      <span class={`text-xs px-2 py-1 rounded-full font-medium ${
-                        experiment.status === 'Complete' 
-                          ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
-                          : experiment.status === 'In Progress'
-                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
-                          : experiment.status === 'Prototype'
-                          ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
-                          : 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400'
-                      }`}>
-                        {experiment.status}
-                      </span>
-                    </div>
-                    <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400 line-clamp-2">
-                      {experiment.description.split('.')[0]}.
-                    </p>
-                  </div>
-                ))}
+                {categoryExperiments.map((experiment) => {
+                  const primaryUrl = experiment.demoUrl || experiment.githubUrl;
+                  const isExternal = primaryUrl && (primaryUrl.startsWith('http://') || primaryUrl.startsWith('https://'));
+                  
+                  return (
+                    <a 
+                      href={primaryUrl}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      class="block group cursor-pointer transition-all duration-200 hover:scale-[1.02]"
+                      aria-label={`View ${experiment.title} - ${experiment.category}`}
+                    >
+                      <div class="border-l-2 border-macos-blue-500 pl-4 py-2 group-hover:border-macos-blue-600 dark:group-hover:border-macos-blue-400 transition-colors">
+                        <h4 class="font-semibold text-macos-gray-900 dark:text-white mb-1 group-hover:text-macos-blue-600 dark:group-hover:text-macos-blue-400 transition-colors">
+                          {experiment.title}
+                        </h4>
+                        <div class="flex items-center gap-2 mb-2">
+                          <span class={`text-xs px-2 py-1 rounded-full font-medium ${
+                            experiment.status === 'Complete' 
+                              ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                              : experiment.status === 'In Progress'
+                              ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+                              : experiment.status === 'Prototype'
+                              ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
+                              : 'bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400'
+                          }`}>
+                            {experiment.status}
+                          </span>
+                        </div>
+                        <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400 line-clamp-2 group-hover:text-macos-gray-700 dark:group-hover:text-macos-gray-300 transition-colors">
+                          {experiment.description.split('.')[0]}.
+                        </p>
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
             </Window>
           ))}
