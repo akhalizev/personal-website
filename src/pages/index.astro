@@ -285,7 +285,7 @@ const skillDescriptions: Record<string, string> = {
                           <button
                             type="button"
                             id="git-flip-btn"
-                            class="skill-chip git-octocat-intro group relative w-full text-left bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm hover:bg-macos-blue-500 hover:text-white dark:hover:bg-macos-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500 transition-colors overflow-hidden"
+                            class="skill-chip group relative w-full text-left bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm hover:bg-macos-blue-500 hover:text-white dark:hover:bg-macos-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500 transition-colors overflow-hidden"
                             aria-expanded="false"
                             aria-controls="git-activity-panel"
                             aria-describedby="tip-git"
@@ -721,34 +721,44 @@ const skillDescriptions: Record<string, string> = {
   gitFlipBtn?.addEventListener('click', ()=> { if(!flipCard) return; flipCard.classList.add('flipped'); gitFlipBtn.setAttribute('aria-expanded','true'); if(!eventsCache) fetchEvents(); });
   gitBackBtn?.addEventListener('click', ()=> { if(!flipCard) return; flipCard.classList.remove('flipped'); gitFlipBtn?.setAttribute('aria-expanded','false'); });
   gitRefresh?.addEventListener('click', ()=> fetchEvents(true));
-  // Attention pulse for Git button (drives discovery). Stops after first click or 20s.
+  // Deferred Git attention + Octocat traverse: trigger when scrolled into view
   if (gitFlipBtn) {
-    gitFlipBtn.classList.add('git-attn');
-    const clearGitAttn = () => { gitFlipBtn.classList.remove('git-attn'); };
-    gitFlipBtn.addEventListener('click', clearGitAttn, { once: true });
-    gitFlipBtn.addEventListener('mouseenter', () => gitFlipBtn.classList.add('git-attn-hover'));
-    gitFlipBtn.addEventListener('mouseleave', () => gitFlipBtn.classList.remove('git-attn-hover'));
-    setTimeout(clearGitAttn, 15000); // auto-stop after 15s each load
-  // Remove octocat intro class after first animation cycle ends (~2s) to prevent re-trigger by class reflows
-    setTimeout(()=> {
-      const octo = gitFlipBtn.querySelector('.octocat-anim-wrapper');
-      if(octo){
-        octo.classList.add('octo-rest');
-        // Stop further animation without losing final position
-        octo.style.animation='none';
+    let gitIntroStarted = false;
+    const startGitIntro = () => {
+      if (gitIntroStarted) return; gitIntroStarted = true;
+      gitFlipBtn.classList.add('git-octocat-intro','git-attn');
+      const clearGitAttn = () => { gitFlipBtn.classList.remove('git-attn'); };
+      gitFlipBtn.addEventListener('click', clearGitAttn, { once: true });
+      gitFlipBtn.addEventListener('mouseenter', () => gitFlipBtn.classList.add('git-attn-hover'));
+      gitFlipBtn.addEventListener('mouseleave', () => gitFlipBtn.classList.remove('git-attn-hover'));
+      setTimeout(clearGitAttn, 15000);
+      // Octocat rest transition timers (relative to start)
+      setTimeout(()=> {
+        const octo = gitFlipBtn.querySelector('.octocat-anim-wrapper');
+        if(octo){
+          octo.classList.add('octo-rest');
+          (octo as HTMLElement).style.animation='none';
+        }
+      }, 2900);
+      setTimeout(()=> {
+        const octo = gitFlipBtn.querySelector('.octocat-anim-wrapper.octo-rest');
+        if(octo){
+          octo.classList.add('octo-rest-force');
+          octo.setAttribute('data-octo-final','true');
+          (octo as HTMLElement).style.right='auto';
+        }
+      }, 3200);
+    };
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          startGitIntro();
+          observer.disconnect();
+          break;
+        }
       }
-      // Keep git-octocat-intro class to avoid reverting starting styles (prevents left jump)
-    }, 2900);
-    // Hard fallback to enforce right parking after potential layout shifts
-    setTimeout(()=> {
-      const octo = gitFlipBtn.querySelector('.octocat-anim-wrapper.octo-rest');
-      if(octo){
-        octo.classList.add('octo-rest-force');
-        octo.setAttribute('data-octo-final','true');
-        // Ensure it retains animation's computed left
-        (octo as HTMLElement).style.right='auto';
-      }
-    }, 3200);
+    }, { threshold: 0.4 });
+    observer.observe(gitFlipBtn);
   }
     // === UX side gutter quotes logic (re-added) ===
     const uxSections = Array.from(document.querySelectorAll('section[data-ux-note]'));
