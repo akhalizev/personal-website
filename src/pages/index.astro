@@ -737,12 +737,12 @@ const skillDescriptions: Record<string, string> = {
         if (rect.bottom < 0 || rect.top > window.innerHeight) return; // not in viewport
         const wrapper = gitFlipBtn.querySelector('.octocat-anim-wrapper') as HTMLElement | null;
         if (!wrapper) return;
-        // Reset from rest state
-        wrapper.classList.remove('octo-rest','octo-rest-force');
-        wrapper.style.left = '-2.2rem';
-        wrapper.style.animation = 'none';
-        const icon = wrapper.querySelector('.octocat-anim') as HTMLElement | null;
-        if (icon) { icon.style.animation = 'none'; icon.style.opacity = '0'; }
+  // Reset from rest state (remove rest classes & inline animations so CSS can drive replay)
+  wrapper.classList.remove('octo-rest','octo-rest-force');
+  wrapper.style.left = '-2.2rem';
+  wrapper.style.removeProperty('animation');
+  const icon = wrapper.querySelector('.octocat-anim') as HTMLElement | null;
+  if (icon) { icon.style.removeProperty('animation'); icon.style.opacity = '0'; }
         // Force reflow then trigger replay class on button
         void wrapper.offsetWidth;
         gitFlipBtn.classList.add('octo-replay');
@@ -1069,6 +1069,7 @@ const skillDescriptions: Record<string, string> = {
   /* Replay state: re-run traverse when .octo-replay is present after initial intro */
   #git-flip-btn.octo-replay .octocat-anim-wrapper { position:absolute; top:50%; animation: octoTraverse 2s cubic-bezier(.65,.1,.25,1) 0s forwards; }
   #git-flip-btn.octo-replay .octocat-anim { animation: octoIconFade 2s linear 0s forwards; }
+  #git-flip-btn.octo-replay .octocat-track::before { animation: octoTrailFade 2.1s ease 0s forwards; }
   @keyframes octoIconFade { 0% { opacity:0; } 12% { opacity:1; } 100% { opacity:1; } }
   #git-flip-btn.git-octocat-intro .octocat-track::before { content:""; position:absolute; left:0; top:50%; height:2px; width:100%; background:linear-gradient(90deg, rgba(59,130,246,0.0), rgba(59,130,246,0.45) 18%, rgba(59,130,246,0.0)); transform:translateY(-50%); animation: octoTrailFade 2.1s ease var(--octo-delay) forwards; pointer-events:none; }
   /* Delay label reveal for focus on mascot */
