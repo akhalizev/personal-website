@@ -62,6 +62,32 @@ const dockItems = [
   { name: "Experiments", icon: "🧪", href: "/experiments" },
   { name: "Contact", icon: "📧", href: "#contact" }
 ];
+
+// Descriptions for skill tooltips (2 concise sentences each)
+const skillDescriptions: Record<string, string> = {
+  'React': 'Component-driven library for building interactive UIs. I leverage hooks, context patterns, and performance profiling to create resilient frontends.',
+  'Vue.js': 'Progressive framework balancing approachability and power. Used for rapid prototypes and reactive state modeling.',
+  'TypeScript': 'Static typing layer that hardens code quality and refactors. I design ergonomic types & utility generics for safer APIs.',
+  'Tailwind CSS': 'Utility-first CSS framework enabling design velocity while preserving consistency. I extend tokens for a coherent macOS-inspired system.',
+  'Next.js': 'Full‑stack React framework: routing, SSR/SSG, edge streaming. I optimize data fetching and bundle footprint for fast TTFB.',
+  'Node.js': 'Event-driven runtime ideal for IO-heavy services. I structure modular services with attention to observability & resource efficiency.',
+  'Python': 'Multi-paradigm language great for automation & AI pipelines. I use it for quick data tooling and ML experimentation.',
+  'PostgreSQL': 'Robust relational database with strong ACID guarantees. I design normalized schemas plus judicious indexes & CTE-driven analytics.',
+  'MongoDB': 'Document store suited for flexible, evolving schemas. I apply schema validation and aggregation pipelines for agility with control.',
+  'Express': 'Minimal Node.js web framework. I compose middleware for auth, rate limiting, and structured error handling.',
+  'Git': 'Version control backbone for collaboration & traceability. I keep linear histories via interactive rebasing and atomic commits.',
+  'Docker': 'Containerization for reproducible environments. I craft slim images and multi-stage builds to cut cold start & attack surface.',
+  'AWS': 'Cloud platform for scalable infrastructure. Comfortable with core services (EC2, S3, CloudFront, Lambda) and infrastructure as code patterns.',
+  'Figma': 'Collaborative interface design & prototyping platform. I architect complex interactive components, evolve & steward design systems, and compose responsive, constraint‑driven layouts.',
+  'VS Code': 'Primary editor configured for rapid feedback loops. Extensions + tasks streamline refactors, tests, and design/dev alignment.',
+  'Neovim': 'Modal, extensible terminal-first editor I tune with Lua for instant navigation and ergonomic motions. LSP + treesitter + fuzzy finding complement VS Code for deep focus sessions.',
+  'LLM Orchestration (LangChain)': 'Framework patterns for chaining model calls, tools, and memory. I design modular graph flows with observability & failure recovery.',
+  'RAG Pipelines': 'Retrieval Augmented Generation: ground model outputs in domain context. I optimize chunking, embeddings, and ranking for factuality.',
+  'Vector DBs (Pinecone / Weaviate / pgvector)': 'Similarity search infrastructure for embeddings. I tune dimensionality, filtering, and index types for latency vs. recall balance.',
+  'Prompt Engineering': 'Systematic crafting of prompt templates & guards. I iterate with evals to stabilize outputs across edge scenarios.',
+  'Embeddings & Semantic Search': 'Numerical text representations enabling clustering, search, and personalization. I evaluate models with domain relevance metrics.',
+  'Guardrails & Evaluation': 'Safety & quality layer: validation, red-teaming, regression benchmarks. I automate eval suites to catch drift early.'
+};
 ---
 
 <Layout title={`Portfolio - ${me.name}`}>
@@ -219,13 +245,16 @@ const dockItems = [
   <section id="skills" data-ux-note="Clear affordances reduce friction." data-ux-side="right" class="py-20 px-6">
       <div class="max-w-6xl mx-auto">
         <Window title="Skills & Technologies" class="max-w-4xl mx-auto">
-          <div class="grid md:grid-cols-3 gap-8">
+          <div class="grid md:grid-cols-3 xl:grid-cols-4 gap-8 skills-grid">
             <div>
               <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Frontend</h3>
               <div class="space-y-2">
                 {["React", "Vue.js", "TypeScript", "Tailwind CSS", "Next.js"].map((skill) => (
-                  <div class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm">
+                  <div class="skill-chip group bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm relative focus-within:ring-2 focus-within:ring-macos-blue-500" tabindex="0" aria-describedby={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`}>
                     {skill}
+                    <div role="tooltip" id={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`} class="skill-tooltip">
+                      {skillDescriptions[skill]}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -235,32 +264,51 @@ const dockItems = [
               <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Backend</h3>
               <div class="space-y-2">
                 {["Node.js", "Python", "PostgreSQL", "MongoDB", "Express"].map((skill) => (
-                  <div class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm">
+                  <div class="skill-chip group bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm relative" tabindex="0" aria-describedby={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`}>
                     {skill}
+                    <div role="tooltip" id={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`} class="skill-tooltip">
+                      {skillDescriptions[skill]}
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div>
+            <div class="tools-col">
               <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">Tools</h3>
               <div class="relative flip-wrapper perspective-1200">
                 <div id="tools-flip-card" class="flip-card-inner duration-700 ease-in-out will-change-transform">
                   <div class="flip-face flip-front space-y-2">
-                    {["Git", "Docker", "AWS", "Figma", "VS Code"].map((skill) => (
+                    {["Figma", "Git", "Docker", "AWS", "VS Code", "Neovim"].map((skill) => (
                       skill === 'Git' ? (
-                        <button
-                          type="button"
-                          id="git-flip-btn"
-                          class="group relative w-full text-left bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm hover:bg-macos-blue-500 hover:text-white dark:hover:bg-macos-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500 transition-colors"
-                          aria-expanded="false"
-                          aria-controls="git-activity-panel"
-                        >
-                          Git <span class="ml-1 text-[10px] uppercase tracking-wide opacity-60 group-hover:opacity-80">activity</span>
-                        </button>
+                        <div class="relative">
+                          <button
+                            type="button"
+                            id="git-flip-btn"
+                            class="skill-chip git-octocat-intro group relative w-full text-left bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm hover:bg-macos-blue-500 hover:text-white dark:hover:bg-macos-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500 transition-colors overflow-hidden"
+                            aria-expanded="false"
+                            aria-controls="git-activity-panel"
+                            aria-describedby="tip-git"
+                            aria-label="Git activity (recent commits)"
+                          >
+                            <span class="octocat-track absolute inset-0 pointer-events-none select-none" aria-hidden="true"></span>
+                            <span class="octocat-anim-wrapper pointer-events-none select-none" aria-hidden="true">
+                              <svg class="octocat-anim w-5 h-5" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="" focusable="false">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.263.82-.582 0-.287-.01-1.244-.015-2.255-3.338.726-4.042-1.415-4.042-1.415-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.466-1.335-5.466-5.93 0-1.31.468-2.382 1.236-3.223-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.841 1.235 1.913 1.235 3.223 0 4.607-2.804 5.624-5.476 5.92.43.37.823 1.102.823 2.222 0 1.604-.014 2.896-.014 3.286 0 .322.217.7.825.58C20.565 21.796 24 17.297 24 12 24 5.37 18.63 0 12 0Z" />
+                              </svg>
+                            </span>
+                            <span class="git-label inline-flex items-center">Git <span class="ml-1 text-[10px] uppercase tracking-wide opacity-60 group-hover:opacity-80">activity</span></span>
+                          </button>
+                          <div role="tooltip" id="tip-git" class="skill-tooltip">
+                            {skillDescriptions['Git']}
+                          </div>
+                        </div>
                       ) : (
-                        <div class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm">
+                        <div class="skill-chip group bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-sm relative" tabindex="0" aria-describedby={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`}>
                           {skill}
+                          <div role="tooltip" id={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`} class="skill-tooltip">
+                            {skillDescriptions[skill]}
+                          </div>
                         </div>
                       )
                     ))}
@@ -292,6 +340,20 @@ const dockItems = [
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="ai-tech-col">
+              <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">AI & Emerging Tech</h3>
+              <div class="space-y-2">
+                {["LLM Orchestration (LangChain)", "RAG Pipelines", "Vector DBs (Pinecone / Weaviate / pgvector)", "Prompt Engineering", "Embeddings & Semantic Search", "Guardrails & Evaluation"].map((skill) => (
+                  <div class="skill-chip group bg-gradient-to-r from-macos-blue-500/10 to-macos-blue-500/5 dark:from-macos-blue-600/20 dark:to-macos-blue-500/10 border border-macos-blue-500/20 dark:border-macos-blue-400/20 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-[13px] leading-tight backdrop-blur-sm relative" tabindex="0" aria-describedby={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`}>
+                    {skill}
+                    <div role="tooltip" id={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`} class="skill-tooltip max-w-xs">
+                      {skillDescriptions[skill]}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -659,6 +721,35 @@ const dockItems = [
   gitFlipBtn?.addEventListener('click', ()=> { if(!flipCard) return; flipCard.classList.add('flipped'); gitFlipBtn.setAttribute('aria-expanded','true'); if(!eventsCache) fetchEvents(); });
   gitBackBtn?.addEventListener('click', ()=> { if(!flipCard) return; flipCard.classList.remove('flipped'); gitFlipBtn?.setAttribute('aria-expanded','false'); });
   gitRefresh?.addEventListener('click', ()=> fetchEvents(true));
+  // Attention pulse for Git button (drives discovery). Stops after first click or 20s.
+  if (gitFlipBtn) {
+    gitFlipBtn.classList.add('git-attn');
+    const clearGitAttn = () => { gitFlipBtn.classList.remove('git-attn'); };
+    gitFlipBtn.addEventListener('click', clearGitAttn, { once: true });
+    gitFlipBtn.addEventListener('mouseenter', () => gitFlipBtn.classList.add('git-attn-hover'));
+    gitFlipBtn.addEventListener('mouseleave', () => gitFlipBtn.classList.remove('git-attn-hover'));
+    setTimeout(clearGitAttn, 15000); // auto-stop after 15s each load
+  // Remove octocat intro class after first animation cycle ends (~2s) to prevent re-trigger by class reflows
+    setTimeout(()=> {
+      const octo = gitFlipBtn.querySelector('.octocat-anim-wrapper');
+      if(octo){
+        octo.classList.add('octo-rest');
+        // Stop further animation without losing final position
+        octo.style.animation='none';
+      }
+      // Keep git-octocat-intro class to avoid reverting starting styles (prevents left jump)
+    }, 2900);
+    // Hard fallback to enforce right parking after potential layout shifts
+    setTimeout(()=> {
+      const octo = gitFlipBtn.querySelector('.octocat-anim-wrapper.octo-rest');
+      if(octo){
+        octo.classList.add('octo-rest-force');
+        octo.setAttribute('data-octo-final','true');
+        // Ensure it retains animation's computed left
+        (octo as HTMLElement).style.right='auto';
+      }
+    }, 3200);
+  }
     // === UX side gutter quotes logic (re-added) ===
     const uxSections = Array.from(document.querySelectorAll('section[data-ux-note]'));
     const clamp = (n, min, max) => n < min ? min : (n > max ? max : n);
@@ -689,6 +780,109 @@ const dockItems = [
     updateUxNoteShift();
     window.addEventListener('scroll', updateUxNoteShift, { passive: true });
     window.addEventListener('resize', () => { updateUxNoteVertical(); updateUxNoteShift(); });
+
+    // Global skill tooltip portal
+    (function setupSkillTooltipPortal(){
+      const SOURCE_SELECTOR = '.skill-chip';
+      let portal = document.getElementById('global-skill-tooltip');
+      if(!portal){
+        portal = document.createElement('div');
+        portal.id='global-skill-tooltip';
+        const baseStyle = [
+          'position:fixed',
+          'z-index:9999',
+          'opacity:0',
+          'transform:translateY(-4px)',
+          'transition:opacity .14s ease, transform .14s ease',
+          'background:rgba(255,255,255,0.92)',
+          'border:1px solid rgba(0,0,0,0.06)',
+          'border-radius:12px',
+          'padding:0.65rem 0.75rem 0.6rem',
+          'box-shadow:0 8px 32px -10px rgba(0,0,0,0.35),0 4px 14px -4px rgba(0,0,0,0.22)',
+          'font-size:11.5px',
+          'line-height:1.35',
+          'font-weight:500',
+          'color:#1e293b',
+          'letter-spacing:.2px',
+          'backdrop-filter:blur(10px) saturate(1.4)',
+          'max-width:22rem',
+          'pointer-events:none'
+        ].join(';');
+        portal.setAttribute('style', baseStyle);
+        const arrow = document.createElement('div'); arrow.className='gst-arrow';
+        arrow.setAttribute('style', [
+          'position:absolute','width:18px','height:11px','left:50%','top:100%','transform:translateX(-50%)'
+        ].join(';'));
+        const arrowInner = document.createElement('div');
+        arrowInner.setAttribute('style', 'position:absolute;inset:0;background:inherit;clip-path:path("M0 0 L18 0 L9 11 Z");filter:drop-shadow(0 2px 3px rgba(0,0,0,0.25))');
+        arrow.appendChild(arrowInner);
+        portal.appendChild(arrow);
+        const inner = document.createElement('div'); inner.className='gst-inner';
+        inner.setAttribute('style','position:relative;padding-left:0.4rem');
+        portal.appendChild(inner);
+        const accent = document.createElement('div');
+        accent.setAttribute('style','content:"";position:absolute;left:0;top:0;height:100%;width:3px;border-radius:2px;background:linear-gradient(to bottom,#3b82f6,transparent 85%);opacity:.6;');
+        inner.appendChild(accent);
+        const textHolder = document.createElement('div'); textHolder.className='gst-text'; inner.appendChild(textHolder);
+        document.body.appendChild(portal);
+      }
+  const innerEl = portal.querySelector('.gst-text');
+      let active=null; let hideT;
+      function position(chip){
+        if(!portal || !innerEl) return;
+        const rect = chip.getBoundingClientRect();
+        portal.dataset.flipped='false';
+        portal.style.maxWidth='22rem';
+        portal.style.left='0px'; portal.style.top='0px'; portal.style.visibility='hidden';
+        requestAnimationFrame(()=>{
+          const pw = portal.offsetWidth; const ph = portal.offsetHeight; const gap=10;
+          let left = rect.left + rect.width/2 - pw/2; left = Math.max(8, Math.min(window.innerWidth - pw - 8, left));
+          let top = rect.top - ph - gap; if(top < 8){ top = rect.bottom + gap; portal.dataset.flipped='true'; }
+          portal.style.left=left+'px'; portal.style.top=top+'px'; portal.style.visibility='visible';
+        });
+      }
+      function show(chip){
+        clearTimeout(hideT); active=chip;
+        const txt = chip.querySelector('.skill-tooltip')?.textContent || chip.textContent?.trim();
+        if(innerEl) innerEl.textContent = txt || '';
+        // AI theme if inside AI column
+        if(chip.closest('.ai-tech-col')) {
+          portal.classList.add('ai-theme');
+          // Apply AI gradient inline to override scoped CSS not present
+          portal.style.background='linear-gradient(135deg, rgba(30,64,175,0.9), rgba(29,78,216,0.92) 55%, rgba(56,189,248,0.65))';
+          portal.style.color='#f1f5f9';
+          const accentBar = portal.querySelector('.gst-inner > div');
+          if(accentBar) (accentBar as HTMLElement).style.background='linear-gradient(to bottom,#93c5fd,transparent 85%)';
+        } else {
+          portal.classList.remove('ai-theme');
+          portal.style.background='rgba(255,255,255,0.92)';
+          portal.style.color='#1e293b';
+          const accentBar = portal.querySelector('.gst-inner > div');
+          if(accentBar) (accentBar as HTMLElement).style.background='linear-gradient(to bottom,#3b82f6,transparent 85%)';
+        }
+        position(chip); portal.style.opacity='1'; portal.style.transform='translateY(0)';
+      }
+      function hide(){ portal.style.opacity='0'; portal.style.transform='translateY(-4px)'; active=null; }
+      function scheduleHide(){ hideT = setTimeout(hide, 100); }
+      const chips = Array.from(document.querySelectorAll(SOURCE_SELECTOR));
+      chips.forEach(chip=>{
+        chip.addEventListener('mouseenter', ()=> show(chip));
+        chip.addEventListener('focus', ()=> show(chip));
+        chip.addEventListener('mouseleave', scheduleHide);
+        chip.addEventListener('blur', scheduleHide);
+        chip.addEventListener('keydown', e=> { if(e.key==='Escape') hide(); });
+      });
+      window.addEventListener('scroll', ()=> { if(active) position(active); }, { passive:true });
+      window.addEventListener('resize', ()=> { if(active) position(active); });
+      document.body.classList.add('skill-tooltips-portal-active');
+    })();
+    // Fallback: if portal not active after 1s, re-enable inline tooltips
+    setTimeout(()=>{
+      if(!document.getElementById('global-skill-tooltip')){
+        document.querySelectorAll('.skill-tooltip').forEach(el=>{ el.removeAttribute('style'); el.classList.remove('hidden'); });
+        document.body.classList.add('skill-tooltips-fallback');
+      }
+    })();
   });
 </script>
 
@@ -741,6 +935,8 @@ const dockItems = [
   .flip-front { position: relative; }
   .flip-back { position: absolute; inset: 0; transform: rotateY(180deg); display: flex; }
   .flip-wrapper { min-height: 190px; }
+  /* Ensure flip card (Tools column) tooltips overlay later columns */
+  .flip-wrapper { position: relative; }
   /* Scrollbar inside activity panel */
   #git-activity-content.custom-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(100,116,139,0.35) transparent; }
   #git-activity-content.custom-scrollbar::-webkit-scrollbar { width: 8px; }
@@ -802,4 +998,61 @@ const dockItems = [
   :root { --git-l0: rgba(148,163,184,0.18); --git-l1: #cfe1ff; --git-l2: #9ec5ff; --git-l3: #5aa5ff; --git-l4: #1d72e7; }
   .dark :root, .dark { --git-l0: rgba(100,116,139,0.18); --git-l1: #1e3a8a; --git-l2: #1d4ed8; --git-l3: #2563eb; --git-l4: #3b82f6; }
   .git-activity-chart-wrapper { background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0)); }
+  /* Git attention pulse */
+  @keyframes gitPulseRing { 0% { transform:scale(.94); opacity:.34;} 70% { transform:scale(1.24); opacity:0;} 100% { opacity:0;} }
+  @keyframes gitPulseGlow { 0%,100% { box-shadow:0 0 0 0 rgba(59,130,246,0.25);} 50% { box-shadow:0 0 0 4px rgba(59,130,246,0); } }
+  #git-flip-btn.git-attn { position:relative; }
+  #git-flip-btn.git-attn::after, #git-flip-btn.git-attn::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; }
+  #git-flip-btn.git-attn::before { animation: gitPulseGlow 2.8s ease-in-out infinite; }
+  #git-flip-btn.git-attn::after { border:2px solid rgba(59,130,246,0.42); animation: gitPulseRing 2.1s ease-out infinite; border-radius:inherit; }
+  #git-flip-btn.git-attn-hover::after { border-color:rgba(255,255,255,0.9); }
+  .dark #git-flip-btn.git-attn::after { border-color:rgba(96,165,250,0.45); }
+  .dark #git-flip-btn.git-attn::before { animation: gitPulseGlow 2.8s ease-in-out infinite; }
+  /* Octocat traverse animation (mascot physically moves across width using left positioning) */
+  @keyframes octoTraverse {
+    0% { left:-2.2rem; transform:translateY(-50%) rotate(-10deg); opacity:0; }
+    10% { opacity:1; }
+    45% { left:0.3rem; transform:translateY(-50%) rotate(0deg); }
+    70% { left:calc(100% - 2.2rem); transform:translateY(-50%) rotate(6deg); }
+    82% { left:calc(100% - 2.6rem); transform:translateY(-50%) rotate(0deg); }
+    92% { left:calc(100% - 2.3rem); transform:translateY(-50%) rotate(3deg); }
+    100% { left:calc(100% - 2.2rem); transform:translateY(-50%) rotate(0deg); opacity:1; }
+  }
+  @keyframes octoTrailFade { 0% { opacity:.38; transform:translateX(-5%) scaleX(.85);} 55% { opacity:.18; } 100% { opacity:0; transform:translateX(25%) scaleX(1);} }
+  #git-flip-btn.git-octocat-intro { --octo-delay: .25s; position:relative; }
+  #git-flip-btn.git-octocat-intro .git-label { position:relative; }
+  #git-flip-btn.git-octocat-intro .octocat-anim-wrapper { position:absolute; top:50%; left:-2.2rem; width:1.25rem; height:1.25rem; display:flex; align-items:center; justify-content:center; animation: octoTraverse 2s cubic-bezier(.65,.1,.25,1) var(--octo-delay) forwards; will-change:left, transform; }
+  #git-flip-btn.git-octocat-intro .octocat-anim { opacity:0; animation: octoIconFade 2s linear var(--octo-delay) forwards; filter:drop-shadow(0 1px 1px rgba(0,0,0,0.25)); }
+  @keyframes octoIconFade { 0% { opacity:0; } 12% { opacity:1; } 100% { opacity:1; } }
+  #git-flip-btn.git-octocat-intro .octocat-track::before { content:""; position:absolute; left:0; top:50%; height:2px; width:100%; background:linear-gradient(90deg, rgba(59,130,246,0.0), rgba(59,130,246,0.45) 18%, rgba(59,130,246,0.0)); transform:translateY(-50%); animation: octoTrailFade 2.1s ease var(--octo-delay) forwards; pointer-events:none; }
+  /* Delay label reveal for focus on mascot */
+  #git-flip-btn.git-octocat-intro .git-label { opacity:0; animation: gitLabelIn .55s ease 1.35s forwards; }
+  /* Rest state: keep Octocat parked on right side after traverse */
+  #git-flip-btn .octocat-anim-wrapper.octo-rest, #git-flip-btn .octocat-anim-wrapper.octo-rest-force { left:calc(100% - 2.2rem) !important; right:auto !important; transform:translateY(-50%) rotate(0deg) !important; animation:none !important; }
+  #git-flip-btn .octocat-anim-wrapper.octo-rest .octocat-anim, #git-flip-btn .octocat-anim-wrapper.octo-rest-force .octocat-anim { opacity:1 !important; animation:none !important; }
+  @keyframes gitLabelIn { 0% { opacity:0; filter:blur(3px); transform:translateX(6px);} 100% { opacity:1; filter:none; transform:translateX(0);} }
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    #git-flip-btn.git-octocat-intro .octocat-anim, #git-flip-btn.git-octocat-intro .git-label { animation:none !important; opacity:1 !important; transform:none !important; }
+    #git-flip-btn.git-octocat-intro .octocat-track::before { display:none; }
+  }
+  /* Dark mode adjustments */
+  .dark #git-flip-btn.git-octocat-intro .octocat-track::before { background:linear-gradient(90deg, rgba(96,165,250,0.0), rgba(96,165,250,0.45) 20%, rgba(96,165,250,0.0)); }
+  /* Skill tooltips */
+  .skill-chip { cursor: default; position:relative; }
+  /* Hide inline tooltip content; portal will read it */
+  .skill-tooltip { display:none !important; }
+  #global-skill-tooltip { background:rgba(255,255,255,0.92); border:1px solid rgba(0,0,0,0.06); border-radius:.75rem; padding:.65rem .75rem .6rem; box-shadow:0 8px 32px -10px rgba(0,0,0,0.35), 0 4px 14px -4px rgba(0,0,0,0.22); font-size:11.5px; line-height:1.35; font-weight:500; color:#1e293b; letter-spacing:.2px; backdrop-filter:blur(10px) saturate(1.4); max-width:22rem; pointer-events:none; --tip-accent: #3b82f6; position:fixed; }
+  .dark #global-skill-tooltip { background:rgba(30,41,59,0.88); color:rgba(255,255,255,0.9); border-color:rgba(255,255,255,0.08); --tip-accent:#60a5fa; }
+  #global-skill-tooltip.ai-theme { background:linear-gradient(135deg, rgba(30,64,175,0.9), rgba(29,78,216,0.92) 55%, rgba(56,189,248,0.65)); color:#f1f5f9; border-color:rgba(255,255,255,0.15); --tip-accent:#93c5fd; }
+  #global-skill-tooltip.ai-theme .gst-inner { text-shadow:0 1px 2px rgba(0,0,0,0.35); }
+  #global-skill-tooltip .gst-inner { position:relative; }
+  #global-skill-tooltip .gst-inner::before { content:""; position:absolute; left:0; top:0; height:100%; width:3px; border-radius:2px; background:linear-gradient(to bottom, var(--tip-accent), transparent 85%); opacity:.6; }
+  #global-skill-tooltip .gst-arrow { position:absolute; width:18px; height:11px; left:50%; transform:translateX(-50%); top:100%; }
+  #global-skill-tooltip .gst-arrow::before { content:""; position:absolute; inset:0; background:inherit; clip-path:path('M0 0 L18 0 L9 11 Z'); filter:drop-shadow(0 2px 3px rgba(0,0,0,0.25)); }
+  #global-skill-tooltip[data-flipped='true'] .gst-arrow { top:auto; bottom:100%; }
+  #global-skill-tooltip[data-flipped='true'] .gst-arrow::before { clip-path:path('M0 11 L18 11 L9 0 Z'); }
+  @media (prefers-reduced-motion: reduce) { #global-skill-tooltip { transition:none !important; } }
+  body.skill-tooltips-portal-active { --skill-tooltip-mode: portal; }
+  body.skill-tooltips-fallback { --skill-tooltip-mode: inline; }
 </style>
