@@ -5,32 +5,55 @@ export interface Props {
     icon: string;
     href: string;
     isActive?: boolean;
+    alignRight?: boolean; // when true, item is pushed to the far right with extra spacing (de-emphasized)
   }>;
 }
 
 const { items } = Astro.props;
+const leftItems = items.filter(i => !i.alignRight);
+const rightItems = items.filter(i => i.alignRight);
 ---
 
 <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50" data-dock>
   <div class="bg-white/20 dark:bg-black/20 backdrop-blur-macos border border-white/30 dark:border-white/10 rounded-macos-lg px-4 py-3 shadow-macos-lg">
-    <div class="flex items-center space-x-3">
-      {items.map((item) => (
-        <a
-          href={item.href}
-          class={`group relative flex items-center justify-center w-12 h-12 rounded-lg transition-all duration-200 ease-out transform hover:scale-110 ${item.isActive ? 'is-active' : ''}`}
-          title={item.name}
-          data-dock-link
-        >
-          <span class="text-xl">{item.icon}</span>
-          <!-- Tooltip -->
-          <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <div class="bg-macos-gray-800 text-white text-xs rounded-md px-2 py-1 whitespace-nowrap">
-              {item.name}
+    <div class="flex items-center">
+      <div class="flex items-center space-x-3">
+        {leftItems.map((item) => (
+          <a
+            href={item.href}
+            class={`group relative flex items-center justify-center w-12 h-12 rounded-lg transition-all duration-200 ease-out transform hover:scale-110 ${item.isActive ? 'is-active' : ''}`}
+            title={item.name}
+            data-dock-link
+          >
+            <span class="text-xl">{item.icon}</span>
+            <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <div class="bg-macos-gray-800 text-white text-xs rounded-md px-2 py-1 whitespace-nowrap">{item.name}</div>
+              <div class="w-2 h-2 bg-macos-gray-800 transform rotate-45 absolute top-full left-1/2 -translate-x-1/2 -mt-1"></div>
             </div>
-            <div class="w-2 h-2 bg-macos-gray-800 transform rotate-45 absolute top-full left-1/2 -translate-x-1/2 -mt-1"></div>
+          </a>
+        ))}
+      </div>
+      {rightItems.length > 0 && (
+        <>
+          <div class="mx-5 w-px h-8 bg-macos-gray-300/40 dark:bg-macos-gray-600/40" aria-hidden="true"></div>
+          <div class="flex items-center space-x-3 pl-1">
+            {rightItems.map((item) => (
+              <a
+                href={item.href}
+                class={`group relative flex items-center justify-center w-11 h-11 rounded-lg transition-all duration-200 ease-out hover:scale-105 opacity-80 hover:opacity-100 ${item.isActive ? 'is-active !opacity-100 !hover:scale-110' : ''}`}
+                title={item.name}
+                data-dock-link
+              >
+                <span class="text-lg">{item.icon}</span>
+                <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div class="bg-macos-gray-800 text-white text-xs rounded-md px-2 py-1 whitespace-nowrap">{item.name}</div>
+                  <div class="w-2 h-2 bg-macos-gray-800 transform rotate-45 absolute top-full left-1/2 -translate-x-1/2 -mt-1"></div>
+                </div>
+              </a>
+            ))}
           </div>
-        </a>
-      ))}
+        </>
+      )}
     </div>
   </div>
 </div>
