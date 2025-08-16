@@ -6,6 +6,9 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Dock from '../components/Dock.astro';
 import ProjectListItem from '../components/ProjectListItem.astro';
 import { experiments as allExperiments } from '../utils/experimentsData';
+import { testimonials } from '../utils/testimonials';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import TestimonialsCarousel from '../components/TestimonialsCarousel.astro';
 
 // Personalization (update these values as needed)
 const me = {
@@ -396,6 +399,17 @@ const dockItems = [
             View All Experiments
           </a>
         </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section (Carousel) -->
+    <section id="testimonials" data-ux-note="Social proof reduces decision friction." data-ux-side="left" class="py-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-macos-gray-900 dark:text-white mb-4">Testimonials</h2>
+          <p class="text-lg text-macos-gray-600 dark:text-macos-gray-400 max-w-2xl mx-auto">What collaborators and stakeholders say about working with me.</p>
+        </div>
+        <TestimonialsCarousel />
       </div>
     </section>
 

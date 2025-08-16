@@ -1,0 +1,71 @@
+---
+import TestimonialCard from './TestimonialCard.astro';
+import { testimonials } from '../utils/testimonials';
+---
+<div class="relative" id="testimonials-carousel" data-count={testimonials.length}>
+  <div class="overflow-hidden rounded-xl">
+    <ul class="flex transition-transform duration-500 ease-in-out will-change-transform" style={`--slide-count:${testimonials.length};`} data-carousel-track>
+      {testimonials.map((t, idx) => (
+        <li class="w-full shrink-0 px-1 sm:px-2" data-slide-index={idx} aria-hidden={idx === 0 ? 'false' : 'true'}>
+          <TestimonialCard {...t} />
+        </li>
+      ))}
+    </ul>
+  </div>
+  <!-- Controls -->
+  <div class="mt-6 flex items-center justify-between gap-4">
+    <div class="flex gap-2" role="tablist" aria-label="Select testimonial">
+      {testimonials.map((_, i) => (
+        <button type="button" class="w-3 h-3 rounded-full bg-macos-gray-300 dark:bg-macos-gray-600 ring-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500 transition-colors" data-carousel-dot={i} aria-label={`Go to testimonial ${i+1}`} aria-controls="testimonials-carousel" aria-selected={i===0? 'true':'false'}></button>
+      ))}
+    </div>
+    <div class="flex gap-3">
+      <button type="button" data-carousel-prev class="inline-flex items-center justify-center rounded-md bg-white/70 dark:bg-macos-gray-800/70 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 px-3 py-2 text-sm font-medium text-macos-gray-700 dark:text-macos-gray-200 hover:bg-white/90 dark:hover:bg-macos-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500" aria-label="Previous testimonial">←</button>
+      <button type="button" data-carousel-next class="inline-flex items-center justify-center rounded-md bg-macos-blue-500 hover:bg-macos-blue-600 text-white px-3 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-macos-blue-500" aria-label="Next testimonial">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  document.addEventListener('DOMContentLoaded', () => {
+    const root = document.getElementById('testimonials-carousel');
+    if (!root) return;
+    const track = root.querySelector('[data-carousel-track]');
+    const slides = Array.from(root.querySelectorAll('[data-slide-index]'));
+    const prevBtn = root.querySelector('[data-carousel-prev]');
+    const nextBtn = root.querySelector('[data-carousel-next]');
+    const dots = Array.from(root.querySelectorAll('[data-carousel-dot]'));
+    let index = 0; let autoTimer; const INTERVAL = 7000;
+    function apply() {
+      const width = root.clientWidth;
+      track.style.transform = `translateX(${-index * width}px)`;
+      slides.forEach((li,i)=> li.setAttribute('aria-hidden', i === index ? 'false':'true'));
+      dots.forEach((d,i)=> d.setAttribute('aria-selected', i === index ? 'true':'false'));
+    }
+    function next() { index = (index + 1) % slides.length; apply(); }
+    function prev() { index = (index - 1 + slides.length) % slides.length; apply(); }
+    function startAuto() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      stopAuto(); autoTimer = setInterval(next, INTERVAL);
+    }
+    function stopAuto() { if (autoTimer) clearInterval(autoTimer); }
+    nextBtn?.addEventListener('click', () => { next(); startAuto(); });
+    prevBtn?.addEventListener('click', () => { prev(); startAuto(); });
+    dots.forEach(d => d.addEventListener('click', () => { const i = Number(d.getAttribute('data-carousel-dot')); if(!isNaN(i)) { index = i; apply(); startAuto(); }}));
+    // Keyboard nav
+    root.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { next(); startAuto(); } else if (e.key === 'ArrowLeft') { prev(); startAuto(); } });
+    // Resize handling
+    window.addEventListener('resize', () => apply());
+    root.addEventListener('mouseenter', stopAuto);
+    root.addEventListener('mouseleave', startAuto);
+    apply(); startAuto();
+  });
+</script>
+
+<style>
+  #testimonials-carousel ul { width: 100%; }
+  #testimonials-carousel [data-slide-index] { width: 100%; }
+  #testimonials-carousel [data-carousel-dot][aria-selected="true"] { background: var(--dot-active, rgb(37 99 235)); box-shadow: 0 0 0 3px rgba(37,99,235,0.25); }
+  .dark #testimonials-carousel [data-carousel-dot][aria-selected="true"] { background: var(--dot-active, rgb(96 165 250)); box-shadow: 0 0 0 3px rgba(96,165,250,0.35); }
+</style>

@@ -130,6 +130,35 @@ npm run preview # optional local smoke test
 - Add basic unit tests and accessibility checks
 - Optional: image optimization pipeline and upload handling
 
+## Assets / Images Structure
+
+Place images inside `public/images` following this convention:
+
+```text
+public/
+  images/
+    testimonials/   # Headshots for testimonials (e.g. jane.png, john.webp)
+    projects/       # Each project can have its own subfolder
+      project-slug/
+        cover.png   # Primary cover image
+        screen-1.png
+        screen-2.png
+    avatars/        # (Optional) main profile or alternate avatars
+```
+
+Guidelines:
+
+- Prefer `.webp` where possible; fall back to `.png`.
+- Keep testimonial headshots ~256x256 (square) for consistency.
+- Name project folder with a URL-friendly slug (e.g. `design-system-dashboard`).
+- For retina quality, you can include `@2x` versions if needed (not required yet).
+
+### Adding / Updating Testimonials
+
+1. Add headshot to `public/images/testimonials/`.
+2. Edit `src/utils/testimonials.ts` to update name, role, quote, photo path.
+3. Rebuild or refresh dev server; homepage section updates automatically.
+
 ## License
 
 MIT (or your preferred license)

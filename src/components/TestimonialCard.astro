@@ -1,0 +1,34 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  quote: string;
+  photo: string; // path in public
+  companyUrl?: string;
+}
+const { name, role, quote, photo, companyUrl } = Astro.props as Props;
+---
+<figure class="relative flex flex-col h-full rounded-xl bg-white/80 dark:bg-macos-gray-800/70 backdrop-blur-macos border border-white/40 dark:border-macos-gray-700/60 shadow-macos p-6 overflow-hidden">
+  <div class="flex items-center gap-4 mb-4">
+    <div class="w-14 h-14 rounded-full ring-2 ring-white/70 dark:ring-macos-gray-700 overflow-hidden bg-macos-gray-200 dark:bg-macos-gray-600 flex items-center justify-center text-macos-gray-500 dark:text-macos-gray-300 text-xl font-semibold">
+      <img src={photo} alt={name + ' photo'} loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.textContent = (this.alt||'?').split(' ').map(p=>p[0]).slice(0,2).join('')" />
+    </div>
+    <figcaption class="flex-1 min-w-0">
+      <p class="font-semibold text-macos-gray-900 dark:text-white leading-tight">{name}</p>
+      {companyUrl ? (
+        <a href={companyUrl} target="_blank" rel="noopener noreferrer" class="text-xs text-macos-blue-600 dark:text-macos-blue-400 hover:underline block truncate">{role}</a>
+      ) : (
+        <p class="text-xs text-macos-gray-600 dark:text-macos-gray-400 truncate">{role}</p>
+      )}
+    </figcaption>
+  </div>
+  <blockquote class="text-sm text-macos-gray-700 dark:text-macos-gray-300 leading-relaxed grow relative">
+    <span class="absolute -top-2 -left-2 text-macos-blue-500/20 dark:text-macos-blue-300/10 text-6xl select-none pointer-events-none" aria-hidden="true">“</span>
+    {quote}
+  </blockquote>
+</figure>
+
+<style>
+  figure:hover { box-shadow: 0 4px 18px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.04); }
+  .dark figure:hover { box-shadow: 0 4px 18px -2px rgba(0,0,0,0.45), 0 2px 6px -1px rgba(0,0,0,0.3); }
+</style>
