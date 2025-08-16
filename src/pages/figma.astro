@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Dock from '../components/Dock.astro';
+import Window from '../components/Window.astro';
+
+// Figma plugin metadata (replace placeholder URLs & details with real data)
+const plugins = [
+  {
+    name: 'Sticky Note Maker',
+    tagline: 'Add colorful sticky notes for fast annotations & feedback',
+    description: `Effortlessly add colorful sticky notes to your Figma designs — perfect for annotations, feedback, and organizing ideas. Ideal for designers and teams who want a visual way to comment, triage, and collaborate right inside a file. Streamline review cycles and keep context anchored to the work.`,
+    figmaUrl: 'https://www.figma.com/community/plugin/1505336318807985387',
+    status: 'Published',
+    highlights: [
+      'Create notes beside a selected frame (auto top‑right) or centered in viewport',
+      'Five semantic types: Note, Fresh Idea, Approved, Need Attention, Need Fix',
+      'Auto inserts creator name + timestamp for lightweight audit trail',
+      'Icon‑driven, color‑coded UI with clear hover & selection states',
+      'Fast 3‑step flow: select • choose type • write & create'
+    ],
+    technologies: ['TypeScript', 'Figma Plugin API']
+  },
+  {
+    name: 'Figma Variable Exporter',
+    tagline: 'Export Figma variables to CSS, JSON & visual style guides',
+    description: `Transform your Figma variables into production‑ready assets with one click. Export multi‑mode (Light, Dark, Mobile, etc.) tokens as clean CSS Custom Properties, structured JSON, or auto‑generated style guide frames. Resolves aliases, normalizes names, and speeds handoff between design and engineering.`,
+    figmaUrl: 'https://www.figma.com/community/plugin/1487911262916619647',
+    status: 'Published',
+    highlights: [
+      'Multi‑format export: CSS custom properties, JSON tokens, style guide frames',
+      'Full mode support (Light / Dark / Mobile) with optional combined output',
+      'Alias resolution: replaces chained references with concrete values',
+      'Smart cleanup: removes duplicate word patterns & supports custom prefixes',
+      'Style guide generator: color swatches, spacing, typography & more',
+      'Configurable grouping, indentation & mode selection per export'
+    ],
+    technologies: ['TypeScript', 'Figma Plugin API']
+  }
+];
+
+const dockItems = [
+  { name: 'About', icon: '👤', href: '/#about' },
+  { name: 'Projects', icon: '💼', href: '/projects' },
+  { name: 'Skills', icon: '🛠️', href: '/#skills' },
+  { name: 'Figma', icon: '🧩', href: '/figma', isActive: true, alignRight: true },
+  { name: 'Shots', icon: '🎨', href: '/dribbble', alignRight: true },
+  { name: 'Experiments', icon: '🧪', href: '/experiments' },
+  { name: 'Contact', icon: '📧', href: '/#contact' }
+];
+---
+<Layout title="Figma Plugins - Portfolio">
+  <main class="min-h-screen bg-gradient-to-br from-macos-blue-500/5 to-macos-gray-100 dark:from-macos-gray-900 dark:to-macos-gray-800">
+    <section class="pt-20 pb-12 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-14">
+          <h1 class="text-5xl md:text-6xl font-bold text-macos-gray-900 dark:text-white mb-5">Figma Plugins</h1>
+          <p class="text-lg text-macos-gray-600 dark:text-macos-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Workflow accelerators I built to remove friction in everyday design system & product work. Each plugin focuses on repeatable leverage: consistency, speed, or better iteration loops.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+          {plugins.map(plugin => (
+            <Window title={plugin.name} class="h-full flex flex-col">
+              <div class="flex flex-col h-full">
+                <div class="mb-4">
+                  <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white tracking-tight flex items-center gap-2">
+                    {plugin.name}
+                    <span class={`text-xs px-2 py-0.5 rounded-full font-medium tracking-wide ${
+                      plugin.status === 'Published' ? 'bg-green-100 text-green-700 dark:bg-green-900/25 dark:text-green-400' :
+                      plugin.status === 'Beta' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/25 dark:text-blue-400' :
+                      'bg-macos-gray-100 text-macos-gray-600 dark:bg-macos-gray-700/60 dark:text-macos-gray-300'
+                    }`}>
+                      {plugin.status}
+                    </span>
+                  </h3>
+                  <p class="text-macos-blue-600 dark:text-macos-blue-400 text-sm mt-1 font-medium">{plugin.tagline}</p>
+                </div>
+                <p class="text-sm text-macos-gray-600 dark:text-macos-gray-400 leading-relaxed mb-5 flex-1">{plugin.description}</p>
+                <div class="mb-6 space-y-2">
+                  <h4 class="text-xs font-semibold uppercase tracking-wide text-macos-gray-500 dark:text-macos-gray-400">Highlights</h4>
+                  <ul class="text-sm text-macos-gray-600 dark:text-macos-gray-400 space-y-1">
+                    {plugin.highlights.map(h => (
+                      <li class="flex items-start"><span class="w-1.5 h-1.5 rounded-full bg-macos-blue-500 dark:bg-macos-blue-400 mt-1 mr-2 flex-shrink-0"></span>{h}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {plugin.technologies.map(t => (
+                    <span class="bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-700 dark:text-macos-gray-300 px-2 py-1 rounded text-xs">{t}</span>
+                  ))}
+                </div>
+                <div class="mt-auto flex gap-3 pt-4 border-t border-macos-gray-200 dark:border-macos-gray-700">
+                  <a href={plugin.figmaUrl} target="_blank" rel="noopener noreferrer" class="bg-macos-blue-500 hover:bg-macos-blue-600 text-white px-4 py-2 rounded-macos text-sm font-medium shadow-macos inline-flex items-center gap-1">
+                    <span>View in Community</span> ↗
+                  </a>
+                  <a href="/#contact" class="bg-white/70 dark:bg-macos-gray-800/70 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/40 text-macos-gray-900 dark:text-white px-4 py-2 rounded-macos text-sm font-medium hover:bg-white/90 dark:hover:bg-macos-gray-800/90 inline-flex items-center">
+                    Collaborate
+                  </a>
+                </div>
+              </div>
+            </Window>
+          ))}
+        </div>
+
+        <div class="mt-16 max-w-3xl mx-auto">
+          <Window title="Why Build Plugins?">
+            <p class="text-macos-gray-600 dark:text-macos-gray-400 leading-relaxed mb-4">
+              Plugins act as force multipliers: they compress repetitive labor, enforce standards, and enable new exploratory workflows. I build them when I notice recurring micro‑frictions slowing design & engineering alignment.
+            </p>
+            <ul class="space-y-2 text-sm text-macos-gray-600 dark:text-macos-gray-400">
+              <li class="flex items-start"><span class="w-1.5 h-1.5 bg-macos-blue-500 dark:bg-macos-blue-400 rounded-full mt-1 mr-2"></span>Codify heuristic decisions into consistent tooling</li>
+              <li class="flex items-start"><span class="w-1.5 h-1.5 bg-macos-blue-500 dark:bg-macos-blue-400 rounded-full mt-1 mr-2"></span>Create leverage for distributed design system stewardship</li>
+              <li class="flex items-start"><span class="w-1.5 h-1.5 bg-macos-blue-500 dark:bg-macos-blue-400 rounded-full mt-1 mr-2"></span>Accelerate early product iteration with structured placeholders</li>
+              <li class="flex items-start"><span class="w-1.5 h-1.5 bg-macos-blue-500 dark:bg-macos-blue-400 rounded-full mt-1 mr-2"></span>Bridge gaps between design artifacts & implementation semantics</li>
+            </ul>
+          </Window>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed top-6 left-6 z-50">
+      <a 
+        href="/" 
+        class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 text-macos-gray-900 dark:text-white p-3 rounded-macos font-medium transition-colors hover:bg-white/90 dark:hover:bg-macos-gray-800/90 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <Dock items={dockItems} />
+  </main>
+</Layout>
