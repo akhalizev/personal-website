@@ -1,0 +1,59 @@
+---
+import Window from './Window.astro';
+import { getLocalDribbbleShots } from '../utils/dribbbleLocal';
+
+interface GalleryProps { limit?: number; title?: string; showTags?: boolean; }
+const { limit = 24, title = 'Design Shots', showTags = true } = Astro.props as GalleryProps;
+
+// Single, reliable data source: local export JSON.
+const shots = getLocalDribbbleShots(limit);
+---
+<Window title={title} class="max-w-6xl mx-auto">
+  {shots.length === 0 && (
+    <div class="text-center py-12 text-macos-gray-500 dark:text-macos-gray-400 text-sm">
+      No Dribbble shots found (feed empty or fetch blocked). Add static images or try again later.
+    </div>
+  )}
+  {shots.length > 0 && (
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:balance]" aria-label="Dribbble shots gallery">
+      {shots.map(shot => (
+        <a href={shot.url} target="_blank" rel="noopener noreferrer" class="group mb-6 block break-inside-avoid" aria-label={`Open Dribbble shot: ${shot.title}`}>
+          <figure class="relative overflow-hidden rounded-lg border border-macos-gray-200 dark:border-macos-gray-700 bg-white/60 dark:bg-macos-gray-800/60 shadow-sm hover:shadow-macos transition-shadow">
+            {shot.image && (
+              <img src={shot.image} alt={shot.title} loading="lazy" decoding="async" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+            )}
+            <figcaption class="p-3">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="text-sm font-medium text-macos-gray-800 dark:text-macos-gray-200 line-clamp-2 group-hover:text-macos-blue-600 dark:group-hover:text-macos-blue-400 transition-colors flex-1">{shot.title}</h3>
+                {shot.animated && (<span class="text-[10px] px-1.5 py-0.5 rounded bg-macos-pink-500/10 text-macos-pink-600 dark:text-macos-pink-400 border border-macos-pink-500/30">GIF</span>)}
+              </div>
+              <time class="block text-[11px] uppercase tracking-wide text-macos-gray-400 dark:text-macos-gray-500" datetime={shot.published}>{new Date(shot.published).toLocaleDateString()}</time>
+              {showTags && shot.tags && shot.tags.length > 0 && (
+                <ul class="mt-2 flex flex-wrap gap-1">
+                  {shot.tags.slice(0,6).map(t => (
+                    <li class="text-[10px] bg-macos-gray-100 dark:bg-macos-gray-700 text-macos-gray-600 dark:text-macos-gray-300 px-1.5 py-0.5 rounded">
+                      {t}
+                    </li>
+                  ))}
+                  {shot.tags.length > 6 && (
+                    <li class="text-[10px] text-macos-gray-400 dark:text-macos-gray-500">+{shot.tags.length - 6}</li>
+                  )}
+                </ul>
+              )}
+            </figcaption>
+          </figure>
+        </a>
+      ))}
+  {shots.length === 0 && (
+        <p class="mt-6 text-center text-xs text-macos-gray-500 dark:text-macos-gray-600">Local export has no shots.</p>
+      )}
+    </div>
+  )}
+</Window>
+
+<style>
+  /* Ensure columns layout looks good */
+  @media (prefers-reduced-motion: reduce) {
+    .group:hover img { transform: none !important; }
+  }
+</style>

@@ -1,0 +1,792 @@
+{
+  "user": {
+    "avatar_url": "https://cdn.dribbble.com/users/734277/avatars/normal/0f4132cc00b38584e5d86a9b1aa76b9b.jpg?1537406377",
+    "bio": "UX/UI designer. As a relatively new American resident, hustling to do more different things, meet people, learn. ",
+    "created_at": "2015-01-11 07:53:49 -0500",
+    "html_url": "https://dribbble.com/ahalizev",
+    "links": {
+      "web": "http://patience.design",
+      "twitter": "https://twitter.com/ahalizev",
+      "facebook": "https://facebook.com/akhalizev",
+      "instagram": "https://instagram.com/ahalizev",
+      "github": "https://github.com/akhalizev",
+      "medium": "https://medium.com/@akhalizev",
+      "behance": "https://www.behance.net/akhalizev",
+      "linkedin": "https://www.linkedin.com/in/akhalizev"
+    },
+    "location": "Minneapolis",
+    "login": "ahalizev",
+    "name": "Anatoly Khalizev"
+  },
+  "shots": [
+    {
+      "id": 5281579,
+      "title": "Minneapolis",
+      "description": "<p>My submission to this panorama rebound experiment.\n I live in Minneapolis, Minnesota, so here are a couple famous buildings and a sign of Prince, the most famous Minneapolis citizen.</p>\n\n<p>Thanks to the following for participating and contributing to this experiment:</p>\n\n<p>@Evoria \n @Sander de Wekker \n @Dmitriy Mir \n @Bizhan Khodabandeh \n @Lisa Romano \n @Austin Johnson \n @Irine Gubanova a.k.a. bc999 \n @Tanya Kremnova</p>\n\n<p>Please check out their profiles and give them a follow.</p>\n\n<p>---</p>\n\n<p>You are invited to participate in this interactive design challenge. Anyone can participate but please follow the rules below.</p>\n\n<p>RULES:</p>\n\n<p>Download the attached AI file and add to the left or right of the panorama to extend the scene as long as you:</p>\n\n<p>1. Do not change any part of the image added by another designer except for very minor alterations to make your addition look seamless.</p>\n\n<p>2. Do not make the illustration taller. Keep it panoramic.</p>\n\n<p>3. Only add up to 800 pixels of width.</p>\n\n<p>4. You may add colors as you see fit, even to previous work as long as you don't change the lines or change existing color fills or outline colors.</p>\n\n<p>5. Use 3-pixel line weight</p>\n\n<p>6. There are no limits on the subject matter and no requirement that your work follows the same theme as what has been done before. The weirder (more creative) the better.</p>\n\n<p>After you add your own illustration, upload to Dribbble as a rebound of this image. For your Dribbble shot, use only YOUR addition or part thereof.</p>\n\n<p>Rename the AI file.</p>\n\n<p>The AI file is named using the date, in reverse: panorama-YYYY-MM-DD-v#.ai</p>\n\n<p>So change the file name keeping the \"panorama-\" then add the year (2018) - month number - day number - version number. So if the version you download has \"v3\" then you would increase that to \"v4\" and so on.</p>\n\n<p>Send the AI file to scott(at)atomiclotus(dot)net so I can add it to this post for future participants.</p>\n\n<p>Thanks!</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/23554218/file/original-f465754afb3d88eeee33e6139bf28a37.png?resize=800x600",
+        "normal": "https://cdn.dribbble.com/userupload/23554218/file/original-f465754afb3d88eeee33e6139bf28a37.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/23554218/file/original-f465754afb3d88eeee33e6139bf28a37.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/23554218/file/original-f465754afb3d88eeee33e6139bf28a37.png?resize=800x600"
+      },
+      "tags": [
+        "affinitydesigner",
+        "architecture",
+        "debut",
+        "firstshot",
+        "illustration",
+        "junior",
+        "rebound",
+        "vector",
+        "welcome"
+      ],
+      "html_url": "https://dribbble.com/shots/5281579-Minneapolis",
+      "published_at": "2018-09-20T01:16:49Z"
+    },
+    {
+      "id": 5319941,
+      "title": "Minnesconsin Logo",
+      "description": "<p>My attempt to make a logo for one Instagram blog about craft beer in Minnesota and Wisconsin. I think that guy is not using it. And I didn't get any money for this logo.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/23593978/file/original-44cb50ca5b1c23651ae3f46fdb54f61a.png?resize=1066x800",
+        "normal": "https://cdn.dribbble.com/userupload/23593978/file/original-44cb50ca5b1c23651ae3f46fdb54f61a.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/23593978/file/original-44cb50ca5b1c23651ae3f46fdb54f61a.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/23593978/file/original-44cb50ca5b1c23651ae3f46fdb54f61a.png?resize=800x600"
+      },
+      "tags": [
+        "affinitydesigner",
+        "beer",
+        "beer blog",
+        "design",
+        "drink",
+        "illustration",
+        "junior",
+        "logo",
+        "minnesota",
+        "vector",
+        "wisconsin"
+      ],
+      "html_url": "https://dribbble.com/shots/5319941-Minnesconsin-Logo",
+      "published_at": "2018-09-28T02:02:37Z"
+    },
+    {
+      "id": 5937676,
+      "title": "Lasalle Near Target",
+      "description": "<p>Downtown Minneapolis (Lasalle and 9th)</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/24203335/file/original-41657ffeabef6df11f0fbee5d38d98e2.png?resize=1600x1200",
+        "normal": "https://cdn.dribbble.com/userupload/24203335/file/original-41657ffeabef6df11f0fbee5d38d98e2.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/24203335/file/original-41657ffeabef6df11f0fbee5d38d98e2.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/24203335/file/original-41657ffeabef6df11f0fbee5d38d98e2.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/24203335/file/original-41657ffeabef6df11f0fbee5d38d98e2.png?resize=1600x1200",
+        "six_x": "https://cdn.dribbble.com/userupload/24203335/file/original-41657ffeabef6df11f0fbee5d38d98e2.png?resize=2400x1800"
+      },
+      "tags": [
+        "architecture",
+        "design",
+        "illustration",
+        "junior"
+      ],
+      "html_url": "https://dribbble.com/shots/5937676-Lasalle-Near-Target",
+      "published_at": "2019-01-31T00:31:00Z"
+    },
+    {
+      "id": 6090906,
+      "title": "My silhouette",
+      "description": "<p>This is my silhouette made from one photo of me using Affinity Designer.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/24352790/file/original-ecc8d8d409bc86d60ba087c192f5a611.png?resize=1599x1200",
+        "normal": "https://cdn.dribbble.com/userupload/24352790/file/original-ecc8d8d409bc86d60ba087c192f5a611.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/24352790/file/original-ecc8d8d409bc86d60ba087c192f5a611.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/24352790/file/original-ecc8d8d409bc86d60ba087c192f5a611.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/24352790/file/original-ecc8d8d409bc86d60ba087c192f5a611.png?resize=1600x1200",
+        "six_x": "https://cdn.dribbble.com/userupload/24352790/file/original-ecc8d8d409bc86d60ba087c192f5a611.png?resize=2400x1800",
+        "eight_x": "https://cdn.dribbble.com/userupload/24352790/file/original-ecc8d8d409bc86d60ba087c192f5a611.png?resize=3200x2400"
+      },
+      "tags": [
+        "affinity",
+        "affinity designer",
+        "designer",
+        "illustration",
+        "me",
+        "person",
+        "vector"
+      ],
+      "html_url": "https://dribbble.com/shots/6090906-My-silhouette",
+      "published_at": "2019-02-27T03:49:33Z"
+    },
+    {
+      "id": 6180457,
+      "title": "Masterpiece of my life",
+      "description": "<p>Modern art and how I see it. Lots of thoughts, struggle and dream to make this world a happier place.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/24442894/file/original-04613502d79801d2233cf4b990f664b9.png?resize=800x600",
+        "normal": "https://cdn.dribbble.com/userupload/24442894/file/original-04613502d79801d2233cf4b990f664b9.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/24442894/file/original-04613502d79801d2233cf4b990f664b9.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/24442894/file/original-04613502d79801d2233cf4b990f664b9.png?resize=800x600"
+      },
+      "tags": [
+        "finger",
+        "graphic",
+        "illustrator",
+        "modernart",
+        "thoughts"
+      ],
+      "html_url": "https://dribbble.com/shots/6180457-Masterpiece-of-my-life",
+      "published_at": "2019-03-14T23:16:36Z"
+    },
+    {
+      "id": 6229030,
+      "title": "Mad clown",
+      "description": "<p>My cousin's performance \"Mad clown\" poster.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/42112903/file/original-cfd2cf1df9414609a68a3b4d442c7ae8.png?resize=1600x1200",
+        "normal": "https://cdn.dribbble.com/userupload/42112903/file/original-cfd2cf1df9414609a68a3b4d442c7ae8.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/42112903/file/original-cfd2cf1df9414609a68a3b4d442c7ae8.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/42112903/file/original-cfd2cf1df9414609a68a3b4d442c7ae8.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/42112903/file/original-cfd2cf1df9414609a68a3b4d442c7ae8.png?resize=1600x1200",
+        "six_x": "https://cdn.dribbble.com/userupload/42112903/file/original-cfd2cf1df9414609a68a3b4d442c7ae8.png?resize=2400x1800",
+        "eight_x": "https://cdn.dribbble.com/userupload/42112903/file/original-cfd2cf1df9414609a68a3b4d442c7ae8.png?resize=3200x2400"
+      },
+      "tags": [
+        "clown",
+        "mad",
+        "photoshop",
+        "pop",
+        "pop art"
+      ],
+      "html_url": "https://dribbble.com/shots/6229030-Mad-clown",
+      "published_at": "2019-03-24T21:27:02Z"
+    },
+    {
+      "id": 6297721,
+      "title": "20190222 Anatoly 033 Texture Mask Play",
+      "description": "<p>Captured texture at Lynlake brewery added some colors from Capella tower interiors and here we are.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/42153022/file/original-f1267ff724990732d7fa251b84ef66e4.jpg?resize=1600x1199",
+        "normal": "https://cdn.dribbble.com/userupload/42153022/file/original-f1267ff724990732d7fa251b84ef66e4.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/42153022/file/original-f1267ff724990732d7fa251b84ef66e4.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/42153022/file/original-f1267ff724990732d7fa251b84ef66e4.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/42153022/file/original-f1267ff724990732d7fa251b84ef66e4.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "adobecapture",
+        "design",
+        "illustration",
+        "junior",
+        "photoshop",
+        "texture"
+      ],
+      "html_url": "https://dribbble.com/shots/6297721-20190222-Anatoly-033-Texture-Mask-Play",
+      "published_at": "2019-04-07T01:39:20Z"
+    },
+    {
+      "id": 6305464,
+      "title": "Low poly Designer",
+      "description": "<p>Low poly me.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/42157685/file/original-01cf6d525781c3e1f770f2f52da363cc.png?resize=400x300",
+        "normal": "https://cdn.dribbble.com/userupload/42157685/file/original-01cf6d525781c3e1f770f2f52da363cc.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/42157685/file/original-01cf6d525781c3e1f770f2f52da363cc.png?resize=400x300"
+      },
+      "tags": [
+        "illustrator",
+        "low poly",
+        "pen tool",
+        "vector"
+      ],
+      "html_url": "https://dribbble.com/shots/6305464-Low-poly-Designer",
+      "published_at": "2019-04-08T17:23:15Z"
+    },
+    {
+      "id": 6782264,
+      "title": "Lake of Isles",
+      "description": "<p>Minneapolis. Lake of Isles. Dark mood.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/42442206/file/original-9b89b1fb030521880eed9a5d404ef9d5.jpeg?resize=1600x1200",
+        "normal": "https://cdn.dribbble.com/userupload/42442206/file/original-9b89b1fb030521880eed9a5d404ef9d5.jpeg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/42442206/file/original-9b89b1fb030521880eed9a5d404ef9d5.jpeg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/42442206/file/original-9b89b1fb030521880eed9a5d404ef9d5.jpeg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/42442206/file/original-9b89b1fb030521880eed9a5d404ef9d5.jpeg?resize=1600x1200",
+        "six_x": "https://cdn.dribbble.com/userupload/42442206/file/original-9b89b1fb030521880eed9a5d404ef9d5.jpeg?resize=2400x1800",
+        "eight_x": "https://cdn.dribbble.com/userupload/42442206/file/original-9b89b1fb030521880eed9a5d404ef9d5.jpeg?resize=3200x2400"
+      },
+      "tags": [
+        "art",
+        "editing",
+        "mood",
+        "photography",
+        "photoshop",
+        "print"
+      ],
+      "html_url": "https://dribbble.com/shots/6782264-Lake-of-Isles",
+      "published_at": "2019-07-15T00:37:04Z"
+    },
+    {
+      "id": 8530796,
+      "title": "Creative Mornings Extentions",
+      "description": "<p>I created UX/UI for Creative Mornings.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25415726/file/still-8f2bbc7e5900c633b72eec275b27ff55.gif?resize=800x600",
+        "normal": "https://cdn.dribbble.com/userupload/25415726/file/still-8f2bbc7e5900c633b72eec275b27ff55.gif?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25415726/file/still-8f2bbc7e5900c633b72eec275b27ff55.gif?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25415726/file/still-8f2bbc7e5900c633b72eec275b27ff55.gif?resize=800x600"
+      },
+      "tags": [
+        "design",
+        "gif",
+        "photohop",
+        "sketch",
+        "ui",
+        "ui design",
+        "ux"
+      ],
+      "html_url": "https://dribbble.com/shots/8530796-Creative-Mornings-Extentions",
+      "published_at": "2019-11-25T23:10:10Z"
+    },
+    {
+      "id": 8694944,
+      "title": "Daily UI 01 - Sign Up",
+      "description": "<p>Already behind with my first Daily UI challenge but will keep going.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25458426/file/original-188135d6a0a2e79ea6d022d859876204.png?resize=5685x3905",
+        "normal": "https://cdn.dribbble.com/userupload/25458426/file/original-188135d6a0a2e79ea6d022d859876204.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25458426/file/original-188135d6a0a2e79ea6d022d859876204.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25458426/file/original-188135d6a0a2e79ea6d022d859876204.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/25458426/file/original-188135d6a0a2e79ea6d022d859876204.png?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "design",
+        "junior",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/8694944-Daily-UI-01-Sign-Up",
+      "published_at": "2019-12-01T21:08:19Z"
+    },
+    {
+      "id": 8774891,
+      "title": "dailyui02 checkout",
+      "description": "<p>Daily UI 02. Huge thanks to undraw.co for illustrations.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25475574/file/original-754f248c5701af86281ce84d58cc45b2.png?resize=6500x4500",
+        "normal": "https://cdn.dribbble.com/userupload/25475574/file/original-754f248c5701af86281ce84d58cc45b2.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25475574/file/original-754f248c5701af86281ce84d58cc45b2.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25475574/file/original-754f248c5701af86281ce84d58cc45b2.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/25475574/file/original-754f248c5701af86281ce84d58cc45b2.png?resize=1600x1200",
+        "six_x": "https://cdn.dribbble.com/userupload/25475574/file/original-754f248c5701af86281ce84d58cc45b2.png?resize=2400x1800",
+        "eight_x": "https://cdn.dribbble.com/userupload/25475574/file/original-754f248c5701af86281ce84d58cc45b2.png?resize=3200x2400"
+      },
+      "tags": [
+        "dailyui",
+        "dailyui03",
+        "designer",
+        "illustration",
+        "ui",
+        "xd"
+      ],
+      "html_url": "https://dribbble.com/shots/8774891-dailyui02-checkout",
+      "published_at": "2019-12-03T17:43:52Z"
+    },
+    {
+      "id": 8794569,
+      "title": "DailyUI03",
+      "description": "<p>Just a brief 'landing' shot. Thanks to unsplash.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25478134/file/original-9a7ccedf6fd945e65d8f4295b3e71123.png?resize=2907x1842",
+        "normal": "https://cdn.dribbble.com/userupload/25478134/file/original-9a7ccedf6fd945e65d8f4295b3e71123.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25478134/file/original-9a7ccedf6fd945e65d8f4295b3e71123.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25478134/file/original-9a7ccedf6fd945e65d8f4295b3e71123.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/25478134/file/original-9a7ccedf6fd945e65d8f4295b3e71123.png?resize=1600x1200"
+      },
+      "tags": [
+        "adobexd",
+        "dailyui",
+        "dailyui03",
+        "sketch",
+        "xd"
+      ],
+      "html_url": "https://dribbble.com/shots/8794569-DailyUI03",
+      "published_at": "2019-12-04T03:00:05Z"
+    },
+    {
+      "id": 8886858,
+      "title": "Daily UI 04 – Calculator",
+      "description": "<p>My calculator shot for a daily UI. Big shootout to @lstore_graphics for amazing mockups!</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25504619/file/original-a278ec166d85acba33d23509b9a68f37.png?resize=1920x1200",
+        "normal": "https://cdn.dribbble.com/userupload/25504619/file/original-a278ec166d85acba33d23509b9a68f37.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25504619/file/original-a278ec166d85acba33d23509b9a68f37.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25504619/file/original-a278ec166d85acba33d23509b9a68f37.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/25504619/file/original-a278ec166d85acba33d23509b9a68f37.png?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "dailyui04",
+        "junior",
+        "lstore graphics",
+        "ui",
+        "ux"
+      ],
+      "html_url": "https://dribbble.com/shots/8886858-Daily-UI-04-Calculator",
+      "published_at": "2019-12-07T03:07:28Z"
+    },
+    {
+      "id": 9028430,
+      "title": "Let it be witch head",
+      "description": "<p>I was about to do an icon for my daily UI challenge but found an interesting short format Adobe Illustrator tutorial. And let it be the icon of some haircut salon.  </p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25570880/file/original-5896aca8961615a7132d7575f4eb45bb.png?resize=2048x2048",
+        "normal": "https://cdn.dribbble.com/userupload/25570880/file/original-5896aca8961615a7132d7575f4eb45bb.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25570880/file/original-5896aca8961615a7132d7575f4eb45bb.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25570880/file/original-5896aca8961615a7132d7575f4eb45bb.png?resize=800x600"
+      },
+      "tags": [
+        "adobe",
+        "dailyui",
+        "head",
+        "icon",
+        "illustrator",
+        "minimalism"
+      ],
+      "html_url": "https://dribbble.com/shots/9028430-Let-it-be-witch-head",
+      "published_at": "2019-12-14T03:55:52Z"
+    },
+    {
+      "id": 9043381,
+      "title": "Daily UI 06 – User Profile",
+      "description": "<p>My daily UI challenge number 6 - user profile. @Ls.graphics - special thanks for amazing mockups.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25575569/file/original-77d5d7d73c6d8669f906deff2fc635e9.png?resize=1950x1350",
+        "normal": "https://cdn.dribbble.com/userupload/25575569/file/original-77d5d7d73c6d8669f906deff2fc635e9.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25575569/file/original-77d5d7d73c6d8669f906deff2fc635e9.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25575569/file/original-77d5d7d73c6d8669f906deff2fc635e9.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/25575569/file/original-77d5d7d73c6d8669f906deff2fc635e9.png?resize=1600x1200"
+      },
+      "tags": [
+        "adobexd",
+        "dailyui",
+        "fitness",
+        "junior",
+        "ls.graphics",
+        "ui",
+        "ui design",
+        "xd"
+      ],
+      "html_url": "https://dribbble.com/shots/9043381-Daily-UI-06-User-Profile",
+      "published_at": "2019-12-15T02:15:50Z"
+    },
+    {
+      "id": 9156714,
+      "title": "dailyui07 settings",
+      "description": "<p>My variation of a start work assignment for a retail food department.\n Huge thanks to Ls.graphics, for pattern and mockup.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/25644714/file/original-0160996a25005521cfba3c61c8e44593.png?resize=1950x1350",
+        "normal": "https://cdn.dribbble.com/userupload/25644714/file/original-0160996a25005521cfba3c61c8e44593.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/25644714/file/original-0160996a25005521cfba3c61c8e44593.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/25644714/file/original-0160996a25005521cfba3c61c8e44593.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/25644714/file/original-0160996a25005521cfba3c61c8e44593.png?resize=1600x1200"
+      },
+      "tags": [
+        "adobe",
+        "dailyui",
+        "design",
+        "ls.graphics",
+        "settings",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/9156714-dailyui07-settings",
+      "published_at": "2019-12-24T02:16:47Z"
+    },
+    {
+      "id": 10166921,
+      "title": "dailyui08 404",
+      "description": "<p>I didn't come up with a brilliant idea for my Daily UI challenge #8. It's not a daily for me, obviously, and this one took along. So I was doing Illustrator course of Deke McClelland and just added couple things and put it onto mockup.\n Just to skip this one and move forward :)</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26145209/file/original-ea2411540d060d855add0cc0200c1002.png?resize=6830x4693",
+        "normal": "https://cdn.dribbble.com/userupload/26145209/file/original-ea2411540d060d855add0cc0200c1002.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26145209/file/original-ea2411540d060d855add0cc0200c1002.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26145209/file/original-ea2411540d060d855add0cc0200c1002.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26145209/file/original-ea2411540d060d855add0cc0200c1002.png?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "illustrator",
+        "ls.graphics"
+      ],
+      "html_url": "https://dribbble.com/shots/10166921-dailyui08-404",
+      "published_at": "2020-02-18T05:22:40Z"
+    },
+    {
+      "id": 10436652,
+      "title": "dailyui09 apple watch Music Player",
+      "description": "<p>My music player on apple watch with mockup by Mockuuups Studio.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26213852/file/original-0aba939379532a39b590fe8835f2b99d.jpg?resize=2600x1734",
+        "normal": "https://cdn.dribbble.com/userupload/26213852/file/original-0aba939379532a39b590fe8835f2b99d.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26213852/file/original-0aba939379532a39b590fe8835f2b99d.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26213852/file/original-0aba939379532a39b590fe8835f2b99d.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26213852/file/original-0aba939379532a39b590fe8835f2b99d.jpg?resize=1600x1200",
+        "six_x": "https://cdn.dribbble.com/userupload/26213852/file/original-0aba939379532a39b590fe8835f2b99d.jpg?resize=2400x1800"
+      },
+      "tags": [
+        "apple watch",
+        "dailyui 09",
+        "music app",
+        "sketch",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/10436652-dailyui09-apple-watch-Music-Player",
+      "published_at": "2020-02-25T04:21:12Z"
+    },
+    {
+      "id": 10745560,
+      "title": "DailyUI 10, Share post on apple watch",
+      "description": "<p>Share a post in the apple watch app. Design in Sketch, mockuuups studio mockup.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26406321/file/original-fa4b32a619e7e072d5e6a8a68eff64b5.jpg?resize=2600x1733",
+        "normal": "https://cdn.dribbble.com/userupload/26406321/file/original-fa4b32a619e7e072d5e6a8a68eff64b5.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26406321/file/original-fa4b32a619e7e072d5e6a8a68eff64b5.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26406321/file/original-fa4b32a619e7e072d5e6a8a68eff64b5.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26406321/file/original-fa4b32a619e7e072d5e6a8a68eff64b5.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "applewatch",
+        "dailyui",
+        "mockup",
+        "share",
+        "sketch"
+      ],
+      "html_url": "https://dribbble.com/shots/10745560-DailyUI-10-Share-post-on-apple-watch",
+      "published_at": "2020-03-14T19:31:44Z"
+    },
+    {
+      "id": 10764233,
+      "title": "Booking confirmation - Daily UI 11",
+      "description": "<p>Confirmation of booking. Thanks to ls.graphics for this colorful pattern.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26439404/file/original-0224f3621b42a48e792714ca0bc3d1ba.jpg?resize=3099x3099",
+        "normal": "https://cdn.dribbble.com/userupload/26439404/file/original-0224f3621b42a48e792714ca0bc3d1ba.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26439404/file/original-0224f3621b42a48e792714ca0bc3d1ba.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26439404/file/original-0224f3621b42a48e792714ca0bc3d1ba.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26439404/file/original-0224f3621b42a48e792714ca0bc3d1ba.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "ls.graphics",
+        "sketch",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/10764233-Booking-confirmation-Daily-UI-11",
+      "published_at": "2020-03-17T23:16:36Z"
+    },
+    {
+      "id": 10796402,
+      "title": "DailyUI 11 Single Product.",
+      "description": "<p>Daily UI 11, single product.\n There is something I don't like. If you can give me some recommendations on how to fix it - much appreciated.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26483716/file/original-dfc65a7b42250ac603b580c47b97aebb.jpg?resize=3874x4843",
+        "normal": "https://cdn.dribbble.com/userupload/26483716/file/original-dfc65a7b42250ac603b580c47b97aebb.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26483716/file/original-dfc65a7b42250ac603b580c47b97aebb.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26483716/file/original-dfc65a7b42250ac603b580c47b97aebb.jpg?resize=800x600"
+      },
+      "tags": [
+        "adobexd",
+        "dailyui",
+        "iphone",
+        "junior",
+        "lsgraphics",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/10796402-DailyUI-11-Single-Product",
+      "published_at": "2020-03-21T17:21:19Z"
+    },
+    {
+      "id": 10825168,
+      "title": "DailyUI 13 - Direct Messaging",
+      "description": "<p>Direct messaging variation with some gradient and colored shadows.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26520152/file/original-6b7ea84966e7f24a008f69a5274a671c.png?resize=3200x2400",
+        "normal": "https://cdn.dribbble.com/userupload/26520152/file/original-6b7ea84966e7f24a008f69a5274a671c.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26520152/file/original-6b7ea84966e7f24a008f69a5274a671c.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26520152/file/original-6b7ea84966e7f24a008f69a5274a671c.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26520152/file/original-6b7ea84966e7f24a008f69a5274a671c.png?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "forhire",
+        "junior",
+        "sketch",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/10825168-DailyUI-13-Direct-Messaging",
+      "published_at": "2020-03-24T21:41:01Z"
+    },
+    {
+      "id": 10848813,
+      "title": "DailyUI 14 Countdown for IWatch",
+      "description": null,
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26566480/file/original-72c3c270f6dabdfaed4f3d5a0a18b710.jpg?resize=2851x1604",
+        "normal": "https://cdn.dribbble.com/userupload/26566480/file/original-72c3c270f6dabdfaed4f3d5a0a18b710.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26566480/file/original-72c3c270f6dabdfaed4f3d5a0a18b710.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26566480/file/original-72c3c270f6dabdfaed4f3d5a0a18b710.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26566480/file/original-72c3c270f6dabdfaed4f3d5a0a18b710.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "affinitydesigner",
+        "affinitydesigneripad",
+        "countdown",
+        "dailyui",
+        "photoshop",
+        "vector"
+      ],
+      "html_url": "https://dribbble.com/shots/10848813-DailyUI-14-Countdown-for-IWatch",
+      "published_at": "2020-03-28T18:09:20Z"
+    },
+    {
+      "id": 10877898,
+      "title": "DailyUI #15 - On and Off",
+      "description": null,
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26628973/file/original-2c1538dfe892565e499b1b78d900ff0d.png?resize=2016x1344",
+        "normal": "https://cdn.dribbble.com/userupload/26628973/file/original-2c1538dfe892565e499b1b78d900ff0d.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26628973/file/original-2c1538dfe892565e499b1b78d900ff0d.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26628973/file/original-2c1538dfe892565e499b1b78d900ff0d.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26628973/file/original-2c1538dfe892565e499b1b78d900ff0d.png?resize=1600x1200"
+      },
+      "tags": [
+        "adobe",
+        "dailyui",
+        "design",
+        "illustrator",
+        "junior"
+      ],
+      "html_url": "https://dribbble.com/shots/10877898-DailyUI-15-On-and-Off",
+      "published_at": "2020-04-02T00:02:23Z"
+    },
+    {
+      "id": 10918233,
+      "title": "DailyUI #16 - Overlay",
+      "description": "<p>Overlay and auto animation from Adobe XD for my DailyUI challenge.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26660941/file/still-18c2be904b4f6d33e8c8ab428fdeabcb.gif?resize=800x600",
+        "normal": "https://cdn.dribbble.com/userupload/26660941/file/still-18c2be904b4f6d33e8c8ab428fdeabcb.gif?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26660941/file/still-18c2be904b4f6d33e8c8ab428fdeabcb.gif?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26660941/file/still-18c2be904b4f6d33e8c8ab428fdeabcb.gif?resize=800x600"
+      },
+      "tags": [
+        "adobe",
+        "adobexd",
+        "dailyui",
+        "design",
+        "xd"
+      ],
+      "html_url": "https://dribbble.com/shots/10918233-DailyUI-16-Overlay",
+      "published_at": "2020-04-04T01:34:01Z"
+    },
+    {
+      "id": 10933260,
+      "title": "DailyU #17 - Email receipt",
+      "description": null,
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26670520/file/original-a867dffdae261be9c82e2802172a90bb.png?resize=800x600",
+        "normal": "https://cdn.dribbble.com/userupload/26670520/file/original-a867dffdae261be9c82e2802172a90bb.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26670520/file/original-a867dffdae261be9c82e2802172a90bb.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26670520/file/original-a867dffdae261be9c82e2802172a90bb.png?resize=800x600"
+      },
+      "tags": [
+        "affinitydesigneripad ui forhire",
+        "dailyui"
+      ],
+      "html_url": "https://dribbble.com/shots/10933260-DailyU-17-Email-receipt",
+      "published_at": "2020-04-04T19:41:21Z"
+    },
+    {
+      "id": 10976052,
+      "title": "Anatoly",
+      "description": "<p>I didn't know that Photoshop can be useful for simple animations.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26717575/file/still-499699a5f07a5e6ab17a45c5a82c671a.gif?resize=1600x1200",
+        "normal": "https://cdn.dribbble.com/userupload/26717575/file/still-499699a5f07a5e6ab17a45c5a82c671a.gif?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26717575/file/still-499699a5f07a5e6ab17a45c5a82c671a.gif?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26717575/file/still-499699a5f07a5e6ab17a45c5a82c671a.gif?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26717575/file/still-499699a5f07a5e6ab17a45c5a82c671a.gif?resize=1600x1200"
+      },
+      "tags": [
+        "animation",
+        "gif",
+        "photoshop"
+      ],
+      "html_url": "https://dribbble.com/shots/10976052-Anatoly",
+      "published_at": "2020-04-08T05:41:31Z"
+    },
+    {
+      "id": 11018294,
+      "title": "DailyUI #18 - Charts",
+      "description": "<p>Apple Watch fitness tracker. Auto-animation in Adobe XD. A lot of struggles adjusting the size to upload. XD saving into mp4 with iPhone resolution not watch. So lots of resizing.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26770646/file/still-ba3f4ce21b09ecd20ee2a75b271126b1.gif?resize=800x600",
+        "normal": "https://cdn.dribbble.com/userupload/26770646/file/still-ba3f4ce21b09ecd20ee2a75b271126b1.gif?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26770646/file/still-ba3f4ce21b09ecd20ee2a75b271126b1.gif?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26770646/file/still-ba3f4ce21b09ecd20ee2a75b271126b1.gif?resize=800x600"
+      },
+      "tags": [
+        "animation",
+        "dailyui",
+        "design",
+        "ux",
+        "xd"
+      ],
+      "html_url": "https://dribbble.com/shots/11018294-DailyUI-18-Charts",
+      "published_at": "2020-04-12T02:20:19Z"
+    },
+    {
+      "id": 11115490,
+      "title": "Leaderboard is waiting",
+      "description": "<p>Nobody is leading, just bars, because of #stayhome.\n Improve yourself to compete later. </p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26892731/file/original-bbeec54cf615572d8a9fb10cb13f1e5a.png?resize=8192x4707",
+        "normal": "https://cdn.dribbble.com/userupload/26892731/file/original-bbeec54cf615572d8a9fb10cb13f1e5a.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26892731/file/original-bbeec54cf615572d8a9fb10cb13f1e5a.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26892731/file/original-bbeec54cf615572d8a9fb10cb13f1e5a.png?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26892731/file/original-bbeec54cf615572d8a9fb10cb13f1e5a.png?resize=1600x1200"
+      },
+      "tags": [
+        "clean",
+        "covid",
+        "dailyui",
+        "design",
+        "sketch",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/11115490-Leaderboard-is-waiting",
+      "published_at": "2020-04-21T04:52:41Z"
+    },
+    {
+      "id": 11122895,
+      "title": "Neomorphism",
+      "description": "<p>Studying Neomorphism and Figma from Alexander (@alexplyuto). Go check his profile!</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26907105/file/original-29ff0ae05594349a4fdfd59b8e46c767.png?resize=2048x1536",
+        "normal": "https://cdn.dribbble.com/userupload/26907105/file/original-29ff0ae05594349a4fdfd59b8e46c767.png?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26907105/file/original-29ff0ae05594349a4fdfd59b8e46c767.png?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26907105/file/original-29ff0ae05594349a4fdfd59b8e46c767.png?resize=800x600"
+      },
+      "tags": [
+        "design",
+        "figma",
+        "junior",
+        "neomorphism",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/11122895-Neomorphism",
+      "published_at": "2020-04-22T04:46:26Z"
+    },
+    {
+      "id": 11129516,
+      "title": "Dailyui20 Location - Navigation",
+      "description": "<p>Help me, I don't like the colors. Starting from skeuomorphism style light blue, realizing it is all unreadable and switching to red but still not good.\n How to make it better looking?</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/26919728/file/original-21d9a1b318b77c95e011c46c51269be2.jpg?resize=3972x2648",
+        "normal": "https://cdn.dribbble.com/userupload/26919728/file/original-21d9a1b318b77c95e011c46c51269be2.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/26919728/file/original-21d9a1b318b77c95e011c46c51269be2.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/26919728/file/original-21d9a1b318b77c95e011c46c51269be2.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/26919728/file/original-21d9a1b318b77c95e011c46c51269be2.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "figma",
+        "maps",
+        "navigation",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/11129516-Dailyui20-Location-Navigation",
+      "published_at": "2020-04-23T00:42:44Z"
+    },
+    {
+      "id": 11356211,
+      "title": "Dailyui21 Dashboard ipad",
+      "description": "<p>Dashboard for my Daily UI.</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/27159387/file/original-c7913017af57960206282c5182c08523.jpg?resize=4830x3200",
+        "normal": "https://cdn.dribbble.com/userupload/27159387/file/original-c7913017af57960206282c5182c08523.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/27159387/file/original-c7913017af57960206282c5182c08523.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/27159387/file/original-c7913017af57960206282c5182c08523.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/27159387/file/original-c7913017af57960206282c5182c08523.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "design",
+        "forhire",
+        "junior",
+        "sketch",
+        "ui",
+        "ux"
+      ],
+      "html_url": "https://dribbble.com/shots/11356211-Dailyui21-Dashboard-ipad",
+      "published_at": "2020-05-10T06:14:55Z"
+    },
+    {
+      "id": 12066582,
+      "title": "Search for iWatch for DailyUI 22",
+      "description": "<p>Dailyui #22 - Search</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/27613263/file/original-edb4776a2d3685d0e4ee3c25f0511d58.jpg?resize=2600x1733",
+        "normal": "https://cdn.dribbble.com/userupload/27613263/file/original-edb4776a2d3685d0e4ee3c25f0511d58.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/27613263/file/original-edb4776a2d3685d0e4ee3c25f0511d58.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/27613263/file/original-edb4776a2d3685d0e4ee3c25f0511d58.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/27613263/file/original-edb4776a2d3685d0e4ee3c25f0511d58.jpg?resize=1600x1200",
+        "six_x": "https://cdn.dribbble.com/userupload/27613263/file/original-edb4776a2d3685d0e4ee3c25f0511d58.jpg?resize=2400x1800"
+      },
+      "tags": [
+        "dailyui",
+        "ui",
+        "ux"
+      ],
+      "html_url": "https://dribbble.com/shots/12066582-Search-for-iWatch-for-DailyUI-22",
+      "published_at": "2020-06-14T19:37:59Z"
+    },
+    {
+      "id": 12126614,
+      "title": "Onboarding #23 - DailyUI",
+      "description": "<p>Illustrations from Blush and Mockup from Mockuuups Studio!</p>",
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/27670466/file/original-dca6e7f4293d8d7cae415a0fc580e938.jpg?resize=4830x3200",
+        "normal": "https://cdn.dribbble.com/userupload/27670466/file/original-dca6e7f4293d8d7cae415a0fc580e938.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/27670466/file/original-dca6e7f4293d8d7cae415a0fc580e938.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/27670466/file/original-dca6e7f4293d8d7cae415a0fc580e938.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/27670466/file/original-dca6e7f4293d8d7cae415a0fc580e938.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "design",
+        "figma",
+        "ui",
+        "ux"
+      ],
+      "html_url": "https://dribbble.com/shots/12126614-Onboarding-23-DailyUI",
+      "published_at": "2020-06-18T19:54:59Z"
+    },
+    {
+      "id": 12137264,
+      "title": "DailyUI #24 Boarding Pass",
+      "description": null,
+      "images": {
+        "hidpi": "https://cdn.dribbble.com/userupload/27682492/file/original-7c2b45fd8edd69c4f9de6cb24448ac5d.jpg?resize=4786x3191",
+        "normal": "https://cdn.dribbble.com/userupload/27682492/file/original-7c2b45fd8edd69c4f9de6cb24448ac5d.jpg?resize=400x300",
+        "one_x": "https://cdn.dribbble.com/userupload/27682492/file/original-7c2b45fd8edd69c4f9de6cb24448ac5d.jpg?resize=400x300",
+        "two_x": "https://cdn.dribbble.com/userupload/27682492/file/original-7c2b45fd8edd69c4f9de6cb24448ac5d.jpg?resize=800x600",
+        "four_x": "https://cdn.dribbble.com/userupload/27682492/file/original-7c2b45fd8edd69c4f9de6cb24448ac5d.jpg?resize=1600x1200"
+      },
+      "tags": [
+        "dailyui",
+        "design",
+        "figma",
+        "forhire",
+        "ui"
+      ],
+      "html_url": "https://dribbble.com/shots/12137264-DailyUI-24-Boarding-Pass",
+      "published_at": "2020-06-19T20:08:16Z"
+    }
+  ]
+}

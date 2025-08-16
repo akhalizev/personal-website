@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Dock from '../components/Dock.astro';
+import DribbbleGallery from '../components/DribbbleGallery.astro';
+
+const dockItems = [
+  { name: 'About', icon: '👤', href: '/#about' },
+  { name: 'Projects', icon: '💼', href: '/projects' },
+  { name: 'Skills', icon: '🛠️', href: '/#skills' },
+  { name: 'Shots', icon: '🎨', href: '/dribbble', isActive: true },
+  { name: 'Experiments', icon: '🧪', href: '/experiments' },
+  { name: 'Contact', icon: '📧', href: '/#contact' }
+];
+---
+<Layout title="Dribbble Shots - Portfolio">
+  <main class="min-h-screen bg-gradient-to-br from-macos-blue-500/5 to-macos-gray-100 dark:from-macos-gray-900 dark:to-macos-gray-800">
+    <section class="pt-24 pb-12 px-6">
+      <div class="max-w-4xl mx-auto text-center mb-10">
+        <h1 class="text-5xl md:text-6xl font-bold text-macos-gray-900 dark:text-white mb-4">Design Shots</h1>
+        <p class="text-lg text-macos-gray-600 dark:text-macos-gray-400 max-w-2xl mx-auto">A selection of recent interface and product design explorations from my Dribbble feed (@ahalizev).</p>
+      </div>
+  <DribbbleGallery limit={60} />
+    </section>
+
+    <div class="fixed top-6 left-6 z-50">
+      <a 
+        href="/" 
+        class="bg-white/80 dark:bg-macos-gray-800/80 backdrop-blur-macos border border-white/30 dark:border-macos-gray-700/50 text-macos-gray-900 dark:text-white p-3 rounded-macos font-medium transition-colors hover:bg-white/90 dark:hover:bg-macos-gray-800/90 inline-flex items-center"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <Dock items={dockItems} />
+  </main>
+</Layout>

@@ -97,3 +97,14 @@ export const COMMON_TECHNOLOGIES = [
   // Other
   'Python', 'Java', 'C++', 'Rust', 'Go', 'GraphQL', 'REST API'
 ] as const;
+
+// Dribbble shots (lightweight)
+export interface DribbbleShot {
+  id: string;
+  title: string;
+  url: string;
+  image: string; // preferred preview image (normal/one_x)
+  published: string; // ISO date string
+  tags?: string[];
+  animated?: boolean; // true if image is a GIF
+}
