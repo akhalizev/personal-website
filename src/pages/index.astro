@@ -724,6 +724,37 @@ const skillDescriptions: Record<string, string> = {
   // Deferred Git attention + Octocat traverse: trigger when scrolled into view
   if (gitFlipBtn) {
     let gitIntroStarted = false;
+    let octoReplayInterval: number | null = null;
+    const startReplayLoop = () => {
+      if (octoReplayInterval !== null) return; // already running
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return; // honor reduced motion
+      octoReplayInterval = window.setInterval(() => {
+        // Skip if card flipped or page hidden
+        if (!gitIntroStarted || document.hidden) return;
+        if (flipCard?.classList.contains('flipped')) return;
+        const rect = gitFlipBtn.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return; // not in viewport
+        const wrapper = gitFlipBtn.querySelector('.octocat-anim-wrapper') as HTMLElement | null;
+        if (!wrapper) return;
+        // Reset from rest state
+        wrapper.classList.remove('octo-rest','octo-rest-force');
+        wrapper.style.left = '-2.2rem';
+        wrapper.style.animation = 'none';
+        const icon = wrapper.querySelector('.octocat-anim') as HTMLElement | null;
+        if (icon) { icon.style.animation = 'none'; icon.style.opacity = '0'; }
+        // Force reflow then trigger replay class on button
+        void wrapper.offsetWidth;
+        gitFlipBtn.classList.add('octo-replay');
+        // After animation finishes, return to rest
+        setTimeout(() => {
+          wrapper.classList.add('octo-rest');
+          wrapper.style.animation = 'none';
+        }, 2500);
+        // Cleanup replay class shortly after
+        setTimeout(() => { gitFlipBtn.classList.remove('octo-replay'); }, 2600);
+      }, 5000);
+    };
     const startGitIntro = () => {
       if (gitIntroStarted) return; gitIntroStarted = true;
       gitFlipBtn.classList.add('git-octocat-intro','git-attn');
@@ -747,6 +778,8 @@ const skillDescriptions: Record<string, string> = {
           octo.setAttribute('data-octo-final','true');
           (octo as HTMLElement).style.right='auto';
         }
+  // Start periodic replay loop once initial traverse fully settled
+  startReplayLoop();
       }, 3200);
     };
     const observer = new IntersectionObserver(entries => {
@@ -1033,6 +1066,9 @@ const skillDescriptions: Record<string, string> = {
   #git-flip-btn.git-octocat-intro .git-label { position:relative; }
   #git-flip-btn.git-octocat-intro .octocat-anim-wrapper { position:absolute; top:50%; left:-2.2rem; width:1.25rem; height:1.25rem; display:flex; align-items:center; justify-content:center; animation: octoTraverse 2s cubic-bezier(.65,.1,.25,1) var(--octo-delay) forwards; will-change:left, transform; }
   #git-flip-btn.git-octocat-intro .octocat-anim { opacity:0; animation: octoIconFade 2s linear var(--octo-delay) forwards; filter:drop-shadow(0 1px 1px rgba(0,0,0,0.25)); }
+  /* Replay state: re-run traverse when .octo-replay is present after initial intro */
+  #git-flip-btn.octo-replay .octocat-anim-wrapper { position:absolute; top:50%; animation: octoTraverse 2s cubic-bezier(.65,.1,.25,1) 0s forwards; }
+  #git-flip-btn.octo-replay .octocat-anim { animation: octoIconFade 2s linear 0s forwards; }
   @keyframes octoIconFade { 0% { opacity:0; } 12% { opacity:1; } 100% { opacity:1; } }
   #git-flip-btn.git-octocat-intro .octocat-track::before { content:""; position:absolute; left:0; top:50%; height:2px; width:100%; background:linear-gradient(90deg, rgba(59,130,246,0.0), rgba(59,130,246,0.45) 18%, rgba(59,130,246,0.0)); transform:translateY(-50%); animation: octoTrailFade 2.1s ease var(--octo-delay) forwards; pointer-events:none; }
   /* Delay label reveal for focus on mascot */
