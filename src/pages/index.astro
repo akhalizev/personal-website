@@ -346,7 +346,7 @@ const skillDescriptions: Record<string, string> = {
             <div class="ai-tech-col">
               <h3 class="text-xl font-semibold text-macos-gray-900 dark:text-white mb-4">AI & Emerging Tech</h3>
               <div class="space-y-2">
-                {["LLM Orchestration (LangChain)", "RAG Pipelines", "Vector DBs (Pinecone / Weaviate / pgvector)", "Prompt Engineering", "Embeddings & Semantic Search", "Guardrails & Evaluation"].map((skill) => (
+                {["Prompt Engineering", "LLM Orchestration (LangChain)", "RAG Pipelines", "Vector DBs (Pinecone / Weaviate / pgvector)", "Embeddings & Semantic Search", "Guardrails & Evaluation"].map((skill) => (
                   <div class="skill-chip group bg-gradient-to-r from-macos-blue-500/10 to-macos-blue-500/5 dark:from-macos-blue-600/20 dark:to-macos-blue-500/10 border border-macos-blue-500/20 dark:border-macos-blue-400/20 text-macos-gray-700 dark:text-macos-gray-300 px-3 py-2 rounded-md text-[13px] leading-tight backdrop-blur-sm relative" tabindex="0" aria-describedby={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`}>
                     {skill}
                     <div role="tooltip" id={`tip-${skill.replace(/[^a-z0-9]/ig,'-')}`} class="skill-tooltip max-w-xs">
